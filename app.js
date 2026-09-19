@@ -1,0 +1,540 @@
+/**
+ * BAREUN CLINIC (바른한의원 대전본점)
+ * World-Class High-End Creative Website Architecture
+ */
+
+const CLINIC_PROGRAMS = [
+  {
+    id: "00",
+    slug: "appetite-zero",
+    title: "식욕제로 다이어트",
+    subtitle: "비대면 1:1 맞춤 전화 처방 & 전국 당일 발송",
+    client: "비대면 특화 다이어트 한약",
+    role: "식욕 억제 · 체지방 분해 · 신진대사 활성화",
+    year: "TELEMEDICINE",
+    awards: "누적 처방 50,000건 돌파 · 100% 개별 체질 맞춤 탕전 · 전국 비대면 당일 배송",
+    description: "굶지 않고 자연스럽게 식탐을 억제하며 체질별 기초 대사율을 끌어올리는 바른한의원만의 시그니처 다이어트 탕약. 내원 없이 전화 상담 후 집 앞까지 안전하게 직배송됩니다.",
+    image: "http://bareunhaniwon.com/wp-content/uploads/2026/09/Diet_pill_promotional_poster_2K_202608231705.jpeg",
+    details: [
+      "✓ 1:1 비대면 전화 진료를 통한 맞춤형 체질 감별 및 정밀 처방",
+      "✓ 위장 장애 및 심장 두근거림 최소화 원내 특수 탕전 공법",
+      "✓ 식욕 중추 안정 및 자연스러운 포만감 형성",
+      "✓ 전국 어디서나 간편하게 네이버 폼 신청 후 안심 택배 수령"
+    ],
+    primaryLink: "https://naver.me/GBvNnIom",
+    primaryText: "📝 비대면 처방 신청서 작성하기 (네이버 폼)",
+    secondaryLink: "https://pf.kakao.com/_ykxcLK",
+    secondaryText: "💬 카카오톡 1:1 상담 문의"
+  },
+  {
+    id: "01",
+    slug: "gongjindan",
+    title: "황제 공진단",
+    subtitle: "식약처 정품 사향 100% 인증 · 원내 직접 제환",
+    client: "원기 회복 & 면역력 강화 명약",
+    role: "황실 전통 비방 · 최고급 원방 사향 공진단",
+    year: "MASTERPIECE",
+    awards: "황제를 위한 특허받은 공진단 · 식약처 CITES 정품 사향 100% · 99.9% 순금박 수제 제환",
+    description: "장인의 손끝에서 피어나는 천년의 건강. 엄격한 CITES 정품 사향 인증을 거친 최고급 약재만을 선별하여 대전본점 원장이 직접 한 알 한 알 정성으로 빚어내는 궁극의 명작입니다.",
+    image: "gongjindan.png",
+    details: [
+      "✓ 식약처 CITES 공인 정품 천연 사향 시험성적서 및 품질 보증서 동봉",
+      "✓ 최상급 러시아산 원용 분골(녹용 최고 부위) 황금 비율 배합",
+      "✓ 원내 조제실에서 원장이 직접 전통 수제 제환",
+      "✓ 만성 피로 회복, 수험생 집중력, VIP 효도 선물 추천"
+    ],
+    primaryLink: "https://pf.kakao.com/_ykxcLK",
+    primaryText: "💬 카카오톡 공진단 사전 예약 문의",
+    secondaryLink: "https://naver.me/5U1ELn8L",
+    secondaryText: "📍 네이버 플레이스 정보 보기"
+  },
+  {
+    id: "02",
+    slug: "dream-beauty",
+    title: "드림뷰티 뱃살 다이어트",
+    subtitle: "고민 부위 복부 집중 라인 조각 프로그램",
+    client: "복부 집중 슬리밍 솔루션",
+    role: "심부 내장지방 연소 · 피하지방 분해약침 · 탄력 케어",
+    year: "BODY SCULPT",
+    awards: "복부 둘레 집중 감소 임상 프로그램 · 피하지방 분해 & 피부 탄력 리프팅 동시 케어",
+    description: "쉽게 빠지지 않는 뱃살과 옆구리 러브핸들을 위한 집중 타겟팅 프로그램. 1:1 체성분 분석을 기반으로 체지방 분해 한약과 복부 온열 심부 테라피를 결합하여 매끄러운 바디 라인을 완성합니다.",
+    details: [
+      "✓ 내장지방 및 셀룰라이트 집중 타겟 분해 프로그램",
+      "✓ 심부 온열 요법으로 복부 순환 및 독소 배출 활성화",
+      "✓ 늘어진 피부 탄력을 복원하는 한방 슬리밍 리프팅 케어",
+      "✓ 요요 없는 유지 관리 가이드 및 1:1 밀착 코칭"
+    ],
+    primaryLink: "https://pf.kakao.com/_ykxcLK",
+    primaryText: "💬 복부 슬리밍 카카오톡 상담 예약",
+    secondaryLink: "https://naver.me/5U1ELn8L",
+    secondaryText: "📍 네이버 예약 바로가기"
+  },
+  {
+    id: "03",
+    slug: "doctor-profile",
+    title: "대표원장 소개 & 진료철학",
+    subtitle: "바른 마음, 정직한 처방으로 치유합니다",
+    client: "바른한의원 대전본점 대표원장",
+    role: "한의학 박사 · 1:1 평생 주치의 케어",
+    year: "CHIEF DIRECTOR",
+    awards: "대한한의학회 정회원 · 비만체형학회 정회원 · 1:1 책임 전담 진료제 준수",
+    description: "환자의 몸을 바르게 세우는 정직한 치료. 과잉 진료 없는 정확한 원인 진단과 100% 정품 인증 약재만을 고집하며, 환자 한 분 한 분과의 깊은 소통을 통해 평생의 건강 파트너가 되어 드립니다.",
+    image: "doctor.png",
+    details: [
+      "✓ 대전본점 대표원장 직접 책임 진료",
+      "✓ 한의학 박사 및 비만 체형 교정 전문 임상 연구",
+      "✓ 탕전 전 과정 투명 공개 및 안심 한약재 사용 원칙",
+      "✓ 대전 둔산동 중심에서 환자 한 분만을 위한 평생 주치의 동행"
+    ],
+    primaryLink: "https://naver.me/5U1ELn8L",
+    primaryText: "📍 네이버 플레이스 1:1 진료 예약",
+    secondaryLink: "https://pf.kakao.com/_ykxcLK",
+    secondaryText: "💬 카카오톡 실시간 상담 문의"
+  }
+];
+
+class BareunClinicApp {
+  constructor() {
+    this.projects = CLINIC_PROGRAMS;
+    this.currentIndex = 0;
+    this.audioEnabled = false;
+    this.audioCtx = null;
+    
+    // DOM Cache
+    this.cursor = document.getElementById('custom-cursor');
+    this.cursorFollower = document.getElementById('cursor-follower');
+    this.track = document.getElementById('carousel-track');
+    this.container = document.getElementById('carousel-container');
+    
+    // Meta HUD elements
+    this.activeIndex = document.getElementById('active-index');
+    this.activeTitle = document.getElementById('active-title');
+    this.activeClient = document.getElementById('active-client');
+    this.activeRole = document.getElementById('active-role');
+    this.activeYear = document.getElementById('active-year');
+    this.activeDesc = document.getElementById('active-desc');
+    this.activeAwards = document.getElementById('active-awards');
+    this.progressFill = document.getElementById('progress-fill');
+    
+    // Footer counters
+    this.currentCounter = document.getElementById('current-counter');
+    this.totalCounter = document.getElementById('total-counter');
+
+    // Controls
+    this.prevBtn = document.getElementById('prev-btn');
+    this.nextBtn = document.getElementById('next-btn');
+    this.audioBtn = document.getElementById('audio-toggle');
+    this.audioStateText = document.getElementById('audio-state');
+    this.menuBtn = document.getElementById('menu-toggle');
+    this.menuDrawer = document.getElementById('menu-drawer');
+    this.drawerClose = document.getElementById('drawer-close');
+    this.drawerBackdrop = document.getElementById('drawer-backdrop');
+    
+    // Modal
+    this.projectModal = document.getElementById('project-modal');
+    this.modalContent = document.getElementById('modal-content');
+    this.modalClose = document.getElementById('modal-close');
+    this.modalBackdrop = document.getElementById('modal-backdrop');
+
+    // Intro Elements
+    this.introSplash = document.getElementById('intro-splash');
+    this.introVideo = document.getElementById('intro-video');
+    this.introEnterBtn = document.getElementById('intro-enter-btn');
+    this.introSkipBtn = document.getElementById('intro-skip-btn');
+    this.replayIntroBtn = document.getElementById('replay-intro-btn');
+
+    // Cursor tracking state
+    this.mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    this.follower = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+    this.init();
+  }
+
+  init() {
+    this.renderCards();
+    this.initCursor();
+    this.initClock();
+    this.initAudio();
+    this.initIntro();
+    this.initEvents();
+    this.updateProjectView(0, false);
+  }
+
+  /* --------------------------------------------------------------------------
+     CINEMATIC INTRO VIDEO SPLASH
+     -------------------------------------------------------------------------- */
+  initIntro() {
+    if (!this.introSplash) return;
+
+    const dismissIntro = () => {
+      if (this.introSplash.classList.contains('leaving') || this.introSplash.style.display === 'none') return;
+      this.playClick();
+      this.introSplash.classList.add('leaving');
+      setTimeout(() => {
+        this.introSplash.style.display = 'none';
+        if (this.introVideo) {
+          try { this.introVideo.pause(); } catch(e) {}
+        }
+      }, 850);
+    };
+
+    // Clicking anywhere on the intro splash screen enters the main page
+    this.introSplash.addEventListener('click', dismissIntro);
+
+    if (this.introEnterBtn) {
+      this.introEnterBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dismissIntro();
+      });
+    }
+
+    if (this.introSkipBtn) {
+      this.introSkipBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dismissIntro();
+      });
+    }
+
+    if (this.replayIntroBtn) {
+      this.replayIntroBtn.addEventListener('click', () => {
+        this.playClick();
+        this.introSplash.style.display = 'flex';
+        this.introSplash.classList.remove('leaving');
+        if (this.introVideo) {
+          this.introVideo.currentTime = 0;
+          this.introVideo.play().catch(() => {});
+        }
+      });
+    }
+
+    if (this.introVideo) {
+      this.introVideo.play().catch(() => {});
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     AUDIO SYNTHESIS (Web Audio API)
+     -------------------------------------------------------------------------- */
+  initAudio() {
+    this.audioBtn.addEventListener('click', () => {
+      this.audioEnabled = !this.audioEnabled;
+      if (this.audioEnabled) {
+        if (!this.audioCtx) {
+          this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (this.audioCtx.state === 'suspended') {
+          this.audioCtx.resume();
+        }
+        document.body.classList.add('audio-playing');
+        this.audioStateText.textContent = 'On';
+        this.playTone(880, 0.05, 'sine');
+      } else {
+        document.body.classList.remove('audio-playing');
+        this.audioStateText.textContent = 'Off';
+      }
+    });
+  }
+
+  playTone(freq, duration = 0.04, type = 'sine') {
+    if (!this.audioEnabled || !this.audioCtx) return;
+    try {
+      const osc = this.audioCtx.createOscillator();
+      const gain = this.audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.08, this.audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(this.audioCtx.destination);
+      osc.start();
+      osc.stop(this.audioCtx.currentTime + duration);
+    } catch (e) {
+      console.warn('Audio play suppressed', e);
+    }
+  }
+
+  playClick() {
+    this.playTone(1100, 0.03, 'sine');
+  }
+
+  playSlide() {
+    this.playTone(190, 0.08, 'triangle');
+  }
+
+  /* --------------------------------------------------------------------------
+     CURSOR (Difference lerp trailing)
+     -------------------------------------------------------------------------- */
+  initCursor() {
+    window.addEventListener('mousemove', (e) => {
+      this.mouse.x = e.clientX;
+      this.mouse.y = e.clientY;
+      this.cursor.style.transform = `translate(${this.mouse.x}px, ${this.mouse.y}px)`;
+    });
+
+    const loop = () => {
+      this.follower.x += (this.mouse.x - this.follower.x) * 0.18;
+      this.follower.y += (this.mouse.y - this.follower.y) * 0.18;
+      this.cursorFollower.style.transform = `translate(${this.follower.x}px, ${this.follower.y}px)`;
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+
+    const attachHover = () => {
+      document.querySelectorAll('a, button, .project-card, [data-hover="magnetic"]').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          document.body.classList.add('cursor-hover');
+          this.playClick();
+        });
+        el.addEventListener('mouseleave', () => {
+          document.body.classList.remove('cursor-hover');
+        });
+      });
+    };
+    attachHover();
+    this.attachHover = attachHover;
+  }
+
+  /* --------------------------------------------------------------------------
+     REAL-TIME CLOCK (South Korea KST GMT+9)
+     -------------------------------------------------------------------------- */
+  initClock() {
+    const timeEl = document.getElementById('current-time');
+    const updateTime = () => {
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const kst = new Date(utc + (3600000 * 9));
+      const hours = String(kst.getHours()).padStart(2, '0');
+      const mins = String(kst.getMinutes()).padStart(2, '0');
+      timeEl.textContent = `${hours}:${mins}`;
+    };
+    updateTime();
+    setInterval(updateTime, 1000);
+  }
+
+  /* --------------------------------------------------------------------------
+     RENDER CAROUSEL CARDS
+     -------------------------------------------------------------------------- */
+  renderCards() {
+    this.track.innerHTML = '';
+    this.totalCounter.textContent = String(this.projects.length).padStart(2, '0');
+
+    this.projects.forEach((item, index) => {
+      const card = document.createElement('article');
+      const isDoctor = item.slug === 'doctor-profile';
+      const isGongjindan = item.slug === 'gongjindan';
+
+      let cardClass = 'project-card';
+      if (isDoctor) cardClass += ' doctor-card';
+      if (isGongjindan) cardClass += ' gongjindan-card';
+      if (index === 0) cardClass += ' active';
+
+      card.className = cardClass;
+      card.dataset.index = index;
+
+      let wrapClass = 'card-image-wrap';
+      if (isDoctor) wrapClass += ' doctor-wrap';
+      if (isGongjindan) wrapClass += ' gongjindan-wrap';
+
+      let imgClass = 'card-img';
+      if (isDoctor) imgClass += ' doctor-img';
+      if (isGongjindan) imgClass += ' gongjindan-img';
+
+      card.innerHTML = `
+        <div class="${wrapClass}">
+          <img class="${imgClass}" src="${item.image}" alt="${item.title}" loading="lazy" />
+          <div class="card-overlay">
+            <div class="card-meta-bottom">
+              <h3 class="card-title">${item.title}</h3>
+              <p class="card-subtitle">${item.subtitle || item.role}</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Click ANY card to immediately animate and open detail page
+      card.addEventListener('click', () => {
+        this.updateProjectView(index);
+        this.openProjectModal(item);
+      });
+
+      this.track.appendChild(card);
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     UPDATE ACTIVE PROJECT
+     -------------------------------------------------------------------------- */
+  updateProjectView(index, animate = true) {
+    if (index < 0) index = 0;
+    if (index >= this.projects.length) index = this.projects.length - 1;
+
+    this.currentIndex = index;
+    const project = this.projects[index];
+
+    if (animate) {
+      this.playSlide();
+      this.activeTitle.style.opacity = '0';
+      this.activeTitle.style.transform = 'translateY(8px)';
+      setTimeout(() => {
+        this.activeTitle.textContent = project.title;
+        this.activeTitle.style.opacity = '1';
+        this.activeTitle.style.transform = 'translateY(0)';
+      }, 150);
+    } else {
+      this.activeTitle.textContent = project.title;
+    }
+
+    this.activeIndex.textContent = `/${project.id}`;
+    this.activeClient.textContent = project.client;
+    this.activeRole.textContent = project.role;
+    this.activeYear.textContent = project.year;
+    this.activeDesc.textContent = project.description;
+    this.activeAwards.textContent = project.awards;
+
+    this.currentCounter.textContent = String(index + 1).padStart(2, '0');
+    const progressPct = ((index + 1) / this.projects.length) * 100;
+    this.progressFill.style.width = `${progressPct}%`;
+
+    // Highlight active card
+    const cards = this.track.querySelectorAll('.project-card');
+    cards.forEach((c, idx) => {
+      c.classList.toggle('active', idx === index);
+    });
+
+    // Move track to center the card
+    const cardWidth = 420 + 28;
+    const targetX = -(index * cardWidth);
+    this.track.style.transform = `translateX(${targetX}px)`;
+  }
+
+  /* --------------------------------------------------------------------------
+     EVENT LISTENERS & NAVIGATION
+     -------------------------------------------------------------------------- */
+  initEvents() {
+    this.prevBtn.addEventListener('click', () => {
+      this.updateProjectView(this.currentIndex - 1);
+    });
+
+    this.nextBtn.addEventListener('click', () => {
+      this.updateProjectView(this.currentIndex + 1);
+    });
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (this.projectModal.classList.contains('open') || this.menuDrawer.classList.contains('open')) {
+        if (e.key === 'Escape') {
+          this.closeMenu();
+          this.closeProjectModal();
+        }
+        return;
+      }
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        this.updateProjectView(this.currentIndex + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        this.updateProjectView(this.currentIndex - 1);
+      }
+    });
+
+    // Mouse wheel horizontal scroll
+    let wheelTimeout;
+    this.container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (wheelTimeout) return;
+      wheelTimeout = setTimeout(() => { wheelTimeout = null; }, 180);
+      if (e.deltaY > 20 || e.deltaX > 20) {
+        this.updateProjectView(this.currentIndex + 1);
+      } else if (e.deltaY < -20 || e.deltaX < -20) {
+        this.updateProjectView(this.currentIndex - 1);
+      }
+    }, { passive: false });
+
+    // Menu Drawer
+    this.menuBtn.addEventListener('click', () => this.openMenu());
+    this.drawerClose.addEventListener('click', () => this.closeMenu());
+    this.drawerBackdrop.addEventListener('click', () => this.closeMenu());
+
+    // Modal Close
+    this.modalClose.addEventListener('click', () => this.closeProjectModal());
+    this.modalBackdrop.addEventListener('click', () => this.closeProjectModal());
+
+    this.attachHover();
+  }
+
+  openMenu() {
+    this.playClick();
+    this.menuDrawer.classList.add('open');
+    this.menuDrawer.setAttribute('aria-hidden', 'false');
+  }
+
+  closeMenu() {
+    this.playClick();
+    this.menuDrawer.classList.remove('open');
+    this.menuDrawer.setAttribute('aria-hidden', 'true');
+  }
+
+  openProjectModal(item) {
+    this.playClick();
+    const isDoctor = item.slug === 'doctor-profile';
+    const isGongjindan = item.slug === 'gongjindan';
+    const detailListHtml = (item.details || [])
+      .map(d => `<li style="font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 6px;">${d}</li>`)
+      .join('');
+
+    let heroBg = '#222';
+    let heroImgStyle = 'width: 100%; height: 100%; object-fit: cover;';
+    if (isDoctor) {
+      heroBg = 'linear-gradient(180deg, #EBE5DF 0%, #D8CFC7 100%)';
+      heroImgStyle = 'object-fit: contain; max-height: 380px; width: auto;';
+    } else if (isGongjindan) {
+      heroBg = '#2E1911';
+      heroImgStyle = 'object-fit: contain; max-height: 380px; width: auto; padding: 12px 0;';
+    }
+
+    this.modalContent.innerHTML = `
+      <div style="background: ${heroBg}; display: flex; justify-content: center; align-items: center; overflow: hidden; height: 380px;">
+        <img class="modal-hero-img" src="${item.image}" alt="${item.title}" style="${heroImgStyle}" />
+      </div>
+      <div class="modal-info-panel">
+        <div class="modal-meta-row">
+          <span style="color: var(--accent-rose); font-weight: 700;">${item.year}</span>
+          <span>·</span>
+          <span>${item.client}</span>
+        </div>
+        <h2 class="modal-title">${item.title}</h2>
+        <div class="modal-awards">🌿 ${item.awards}</div>
+        <p class="modal-desc">${item.description}</p>
+        
+        <div style="background: #FAFAFA; border: 1px solid var(--border-line); border-radius: 6px; padding: 20px; margin-top: 4px;">
+          <h4 style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; letter-spacing: 0.05em;">
+            PROGRAM SPECIFICATIONS
+          </h4>
+          <ul style="list-style: none; padding: 0;">
+            ${detailListHtml}
+          </ul>
+        </div>
+
+        <div class="modal-cta-group">
+          <a href="${item.primaryLink}" target="_blank" rel="noopener noreferrer" class="modal-cta-btn modal-cta-primary">
+            ${item.primaryText} ↗
+          </a>
+          <a href="${item.secondaryLink}" target="_blank" rel="noopener noreferrer" class="modal-cta-btn modal-cta-secondary">
+            ${item.secondaryText} ↗
+          </a>
+        </div>
+      </div>
+    `;
+    this.projectModal.classList.add('open');
+    this.projectModal.setAttribute('aria-hidden', 'false');
+  }
+
+  closeProjectModal() {
+    this.playClick();
+    this.projectModal.classList.remove('open');
+    this.projectModal.setAttribute('aria-hidden', 'true');
+  }
+}
+
+// Start application when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  window.app = new BareunClinicApp();
+});
