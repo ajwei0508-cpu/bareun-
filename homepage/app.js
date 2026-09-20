@@ -22,8 +22,8 @@ const CLINIC_PROGRAMS = [
       "✓ 식욕 중추 안정 및 자연스러운 포만감 형성",
       "✓ 전국 어디서나 간편하게 네이버 폼 신청 후 안심 택배 수령"
     ],
-    primaryLink: "https://naver.me/GBvNnIom",
-    primaryText: "📝 비대면 처방 신청서 작성하기 (네이버 폼)",
+    primaryLink: "diet-zero.html#checkout-zone",
+    primaryText: "💳 온라인 결제 & 비대면 처방 신청",
     secondaryLink: "https://pf.kakao.com/_ykxcLK",
     secondaryText: "💬 카카오톡 1:1 상담 문의"
   },

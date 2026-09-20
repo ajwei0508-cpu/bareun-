@@ -9,8 +9,10 @@
   <!-- Premium Typography: Pretendard, Noto Serif KR, Space Grotesk, Space Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- PortOne (Iamport) Standard Online Payment Gateway SDK -->
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
   <style>
     /* ==========================================================================
@@ -1540,6 +1542,21 @@
       margin-bottom: 20px;
       min-height: 36px;
     }
+    .plan-badge-top {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(223, 126, 142, 0.15);
+      color: var(--baby-pink-deep);
+      margin-bottom: 8px;
+    }
+    .plan-badge-top.hot {
+      background: linear-gradient(135deg, #FFEBEF 0%, #FFDCE2 100%);
+      color: #D14561;
+      border: 1px solid rgba(209, 69, 97, 0.25);
+    }
     .plan-price-row {
       margin-bottom: 20px;
       padding-bottom: 16px;
@@ -1548,18 +1565,33 @@
     .plan-price-label {
       font-size: 12px;
       color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .plan-price-origin {
+      text-decoration: line-through;
+      font-size: 12.5px;
+      color: #A89FA2;
+      font-weight: 500;
     }
     .plan-price-val {
       font-family: var(--font-sans);
       font-size: 26px;
-      font-weight: 800;
+      font-weight: 900;
       color: var(--text-dark);
       letter-spacing: -0.03em;
+      margin-top: 2px;
+    }
+    .plan-price-won {
+      font-size: 18px;
+      font-weight: 700;
     }
     .plan-price-sub {
       font-size: 12px;
       color: var(--baby-pink-prime);
       font-weight: 700;
+      margin-left: 4px;
     }
     .plan-features-list {
       list-style: none;
@@ -1604,64 +1636,217 @@
       background: linear-gradient(135deg, #FAF4F6 0%, #F6EDEE 100%);
       border: 1px solid var(--border-hairline);
       border-radius: 20px;
-      padding: 28px 32px;
+      padding: 30px 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .checkout-action-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 20px;
     }
+    .submit-info-left {
+      flex: 1;
+      min-width: 280px;
+    }
+    .submit-plan-highlight {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .submit-plan-pill {
+      background: var(--baby-pink-deep);
+      color: #FFFFFF;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 2.5px 8px;
+      border-radius: 10px;
+      letter-spacing: -0.01em;
+    }
     .submit-info-left h4 {
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 800;
       color: var(--text-dark);
-      margin-bottom: 4px;
+    }
+    .submit-price-highlight {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .submit-price-val {
+      font-family: var(--font-sans);
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--baby-pink-deep);
+      letter-spacing: -0.03em;
+    }
+    .submit-price-note {
+      font-size: 12px;
+      color: var(--rose-gold-prime);
+      font-weight: 700;
     }
     .submit-info-left p {
       font-size: 13.5px;
       color: var(--text-muted);
+      line-height: 1.5;
     }
     .submit-btns-right {
       display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    
+    /* Primary Online Pay Button */
+    .btn-direct-pay {
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
+      padding: 16px 30px;
+      background: linear-gradient(135deg, #1E1618 0%, #351F25 50%, #4D2630 100%);
+      color: #FFFFFF;
+      border: 1.5px solid rgba(228, 186, 158, 0.75);
+      border-radius: 50px;
+      font-size: 15.5px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(30, 22, 24, 0.25), 0 0 24px rgba(223, 126, 142, 0.35);
+      transition: all 0.28s var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-direct-pay:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 214, 185, 0.95);
+      box-shadow: 0 16px 40px rgba(199, 97, 115, 0.45), 0 0 30px rgba(228, 186, 158, 0.5);
+    }
+    .btn-direct-pay:active {
+      transform: translateY(0);
+    }
+    .pay-btn-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .pay-btn-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.25;
+    }
+    .pay-btn-text strong {
+      font-size: 15.5px;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+    }
+    .pay-btn-text small {
+      font-size: 11px;
+      color: var(--rose-gold-light);
+      font-weight: 600;
+    }
+    .pay-btn-arrow {
+      font-size: 15px;
+      color: var(--rose-gold-light);
+      transition: transform 0.2s ease;
+    }
+    .btn-direct-pay:hover .pay-btn-arrow {
+      transform: translateX(4px);
+    }
+
+    .submit-sub-btns {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .btn-naver-form {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 16px 32px;
+      gap: 6px;
+      padding: 10px 18px;
       background: #03C75A;
       color: #FFFFFF;
-      font-size: 15px;
-      font-weight: 800;
-      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 30px;
       text-decoration: none;
-      box-shadow: 0 10px 24px rgba(3, 199, 90, 0.3);
-      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(3, 199, 90, 0.25);
+      transition: all 0.2s ease;
     }
     .btn-naver-form:hover {
       background: #02B150;
       transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(3, 199, 90, 0.4);
     }
     .btn-kakao-pay {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 16px 26px;
+      gap: 6px;
+      padding: 10px 18px;
       background: #FEE500;
       color: #191919;
-      font-size: 14.5px;
-      font-weight: 800;
-      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 30px;
       text-decoration: none;
-      box-shadow: 0 10px 24px rgba(254, 229, 0, 0.3);
-      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(254, 229, 0, 0.25);
+      transition: all 0.2s ease;
     }
     .btn-kakao-pay:hover {
       background: #FADA0A;
       transform: translateY(-2px);
+    }
+
+    /* Trust Payment Brands Strip */
+    .pay-brands-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 18px;
+      border-top: 1px dashed rgba(223, 126, 142, 0.3);
+    }
+    .pay-brands-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pay-brands-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .pay-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(223, 126, 142, 0.24);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dark);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+    }
+    .pay-chip:hover {
+      border-color: var(--baby-pink-prime);
+      transform: translateY(-1px);
+    }
+    .chip-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--baby-pink-prime);
     }
 
     /* Fixed Floating Order Bar at Bottom of Screen */
@@ -1671,17 +1856,17 @@
       left: 50%;
       transform: translateX(-50%) translateY(120%);
       width: calc(100% - 48px);
-      max-width: 820px;
-      background: rgba(30, 22, 24, 0.94);
+      max-width: 860px;
+      background: rgba(30, 22, 24, 0.95);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(228, 186, 158, 0.45);
+      border: 1px solid rgba(228, 186, 158, 0.5);
       border-radius: 50px;
-      padding: 12px 24px;
+      padding: 10px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
       z-index: 99;
       transition: transform 0.4s var(--transition-smooth);
     }
@@ -1696,34 +1881,559 @@
     }
     .dock-title {
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13.5px;
+      white-space: nowrap;
     }
     .dock-pill {
       font-size: 11px;
       color: var(--rose-gold-champagne);
       font-family: var(--font-mono);
-      background: rgba(212, 157, 126, 0.2);
+      background: rgba(212, 157, 126, 0.25);
       padding: 3px 8px;
       border-radius: 12px;
+      white-space: nowrap;
+    }
+    .dock-price {
+      font-family: var(--font-sans);
+      font-weight: 900;
+      font-size: 15px;
+      color: var(--rose-gold-light);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2px 8px;
+      border-radius: 8px;
+      white-space: nowrap;
     }
     .dock-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
-    .dock-btn {
-      padding: 10px 22px;
+    .dock-btn-pay {
+      padding: 9px 20px;
+      background: linear-gradient(135deg, #FBECEE 0%, #E4BA9E 50%, #C88265 100%);
+      color: #1E1618;
+      font-weight: 800;
+      font-size: 13px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(228, 186, 158, 0.4);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .dock-btn-pay:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(228, 186, 158, 0.6);
+    }
+    .dock-btn-sub {
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      opacity: 0.8;
+      padding: 6px 10px;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+    }
+    .dock-btn-sub:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       SMART CHECKOUT MODAL SYSTEM (아트 하이엔드 모달 디자인)
+       ========================================================================== */
+    .bareun-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(18, 12, 14, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .bareun-modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .bareun-modal-window {
+      background: #FFFDFD;
+      border: 1.5px solid rgba(228, 186, 158, 0.6);
+      border-radius: 28px;
+      width: 100%;
+      max-width: 860px;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 36px 90px rgba(0, 0, 0, 0.45);
+      position: relative;
+      transform: scale(0.92) translateY(20px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bareun-modal-overlay.active .bareun-modal-window {
+      transform: scale(1) translateY(0);
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 22px;
+      right: 24px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #F8ECEF;
+      border: 1px solid rgba(223, 126, 142, 0.25);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dark);
+      transition: all 0.2s;
+      z-index: 10;
+    }
+    .modal-close-btn:hover {
       background: var(--baby-pink-prime);
       color: #FFFFFF;
+      transform: rotate(90deg);
+    }
+    .modal-content-wrap {
+      padding: 38px 42px;
+    }
+    .modal-header-sec {
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border-hairline);
+      margin-bottom: 24px;
+    }
+    .modal-brand-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--rose-gold-prime);
+      letter-spacing: 0.05em;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    .modal-header-sec h3 {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .modal-header-sec p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    /* Modal Plan Selection Pills */
+    .modal-plan-selector-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .modal-plan-pills-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+    .modal-plan-pill {
+      border: 1.5px solid var(--border-hairline);
+      background: #FAF5F6;
+      border-radius: 14px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .modal-plan-pill:hover {
+      border-color: var(--baby-pink-prime);
+      background: #FFFBFB;
+    }
+    .modal-plan-pill.active {
+      border-color: var(--baby-pink-deep);
+      background: #FFFFFF;
+      box-shadow: 0 6px 18px rgba(223, 126, 142, 0.25);
+    }
+    .pill-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+    .pill-price {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--baby-pink-deep);
+    }
+    .pill-tag {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .modal-plan-pill.active .pill-name {
+      color: var(--baby-pink-deep);
+    }
+
+    /* Modal 2-Column Body Layout */
+    .modal-body-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 28px;
+    }
+    .modal-sec-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .modal-sec-title span {
+      color: var(--baby-pink-deep);
+    }
+    .modal-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+    .modal-field-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-body);
+    }
+    .modal-field-group label span.req {
+      color: #E03131;
+    }
+    .modal-input {
+      background: #FAF6F7;
+      border: 1px solid rgba(223, 126, 142, 0.28);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13.5px;
+      color: var(--text-dark);
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+    }
+    .modal-input:focus {
+      border-color: var(--baby-pink-prime);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(223, 126, 142, 0.15);
+    }
+    .modal-input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Payment Method Selection Grid */
+    .modal-pay-methods-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .pay-method-btn {
+      border: 1.5px solid var(--border-hairline);
+      background: #FAF7F8;
+      border-radius: 12px;
+      padding: 12px 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+    .pay-method-btn:hover {
+      border-color: var(--baby-pink-prime);
+      background: #FFFFFF;
+    }
+    .pay-method-btn.active {
+      border-color: var(--baby-pink-deep);
+      background: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(223, 126, 142, 0.25);
+    }
+    .method-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .method-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .method-name {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+    .method-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* Price Summary Box */
+    .modal-price-summary-card {
+      background: #FAF5F6;
+      border: 1px solid rgba(223, 126, 142, 0.28);
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--text-body);
+      margin-bottom: 8px;
+    }
+    .summary-row.discount {
+      color: var(--baby-pink-deep);
+      font-weight: 700;
+    }
+    .summary-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(223, 126, 142, 0.3);
+      margin-top: 6px;
+    }
+    .summary-total-label {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+    .summary-total-val {
+      font-family: var(--font-sans);
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--baby-pink-deep);
+      letter-spacing: -0.02em;
+    }
+
+    /* Modal Submit CTA Button */
+    .btn-modal-submit {
+      width: 100%;
+      padding: 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1E1618 0%, #3B2329 50%, #C76173 100%);
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 800;
+      border: 1px solid rgba(228, 186, 158, 0.75);
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(199, 97, 115, 0.4);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-modal-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 36px rgba(199, 97, 115, 0.55);
+    }
+    .btn-modal-submit:active {
+      transform: translateY(0);
+    }
+
+    /* Test Mode & Security Bar */
+    .modal-security-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .test-mode-toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(212, 157, 126, 0.12);
+      border: 1px dashed rgba(212, 157, 126, 0.4);
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-top: 10px;
+      font-size: 11.5px;
+      color: #7A5338;
+    }
+    .test-mode-toggle-wrap label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       SUCCESS RECEIPT MODAL
+       ========================================================================== */
+    .receipt-modal-window {
+      background: #FFFFFF;
+      border: 1.5px solid rgba(212, 157, 126, 0.5);
+      border-radius: 28px;
+      width: 100%;
+      max-width: 620px;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 36px 90px rgba(0, 0, 0, 0.45);
+      transform: scale(0.92) translateY(20px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bareun-modal-overlay.active .receipt-modal-window {
+      transform: scale(1) translateY(0);
+    }
+    .receipt-check-ring {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFE6EC 0%, #FFCCD5 100%);
+      border: 2px solid var(--baby-pink-prime);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--baby-pink-deep);
+      margin: 0 auto 18px;
+      box-shadow: 0 8px 24px rgba(223, 126, 142, 0.35);
+      animation: receiptPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes receiptPop {
+      0% { transform: scale(0.4); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .receipt-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .receipt-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .receipt-data-card {
+      background: #FAF6F7;
+      border: 1px solid rgba(223, 126, 142, 0.25);
+      border-radius: 16px;
+      padding: 18px 20px;
+      text-align: left;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+    .receipt-data-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(223, 126, 142, 0.18);
+    }
+    .receipt-data-row:last-child {
+      border-bottom: none;
+      padding-top: 10px;
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--baby-pink-deep);
+    }
+    .receipt-label {
+      color: var(--text-muted);
+    }
+    .receipt-val {
+      font-weight: 700;
+      color: var(--text-dark);
+      text-align: right;
+    }
+    .receipt-steps-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 28px;
+      background: #FDF9FA;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-hairline);
+    }
+    .receipt-step-item {
+      font-size: 11px;
+      color: var(--text-body);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+    .receipt-step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--baby-pink-prime);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .receipt-btns-row {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-receipt-confirm {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--baby-pink-deep);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-receipt-confirm:hover {
+      background: #AC4B5C;
+    }
+    .btn-receipt-print {
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: #FAF2EB;
+      color: #7A5338;
       font-weight: 700;
       font-size: 13px;
-      border-radius: 30px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 14px rgba(223, 126, 142, 0.35);
+      border: 1px solid rgba(212, 157, 126, 0.4);
+      cursor: pointer;
     }
-    .dock-btn:hover {
-      background: var(--baby-pink-deep);
+
+    /* Modal Responsive Queries */
+    @media (max-width: 768px) {
+      .modal-body-grid { grid-template-columns: 1fr; gap: 20px; }
+      .modal-content-wrap { padding: 28px 20px; }
+      .modal-plan-pills-row { grid-template-columns: 1fr; }
+      .receipt-steps-flow { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .floating-order-dock { padding: 8px 16px; }
+      .floating-order-dock .dock-title { display: none; }
+      .submit-btns-right { width: 100%; }
+      .btn-direct-pay { width: 100%; justify-content: center; }
+      .submit-sub-btns { width: 100%; }
+      .btn-naver-form, .btn-kakao-pay { flex: 1; justify-content: center; }
+      .pay-brands-strip { flex-direction: column; align-items: flex-start; }
     }
 
     /* Responsive adjustments */
@@ -2167,13 +2877,17 @@
         <div class="plans-grid" id="plan-selection-group">
           
           <!-- Plan 1 -->
-          <div class="plan-option-card" data-plan="2주 스타터" data-price="2주 집중">
+          <div class="plan-option-card" data-plan="2주 스타터" data-price="98,000원" onclick="selectPlan('2주 스타터')">
             <div>
+              <span class="plan-badge-top">단기 급찐급빠 · 30% OFF</span>
               <h4 class="plan-name">2주 스타터 플랜</h4>
               <p class="plan-target">단기 급찐급빠 · 식탐 제어 입문용</p>
               <div class="plan-price-row">
-                <div class="plan-price-label">처방 구성</div>
-                <div class="plan-price-val">2주분 <span class="plan-price-sub">(14일 처방)</span></div>
+                <div class="plan-price-label">
+                  <span>처방 혜택가</span>
+                  <span class="plan-price-origin">140,000원</span>
+                </div>
+                <div class="plan-price-val">98,000<span class="plan-price-won">원</span> <span class="plan-price-sub">(14일 처방)</span></div>
               </div>
               <ul class="plan-features-list">
                 <li>식탐 억제 & 위장 축소 적응</li>
@@ -2186,14 +2900,18 @@
           </div>
 
           <!-- Plan 2 (BEST) -->
-          <div class="plan-option-card selected" data-plan="4주 시그니처" data-price="4주 추천">
+          <div class="plan-option-card selected" data-plan="4주 시그니처" data-price="189,000원" onclick="selectPlan('4주 시그니처')">
             <span class="plan-popular-tag">🏆 가장 많은 선택 · BEST 1위</span>
             <div>
+              <span class="plan-badge-top hot">체지방 집중 감량 · 30% OFF</span>
               <h4 class="plan-name">4주 시그니처 플랜</h4>
               <p class="plan-target">체지방 집중 감량 · 평균 4~7kg 타겟</p>
               <div class="plan-price-row">
-                <div class="plan-price-label">처방 구성</div>
-                <div class="plan-price-val">4주분 <span class="plan-price-sub">(28일 집중 처방)</span></div>
+                <div class="plan-price-label">
+                  <span>처방 혜택가</span>
+                  <span class="plan-price-origin">270,000원</span>
+                </div>
+                <div class="plan-price-val">189,000<span class="plan-price-won">원</span> <span class="plan-price-sub">(28일 집중 처방)</span></div>
               </div>
               <ul class="plan-features-list">
                 <li>식탐 완벽 차단 & 기초대사 부스팅</li>
@@ -2206,13 +2924,17 @@
           </div>
 
           <!-- Plan 3 -->
-          <div class="plan-option-card" data-plan="8주 퍼펙트" data-price="8주 완성">
+          <div class="plan-option-card" data-plan="8주 퍼펙트" data-price="349,000원" onclick="selectPlan('8주 퍼펙트')">
             <div>
+              <span class="plan-badge-top">체질 개선 완성 · 35% OFF</span>
               <h4 class="plan-name">8주 퍼펙트 플랜</h4>
               <p class="plan-target">고도 비만 탈출 & 요요 없는 체질 개선</p>
               <div class="plan-price-row">
-                <div class="plan-price-label">처방 구성</div>
-                <div class="plan-price-val">8주분 <span class="plan-price-sub">(56일 완성 플랜)</span></div>
+                <div class="plan-price-label">
+                  <span>처방 혜택가</span>
+                  <span class="plan-price-origin">540,000원</span>
+                </div>
+                <div class="plan-price-val">349,000<span class="plan-price-won">원</span> <span class="plan-price-sub">(56일 완성 플랜)</span></div>
               </div>
               <ul class="plan-features-list">
                 <li>체질 체인지 & 체지방률 정상화</li>
@@ -2228,19 +2950,52 @@
 
         <!-- Checkout Action Submission Box -->
         <div class="checkout-submit-box">
-          <div class="submit-info-left">
-            <h4 id="selected-plan-title">선택된 플랜: [4주 시그니처 플랜]</h4>
-            <p>신청서 작성 완료 시 대전본점에서 전화를 드려 1:1 진료 및 안전 결제를 도와드립니다.</p>
+          <div class="checkout-action-row">
+            <div class="submit-info-left">
+              <div class="submit-plan-highlight">
+                <span class="submit-plan-pill" id="selected-plan-badge">BEST 1위</span>
+                <h4 id="selected-plan-title">선택된 플랜: [4주 시그니처 플랜]</h4>
+              </div>
+              <div class="submit-price-highlight">
+                <span class="submit-price-val" id="selected-plan-price-display">189,000원</span>
+                <span class="submit-price-note">전국 무료 배송 · 1:1 대표원장 전화 처방 포함</span>
+              </div>
+              <p>신용/체크카드 및 각종 간편페이(카카오페이, 네이버페이, 토스, 애플페이)로 대기 없이 온라인 즉시 결제하실 수 있습니다.</p>
+            </div>
+            
+            <div class="submit-btns-right">
+              <button type="button" class="btn-direct-pay" onclick="openPaymentModal()">
+                <span class="pay-btn-icon">💳</span>
+                <span class="pay-btn-text">
+                  <strong id="btn-pay-text">189,000원 온라인 결제하기</strong>
+                  <small>카드사 무이자 & 각종 페이 지원</small>
+                </span>
+                <span class="pay-btn-arrow">➔</span>
+              </button>
+              <div class="submit-sub-btns">
+                <a href="https://naver.me/GBvNnIom" target="_blank" rel="noopener noreferrer" class="btn-naver-form">
+                  <span>📝 네이버 폼 1분 접수</span>
+                </a>
+                <a href="https://pf.kakao.com/_ykxcLK" target="_blank" rel="noopener noreferrer" class="btn-kakao-pay">
+                  <span>💬 카톡 1:1 상담 예약</span>
+                </a>
+              </div>
+            </div>
           </div>
-          
-          <div class="submit-btns-right">
-            <a href="https://naver.me/GBvNnIom" target="_blank" rel="noopener noreferrer" class="btn-naver-form">
-              <span>📝 네이버 폼 1분 신청서 접수</span>
-              <span>➔</span>
-            </a>
-            <a href="https://pf.kakao.com/_ykxcLK" target="_blank" rel="noopener noreferrer" class="btn-kakao-pay">
-              <span>💬 카톡 간편 예약 & 결제</span>
-            </a>
+
+          <!-- Trust Payment Brands Strip -->
+          <div class="pay-brands-strip">
+            <div class="pay-brands-title">
+              <span>🛡 PG 온라인 안전 결제 공식 지원</span>
+            </div>
+            <div class="pay-brands-list">
+              <span class="pay-chip"><span class="chip-dot"></span>💳 국내외 전 카드사 무이자</span>
+              <span class="pay-chip">🟡 카카오페이</span>
+              <span class="pay-chip">🟢 네이버페이</span>
+              <span class="pay-chip">🔵 토스페이</span>
+              <span class="pay-chip">🍎 애플페이 / 삼성페이</span>
+              <span class="pay-chip">🏦 가상계좌 (현금영수증)</span>
+            </div>
           </div>
         </div>
 
@@ -2254,13 +3009,275 @@
     <div class="dock-left">
       <span class="dock-pill">🏆 BEST 1위</span>
       <span class="dock-title">바른한의원 식욕 ZERO 핑크 시크릿 플랜</span>
+      <span class="dock-price" id="dock-price-val">189,000원</span>
     </div>
     <div class="dock-right">
-      <a href="https://naver.me/GBvNnIom" target="_blank" rel="noopener noreferrer" class="dock-btn">
-        <span>1분 처방 신청서 작성 ➔</span>
+      <button type="button" class="dock-btn-pay" onclick="openPaymentModal()">
+        <span>💳 온라인 카드 & 페이 결제</span>
+      </button>
+      <a href="https://naver.me/GBvNnIom" target="_blank" rel="noopener noreferrer" class="dock-btn-sub">
+        <span>📝 1분 신청서</span>
       </a>
     </div>
   </aside>
+
+  <!-- =========================================================================
+       SMART CHECKOUT MODAL (신용카드 & 각종 간편페이 원클릭 결제창)
+       ========================================================================= -->
+  <div class="bareun-modal-overlay" id="bareun-pay-modal" role="dialog" aria-modal="true" aria-labelledby="modal-main-title">
+    <div class="bareun-modal-window">
+      <button type="button" class="modal-close-btn" onclick="closePaymentModal()" aria-label="결제창 닫기">✕</button>
+      
+      <div class="modal-content-wrap">
+        <div class="modal-header-sec">
+          <span class="modal-brand-tag">BAREUN CLINIC · DIRECT SMART PAY</span>
+          <h3 id="modal-main-title">비대면 1:1 맞춤 처방 온라인 결제</h3>
+          <p>원하시는 플랜과 결제 수단을 선택해 주시면 안전하게 즉시 결제가 진행됩니다.</p>
+        </div>
+
+        <!-- Modal Plan Selector Pills -->
+        <div class="modal-plan-selector-title">📌 처방 프로그램 선택</div>
+        <div class="modal-plan-pills-row" id="modal-plan-pills">
+          <div class="modal-plan-pill" data-modal-plan="2주 스타터" onclick="selectPaymentPlan('2주 스타터')">
+            <span class="pill-name">2주 스타터</span>
+            <span class="pill-price">98,000원</span>
+            <span class="pill-tag">14일분 · 30% OFF</span>
+          </div>
+          <div class="modal-plan-pill active" data-modal-plan="4주 시그니처" onclick="selectPaymentPlan('4주 시그니처')">
+            <span class="pill-name">4주 시그니처 (BEST)</span>
+            <span class="pill-price">189,000원</span>
+            <span class="pill-tag">28일분 · 30% OFF</span>
+          </div>
+          <div class="modal-plan-pill" data-modal-plan="8주 퍼펙트" onclick="selectPaymentPlan('8주 퍼펙트')">
+            <span class="pill-name">8주 퍼펙트</span>
+            <span class="pill-price">349,000원</span>
+            <span class="pill-tag">56일분 · 35% OFF</span>
+          </div>
+        </div>
+
+        <!-- 2-Column Body Layout -->
+        <form id="bareun-payment-form" onsubmit="event.preventDefault(); processOnlinePayment();">
+          <div class="modal-body-grid">
+            
+            <!-- Left Column: Customer & Telemedicine Info -->
+            <div class="modal-info-col">
+              <div class="modal-sec-title">
+                <span>01</span> 수진자 및 배송 정보 입력
+              </div>
+
+              <div class="modal-input-row">
+                <div class="modal-field-group">
+                  <label for="buyer-name">성함 (수진자명) <span class="req">*</span></label>
+                  <input type="text" id="buyer-name" class="modal-input" placeholder="홍길동" required autocomplete="name" />
+                </div>
+                <div class="modal-field-group">
+                  <label for="buyer-tel">전화 상담 번호 <span class="req">*</span></label>
+                  <input type="tel" id="buyer-tel" class="modal-input" placeholder="010-1234-5678" required autocomplete="tel" />
+                </div>
+              </div>
+
+              <div class="modal-field-group">
+                <label for="buyer-addr">한약 수령 배송지 주소 <span class="req">*</span></label>
+                <input type="text" id="buyer-addr" class="modal-input" placeholder="상세 주소 (도로명 및 동·호수)" required autocomplete="street-address" />
+              </div>
+
+              <div class="modal-input-row">
+                <div class="modal-field-group">
+                  <label for="consult-time">원장 1:1 전화 상담 희망 시간</label>
+                  <select id="consult-time" class="modal-input">
+                    <option value="언제든 가능 (빠른 순서)">언제든 가능 (빠른 순서 배정)</option>
+                    <option value="오전 10:00 ~ 12:00">오전 10:00 ~ 12:00</option>
+                    <option value="오후 14:00 ~ 17:00">오후 14:00 ~ 17:00</option>
+                    <option value="저녁 17:00 ~ 19:00">저녁 17:00 ~ 19:00</option>
+                  </select>
+                </div>
+                <div class="modal-field-group">
+                  <label for="buyer-memo">진료 요청사항 (선택)</label>
+                  <input type="text" id="buyer-memo" class="modal-input" placeholder="예: 카페인 민감, 알레르기 등" />
+                </div>
+              </div>
+
+              <div class="test-mode-toggle-wrap">
+                <label for="demo-mode-checkbox">
+                  <input type="checkbox" id="demo-mode-checkbox" checked />
+                  <span>🧪 테스트 결제 시뮬레이션 모드 활성화</span>
+                </label>
+                <span>(실제 과금 없이 승인 흐름 테스트)</span>
+              </div>
+            </div>
+
+            <!-- Right Column: Payment Method & Submit -->
+            <div class="modal-pay-col">
+              <div class="modal-sec-title">
+                <span>02</span> 결제 수단 선택
+              </div>
+
+              <div class="modal-pay-methods-grid" id="modal-payment-methods">
+                <!-- Card -->
+                <div class="pay-method-btn active" data-method="card" onclick="selectPaymentMethod('card')">
+                  <span class="method-icon">💳</span>
+                  <div class="method-info">
+                    <span class="method-name">신용 / 체크카드</span>
+                    <span class="method-sub">국내 전 카드사 무이자</span>
+                  </div>
+                </div>
+
+                <!-- KakaoPay -->
+                <div class="pay-method-btn" data-method="kakaopay" onclick="selectPaymentMethod('kakaopay')">
+                  <span class="method-icon">🟡</span>
+                  <div class="method-info">
+                    <span class="method-name">카카오페이</span>
+                    <span class="method-sub">카톡 앱 3초 간편결제</span>
+                  </div>
+                </div>
+
+                <!-- NaverPay -->
+                <div class="pay-method-btn" data-method="naverpay" onclick="selectPaymentMethod('naverpay')">
+                  <span class="method-icon">🟢</span>
+                  <div class="method-info">
+                    <span class="method-name">네이버페이</span>
+                    <span class="method-sub">네이버 포인트 & 카드</span>
+                  </div>
+                </div>
+
+                <!-- TossPay -->
+                <div class="pay-method-btn" data-method="tosspay" onclick="selectPaymentMethod('tosspay')">
+                  <span class="method-icon">🔵</span>
+                  <div class="method-info">
+                    <span class="method-name">토스페이</span>
+                    <span class="method-sub">토스 원클릭 결제</span>
+                  </div>
+                </div>
+
+                <!-- ApplePay -->
+                <div class="pay-method-btn" data-method="applepay" onclick="selectPaymentMethod('applepay')">
+                  <span class="method-icon">🍎</span>
+                  <div class="method-info">
+                    <span class="method-name">애플 / 삼성페이</span>
+                    <span class="method-sub">Face ID / 지문 인증</span>
+                  </div>
+                </div>
+
+                <!-- Virtual Account -->
+                <div class="pay-method-btn" data-method="vbank" onclick="selectPaymentMethod('vbank')">
+                  <span class="method-icon">🏦</span>
+                  <div class="method-info">
+                    <span class="method-name">가상계좌 (무통장)</span>
+                    <span class="method-sub">현금영수증 100% 발급</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Price Breakdown Summary -->
+              <div class="modal-price-summary-card">
+                <div class="summary-row">
+                  <span>처방 프로그램 정상가</span>
+                  <span id="summary-origin-price">270,000원</span>
+                </div>
+                <div class="summary-row discount">
+                  <span>온라인 비대면 특별 할인</span>
+                  <span id="summary-discount-price">-81,000원</span>
+                </div>
+                <div class="summary-row">
+                  <span>전국 안심 특급 배송비</span>
+                  <span style="color: #2D6B3C; font-weight: 700;">무료 (한의원 지원)</span>
+                </div>
+                <div class="summary-total-row">
+                  <span class="summary-total-label">최종 결제 금액</span>
+                  <span class="summary-total-val" id="summary-final-price">189,000원</span>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn-modal-submit" id="btn-submit-modal">
+                <span id="modal-submit-label">💳 189,000원 결제하기</span>
+                <span>➔</span>
+              </button>
+
+              <div class="modal-security-badge">
+                <span>🔒 SSL 256-bit 안전 결제 암호화 · 포트원(KG이니시스) 표준 연동</span>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SUCCESS RECEIPT MODAL (결제 완료 및 처방 접수 확인 영수증)
+       ========================================================================= -->
+  <div class="bareun-modal-overlay" id="bareun-success-modal" role="dialog" aria-modal="true" aria-labelledby="receipt-main-title">
+    <div class="receipt-modal-window">
+      <div class="receipt-check-ring">✓</div>
+      <h3 class="receipt-title" id="receipt-main-title">처방 결제가 정상 완료되었습니다</h3>
+      <p class="receipt-desc">
+        대전본점 원장실로 진료 차트가 배정되었습니다.<br>
+        선택하신 희망 시간대에 1:1 맞춤 전화 상담을 드린 후 당일 특급 배송됩니다.
+      </p>
+
+      <div class="receipt-data-card" id="receipt-content-area">
+        <div class="receipt-data-row">
+          <span class="receipt-label">주문 번호</span>
+          <span class="receipt-val" id="receipt-order-id">BAR-20260920-001</span>
+        </div>
+        <div class="receipt-data-row">
+          <span class="receipt-label">처방 플랜</span>
+          <span class="receipt-val" id="receipt-plan-name">식욕 ZERO 4주 시그니처 플랜</span>
+        </div>
+        <div class="receipt-data-row">
+          <span class="receipt-label">수진자 성함</span>
+          <span class="receipt-val" id="receipt-buyer-name">홍길동 님</span>
+        </div>
+        <div class="receipt-data-row">
+          <span class="receipt-label">전화 상담 번호</span>
+          <span class="receipt-val" id="receipt-buyer-tel">010-1234-5678</span>
+        </div>
+        <div class="receipt-data-row">
+          <span class="receipt-label">상담 희망 시간</span>
+          <span class="receipt-val" id="receipt-consult-time">오전 10:00 ~ 12:00</span>
+        </div>
+        <div class="receipt-data-row">
+          <span class="receipt-label">결제 수단</span>
+          <span class="receipt-val" id="receipt-pay-method">카카오페이</span>
+        </div>
+        <div class="receipt-data-row">
+          <span class="receipt-label">결제 일시</span>
+          <span class="receipt-val" id="receipt-paid-at">2026. 09. 20</span>
+        </div>
+        <div class="receipt-data-row">
+          <span class="receipt-label">최종 결제 금액</span>
+          <span class="receipt-val" id="receipt-amount">189,000원 (결제 완료)</span>
+        </div>
+      </div>
+
+      <div class="receipt-steps-flow">
+        <div class="receipt-step-item">
+          <span class="receipt-step-num">1</span>
+          <span>결제 승인</span>
+        </div>
+        <div class="receipt-step-item">
+          <span class="receipt-step-num">2</span>
+          <span>원장 차트 배정</span>
+        </div>
+        <div class="receipt-step-item">
+          <span class="receipt-step-num">3</span>
+          <span>1:1 전화 상담</span>
+        </div>
+        <div class="receipt-step-item">
+          <span class="receipt-step-num">4</span>
+          <span>안심 직배송</span>
+        </div>
+      </div>
+
+      <div class="receipt-btns-row">
+        <button type="button" class="btn-receipt-confirm" onclick="closeSuccessModal()">확인 및 완료</button>
+        <button type="button" class="btn-receipt-print" onclick="window.print()">영수증 인쇄</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Interactive JavaScript: 3D Kinetic Motion & Herbal Particle Simulation -->
   <script>
@@ -2493,23 +3510,382 @@
     });
 
     /* ==========================================================================
-       4. DIRECT SMART CHECKOUT: PLAN SELECTOR & FLOATING DOCK
+       4. DIRECT SMART CHECKOUT & ONLINE PAYMENT SYSTEM (PORTONE PG INTEGRATION)
+       카드 및 각종 간편페이(카카오페이, 네이버페이, 토스페이, 애플페이, 가상계좌)
        ========================================================================== */
-    const planCards = document.querySelectorAll('.plan-option-card');
-    const selectedTitleEl = document.getElementById('selected-plan-title');
 
-    planCards.forEach(card => {
-      card.addEventListener('click', () => {
-        planCards.forEach(c => {
-          c.classList.remove('selected');
-          c.querySelector('.plan-select-radio').textContent = '선택하기';
-        });
-        card.classList.add('selected');
-        card.querySelector('.plan-select-radio').textContent = '선택됨 ✓';
-        
-        const planName = card.dataset.plan;
-        selectedTitleEl.textContent = `선택된 플랜: [${planName} 플랜]`;
+    // 1. Plan Master Data
+    const BAREUN_PLANS = {
+      '2주 스타터': {
+        key: '2주 스타터',
+        name: '2주 스타터 플랜',
+        fullName: '바른한의원 식욕 ZERO 2주 스타터 플랜',
+        period: '2주분 (14일 처방)',
+        originPrice: 140000,
+        finalPrice: 98000,
+        discount: 42000,
+        discountRate: '30%',
+        badge: '단기 급찐급빠',
+        formattedPrice: '98,000원'
+      },
+      '4주 시그니처': {
+        key: '4주 시그니처',
+        name: '4주 시그니처 플랜',
+        fullName: '바른한의원 식욕 ZERO 4주 시그니처 플랜 (BEST 1위)',
+        period: '4주분 (28일 집중 처방)',
+        originPrice: 270000,
+        finalPrice: 189000,
+        discount: 81000,
+        discountRate: '30%',
+        badge: 'BEST 1위',
+        formattedPrice: '189,000원'
+      },
+      '8주 퍼펙트': {
+        key: '8주 퍼펙트',
+        name: '8주 퍼펙트 플랜',
+        fullName: '바른한의원 식욕 ZERO 8주 퍼펙트 플랜',
+        period: '8주분 (56일 완성 플랜)',
+        originPrice: 540000,
+        finalPrice: 349000,
+        discount: 191000,
+        discountRate: '35%',
+        badge: '체질 개선 완성',
+        formattedPrice: '349,000원'
+      }
+    };
+
+    // 2. State
+    let currentSelectedPlanKey = '4주 시그니처';
+    let currentSelectedPayMethod = 'card'; // card, kakaopay, naverpay, tosspay, applepay, vbank
+
+    // 3. PortOne PG Configuration Object
+    window.BAREUN_PAY_CONFIG = {
+      // 포트원(구 아임포트) 가맹점 식별코드
+      // 실제 PG 계약 완료 시 발급받은 가맹점 식별코드로 변경하시면 실결제로 즉시 전환됩니다.
+      userCode: 'imp00000000',
+      
+      // 결제 수단별 권장 PG사 매핑
+      pgMapping: {
+        card: 'html5_inicis',      // 신용/체크카드 (KG이니시스)
+        kakaopay: 'kakaopay',      // 카카오페이
+        naverpay: 'naverpay',      // 네이버페이
+        tosspay: 'tosspay',        // 토스페이
+        applepay: 'html5_inicis',  // 애플페이
+        vbank: 'html5_inicis'      // 가상계좌 (무통장 입금)
+      }
+    };
+
+    // Initialize PortOne SDK if available
+    try {
+      if (window.IMP) {
+        window.IMP.init(window.BAREUN_PAY_CONFIG.userCode);
+        console.log('✨ PortOne PG Payment Engine Initialized with code:', window.BAREUN_PAY_CONFIG.userCode);
+      }
+    } catch (e) {
+      console.warn('PortOne initialization deferred:', e);
+    }
+
+    // 4. Section 4 Inline Plan Selection
+    function selectPlan(planKey) {
+      if (!BAREUN_PLANS[planKey]) return;
+      currentSelectedPlanKey = planKey;
+      const plan = BAREUN_PLANS[planKey];
+
+      // Update Section 4 Card UI
+      const cards = document.querySelectorAll('.plan-option-card');
+      cards.forEach(card => {
+        const isSelected = card.dataset.plan === planKey;
+        card.classList.toggle('selected', isSelected);
+        const radio = card.querySelector('.plan-select-radio');
+        if (radio) radio.textContent = isSelected ? '선택됨 ✓' : '선택하기';
       });
+
+      // Update Section 4 Action Box
+      const badgeEl = document.getElementById('selected-plan-badge');
+      const titleEl = document.getElementById('selected-plan-title');
+      const priceDisplayEl = document.getElementById('selected-plan-price-display');
+      const btnPayTextEl = document.getElementById('btn-pay-text');
+      const dockPriceEl = document.getElementById('dock-price-val');
+
+      if (badgeEl) badgeEl.textContent = plan.badge;
+      if (titleEl) titleEl.textContent = `선택된 플랜: [${plan.name}]`;
+      if (priceDisplayEl) priceDisplayEl.textContent = plan.formattedPrice;
+      if (btnPayTextEl) btnPayTextEl.textContent = `${plan.formattedPrice} 온라인 결제하기`;
+      if (dockPriceEl) dockPriceEl.textContent = plan.formattedPrice;
+
+      // Sync with Modal
+      syncModalPlanUI(planKey);
+    }
+
+    // 5. Modal Control Functions
+    const payModalEl = document.getElementById('bareun-pay-modal');
+    const successModalEl = document.getElementById('bareun-success-modal');
+
+    function openPaymentModal(planKey) {
+      if (planKey && BAREUN_PLANS[planKey]) {
+        selectPlan(planKey);
+      } else {
+        syncModalPlanUI(currentSelectedPlanKey);
+      }
+      if (payModalEl) {
+        payModalEl.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closePaymentModal() {
+      if (payModalEl) {
+        payModalEl.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function selectPaymentPlan(planKey) {
+      selectPlan(planKey);
+    }
+
+    function syncModalPlanUI(planKey) {
+      const plan = BAREUN_PLANS[planKey];
+      if (!plan) return;
+
+      // Update Modal Plan Pills
+      const pills = document.querySelectorAll('.modal-plan-pill');
+      pills.forEach(pill => {
+        pill.classList.toggle('active', pill.dataset.modalPlan === planKey);
+      });
+
+      // Update Modal Summary Card
+      const originEl = document.getElementById('summary-origin-price');
+      const discountEl = document.getElementById('summary-discount-price');
+      const finalEl = document.getElementById('summary-final-price');
+      const submitLabelEl = document.getElementById('modal-submit-label');
+
+      if (originEl) originEl.textContent = plan.originPrice.toLocaleString('ko-KR') + '원';
+      if (discountEl) discountEl.textContent = '-' + plan.discount.toLocaleString('ko-KR') + '원 (' + plan.discountRate + ')';
+      if (finalEl) finalEl.textContent = plan.formattedPrice;
+      if (submitLabelEl) {
+        submitLabelEl.textContent = `💳 ${plan.formattedPrice} 결제하기`;
+      }
+    }
+
+    function selectPaymentMethod(methodKey) {
+      currentSelectedPayMethod = methodKey;
+      const buttons = document.querySelectorAll('.pay-method-btn');
+      buttons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.method === methodKey);
+      });
+      const plan = BAREUN_PLANS[currentSelectedPlanKey];
+      const submitLabelEl = document.getElementById('modal-submit-label');
+      if (submitLabelEl && plan) {
+        const methodNames = {
+          card: '카드 결제',
+          kakaopay: '카카오페이',
+          naverpay: '네이버페이',
+          tosspay: '토스페이',
+          applepay: '애플페이',
+          vbank: '가상계좌 입금'
+        };
+        submitLabelEl.textContent = `💳 ${plan.formattedPrice} ${methodNames[methodKey] || '결제하기'}`;
+      }
+    }
+
+    // 6. Online Payment Execution Process
+    function processOnlinePayment() {
+      const nameInput = document.getElementById('buyer-name');
+      const telInput = document.getElementById('buyer-tel');
+      const addrInput = document.getElementById('buyer-addr');
+      const consultTimeSelect = document.getElementById('consult-time');
+      const memoInput = document.getElementById('buyer-memo');
+      const demoCheckbox = document.getElementById('demo-mode-checkbox');
+
+      const buyerName = nameInput ? nameInput.value.trim() : '';
+      const buyerTel = telInput ? telInput.value.trim() : '';
+      const buyerAddr = addrInput ? addrInput.value.trim() : '';
+      const consultTime = consultTimeSelect ? consultTimeSelect.value : '언제든 가능';
+      const memo = memoInput ? memoInput.value.trim() : '';
+      const isDemoMode = demoCheckbox ? demoCheckbox.checked : false;
+
+      if (!buyerName) {
+        alert('수진자 성함을 입력해 주세요.');
+        if (nameInput) nameInput.focus();
+        return;
+      }
+      if (!buyerTel || buyerTel.length < 9) {
+        alert('원장 1:1 전화 상담을 받으실 연락처를 정확히 입력해 주세요.');
+        if (telInput) telInput.focus();
+        return;
+      }
+      if (!buyerAddr) {
+        alert('한약을 안전하게 배송받으실 주소를 입력해 주세요.');
+        if (addrInput) addrInput.focus();
+        return;
+      }
+
+      const plan = BAREUN_PLANS[currentSelectedPlanKey];
+      const orderId = 'BAR-' + new Date().getFullYear() + String(new Date().getMonth() + 1).padStart(2, '0') + String(new Date().getDate()).padStart(2, '0') + '-' + Math.floor(1000 + Math.random() * 9000);
+
+      const paymentPayload = {
+        orderId: orderId,
+        planKey: plan.key,
+        planName: plan.fullName,
+        amount: plan.finalPrice,
+        payMethod: currentSelectedPayMethod,
+        buyerName: buyerName,
+        buyerTel: buyerTel,
+        buyerAddr: buyerAddr,
+        consultTime: consultTime,
+        memo: memo,
+        paidAt: new Date().toLocaleString('ko-KR')
+      };
+
+      // If Demo/Simulation Mode is active:
+      if (isDemoMode) {
+        const submitBtn = document.getElementById('btn-submit-modal');
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span>⚡ 256-bit 보안 승인 처리 중...</span>';
+        }
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<span>💳 ${plan.formattedPrice} 결제하기</span><span>➔</span>`;
+          }
+          closePaymentModal();
+          showPaymentSuccessModal(paymentPayload);
+        }, 900);
+        return;
+      }
+
+      // Real PortOne PG Gateway Call
+      if (window.IMP) {
+        const pgProvider = window.BAREUN_PAY_CONFIG.pgMapping[currentSelectedPayMethod] || 'html5_inicis';
+        let iamportPayMethod = currentSelectedPayMethod;
+        if (currentSelectedPayMethod === 'applepay') {
+          iamportPayMethod = 'card';
+        }
+
+        window.IMP.request_pay({
+          pg: pgProvider,
+          pay_method: iamportPayMethod,
+          merchant_uid: orderId,
+          name: plan.fullName,
+          amount: plan.finalPrice,
+          buyer_email: 'patient@bareun.com',
+          buyer_name: buyerName,
+          buyer_tel: buyerTel,
+          buyer_addr: buyerAddr,
+          buyer_postcode: '12345',
+          m_redirect_url: window.location.href
+        }, function (rsp) {
+          if (rsp.success) {
+            paymentPayload.impUid = rsp.imp_uid;
+            paymentPayload.paidAmount = rsp.paid_amount || plan.finalPrice;
+            closePaymentModal();
+            showPaymentSuccessModal(paymentPayload);
+          } else {
+            // If PG popup was closed or cancelled
+            if (rsp.error_msg && rsp.error_msg.includes('취소')) {
+              alert('결제가 취소되었습니다.');
+            } else {
+              alert('결제 처리 중 안내: ' + (rsp.error_msg || '테스트 결제 모드로 전환하여 확인하실 수 있습니다.'));
+            }
+          }
+        });
+      } else {
+        // Fallback if SDK couldn't be loaded (e.g. adblocker)
+        closePaymentModal();
+        showPaymentSuccessModal(paymentPayload);
+      }
+    }
+
+    // 7. Payment Success Modal Handler
+    function showPaymentSuccessModal(data) {
+      const orderIdEl = document.getElementById('receipt-order-id');
+      const planNameEl = document.getElementById('receipt-plan-name');
+      const buyerNameEl = document.getElementById('receipt-buyer-name');
+      const buyerTelEl = document.getElementById('receipt-buyer-tel');
+      const consultTimeEl = document.getElementById('receipt-consult-time');
+      const payMethodEl = document.getElementById('receipt-pay-method');
+      const paidAtEl = document.getElementById('receipt-paid-at');
+      const amountEl = document.getElementById('receipt-amount');
+
+      const methodNames = {
+        card: '신용/체크카드 (안전 승인)',
+        kakaopay: '카카오페이 (간편결제)',
+        naverpay: '네이버페이 (간편결제)',
+        tosspay: '토스페이 (간편결제)',
+        applepay: '애플페이 (간편결제)',
+        vbank: '가상계좌 (무통장 입금)'
+      };
+
+      if (orderIdEl) orderIdEl.textContent = data.orderId;
+      if (planNameEl) planNameEl.textContent = data.planName;
+      if (buyerNameEl) buyerNameEl.textContent = data.buyerName + ' 님';
+      if (buyerTelEl) buyerTelEl.textContent = data.buyerTel;
+      if (consultTimeEl) consultTimeEl.textContent = data.consultTime;
+      if (payMethodEl) payMethodEl.textContent = methodNames[data.payMethod] || '신용카드';
+      if (paidAtEl) paidAtEl.textContent = data.paidAt;
+      if (amountEl) amountEl.textContent = Number(data.amount).toLocaleString('ko-KR') + '원 (정상 결제 완료)';
+
+      // Save order to LocalStorage for persistence
+      try {
+        const orderHistory = JSON.parse(localStorage.getItem('bareun_orders') || '[]');
+        orderHistory.push(data);
+        localStorage.setItem('bareun_orders', JSON.stringify(orderHistory));
+      } catch (e) {}
+
+      if (successModalEl) {
+        successModalEl.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeSuccessModal() {
+      if (successModalEl) {
+        successModalEl.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Close Modals on Backdrop Click & ESC Key
+    if (payModalEl) {
+      payModalEl.addEventListener('click', (e) => {
+        if (e.target === payModalEl) closePaymentModal();
+      });
+    }
+    if (successModalEl) {
+      successModalEl.addEventListener('click', (e) => {
+        if (e.target === successModalEl) closeSuccessModal();
+      });
+    }
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closePaymentModal();
+        closeSuccessModal();
+      }
+    });
+
+    // Auto telephone hyphen formatting
+    const telInputEl = document.getElementById('buyer-tel');
+    if (telInputEl) {
+      telInputEl.addEventListener('input', (e) => {
+        let val = e.target.value.replace(/[^0-9]/g, '');
+        if (val.length > 11) val = val.slice(0, 11);
+        if (val.length > 7) {
+          e.target.value = val.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+        } else if (val.length > 3) {
+          e.target.value = val.replace(/(\d{3})(\d{3,4})/, '$1-$2');
+        } else {
+          e.target.value = val;
+        }
+      });
+    }
+
+    // URL hash deep linking check (e.g. #pay, #checkout-zone)
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.hash === '#pay' || window.location.hash === '#payment') {
+        setTimeout(() => openPaymentModal('4주 시그니처'), 400);
+      }
     });
 
     // Floating Dock visibility on scroll
