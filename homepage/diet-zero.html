@@ -13,6 +13,8 @@
 
   <!-- PortOne (Iamport) Standard Online Payment Gateway SDK -->
   <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <!-- Real Payment PG Merchant Config -->
+  <script src="payment-config.js"></script>
 
   <style>
     /* ==========================================================================
@@ -2260,24 +2262,34 @@
       font-size: 11px;
       color: var(--text-muted);
     }
-    .test-mode-toggle-wrap {
+    .checkout-trust-box {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(212, 157, 126, 0.12);
-      border: 1px dashed rgba(212, 157, 126, 0.4);
-      border-radius: 10px;
-      padding: 8px 12px;
-      margin-top: 10px;
-      font-size: 11.5px;
-      color: #7A5338;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(223, 126, 142, 0.08);
+      border: 1px solid rgba(223, 126, 142, 0.28);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-top: 12px;
+      text-align: left;
     }
-    .test-mode-toggle-wrap label {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 700;
+    .trust-shield-icon {
+      font-size: 22px;
+      line-height: 1;
+      margin-top: 1px;
+    }
+    .checkout-trust-box .trust-desc strong {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--baby-pink-deep);
+      margin-bottom: 3px;
+    }
+    .checkout-trust-box .trust-desc p {
+      font-size: 11px;
+      color: var(--text-body);
+      line-height: 1.45;
+      margin: 0;
     }
 
     /* ==========================================================================
@@ -3097,12 +3109,12 @@
                 </div>
               </div>
 
-              <div class="test-mode-toggle-wrap">
-                <label for="demo-mode-checkbox">
-                  <input type="checkbox" id="demo-mode-checkbox" checked />
-                  <span>🧪 테스트 결제 시뮬레이션 모드 활성화</span>
-                </label>
-                <span>(실제 과금 없이 승인 흐름 테스트)</span>
+              <div class="checkout-trust-box">
+                <span class="trust-shield-icon">🛡️</span>
+                <div class="trust-desc">
+                  <strong>보건복지부 비대면 진료 지침 및 의료법 준수</strong>
+                  <p>결제 승인 완료 즉시 1:1 담당 한의학 박사 배정 및 맞춤 전화 상담 준비가 시작됩니다.</p>
+                </div>
               </div>
             </div>
 
@@ -3559,12 +3571,8 @@
     let currentSelectedPayMethod = 'card'; // card, kakaopay, naverpay, tosspay, applepay, vbank
 
     // 3. PortOne PG Configuration Object
-    window.BAREUN_PAY_CONFIG = {
-      // 포트원(구 아임포트) 가맹점 식별코드
-      // 실제 PG 계약 완료 시 발급받은 가맹점 식별코드로 변경하시면 실결제로 즉시 전환됩니다.
+    window.BAREUN_PAY_CONFIG = window.BAREUN_PAY_CONFIG || {
       userCode: 'imp00000000',
-      
-      // 결제 수단별 권장 PG사 매핑
       pgMapping: {
         card: 'html5_inicis',      // 신용/체크카드 (KG이니시스)
         kakaopay: 'kakaopay',      // 카카오페이
@@ -3575,11 +3583,11 @@
       }
     };
 
-    // Initialize PortOne SDK if available
+    // Initialize PortOne SDK
     try {
       if (window.IMP) {
         window.IMP.init(window.BAREUN_PAY_CONFIG.userCode);
-        console.log('✨ PortOne PG Payment Engine Initialized with code:', window.BAREUN_PAY_CONFIG.userCode);
+        console.log('✨ PortOne Real PG Payment Engine Ready with code:', window.BAREUN_PAY_CONFIG.userCode);
       }
     } catch (e) {
       console.warn('PortOne initialization deferred:', e);
@@ -3689,21 +3697,19 @@
       }
     }
 
-    // 6. Online Payment Execution Process
+    // 6. Online Payment Execution Process (Real PG Gateway Call)
     function processOnlinePayment() {
       const nameInput = document.getElementById('buyer-name');
       const telInput = document.getElementById('buyer-tel');
       const addrInput = document.getElementById('buyer-addr');
       const consultTimeSelect = document.getElementById('consult-time');
       const memoInput = document.getElementById('buyer-memo');
-      const demoCheckbox = document.getElementById('demo-mode-checkbox');
 
       const buyerName = nameInput ? nameInput.value.trim() : '';
       const buyerTel = telInput ? telInput.value.trim() : '';
       const buyerAddr = addrInput ? addrInput.value.trim() : '';
       const consultTime = consultTimeSelect ? consultTimeSelect.value : '언제든 가능';
       const memo = memoInput ? memoInput.value.trim() : '';
-      const isDemoMode = demoCheckbox ? demoCheckbox.checked : false;
 
       if (!buyerName) {
         alert('수진자 성함을 입력해 주세요.');
@@ -3722,7 +3728,7 @@
       }
 
       const plan = BAREUN_PLANS[currentSelectedPlanKey];
-      const orderId = 'BAR-' + new Date().getFullYear() + String(new Date().getMonth() + 1).padStart(2, '0') + String(new Date().getDate()).padStart(2, '0') + '-' + Math.floor(1000 + Math.random() * 9000);
+      const orderId = 'BAR-' + new Date().getFullYear() + String(new Date().getMonth() + 1).padStart(2, '0') + String(new Date().getDate()).padStart(2, '0') + '-' + Math.floor(100000 + Math.random() * 900000);
 
       const paymentPayload = {
         orderId: orderId,
@@ -3738,64 +3744,103 @@
         paidAt: new Date().toLocaleString('ko-KR')
       };
 
-      // If Demo/Simulation Mode is active:
-      if (isDemoMode) {
-        const submitBtn = document.getElementById('btn-submit-modal');
+      // Save to sessionStorage for mobile redirect recovery
+      try {
+        sessionStorage.setItem('bareun_pending_order', JSON.stringify(paymentPayload));
+      } catch (e) {}
+
+      const submitBtn = document.getElementById('btn-submit-modal');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>🔒 보안 결제창 연결 중...</span>';
+      }
+
+      // Check PortOne SDK availability
+      if (!window.IMP) {
+        alert('전자결제 보안 모듈(PortOne SDK)을 불러오는 중입니다. 잠시 후 다시 시도해 주세요.');
         if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.innerHTML = '<span>⚡ 256-bit 보안 승인 처리 중...</span>';
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>💳 ${plan.formattedPrice} 결제하기</span><span>➔</span>`;
         }
-        setTimeout(() => {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = `<span>💳 ${plan.formattedPrice} 결제하기</span><span>➔</span>`;
-          }
-          closePaymentModal();
-          showPaymentSuccessModal(paymentPayload);
-        }, 900);
         return;
       }
 
-      // Real PortOne PG Gateway Call
-      if (window.IMP) {
-        const pgProvider = window.BAREUN_PAY_CONFIG.pgMapping[currentSelectedPayMethod] || 'html5_inicis';
-        let iamportPayMethod = currentSelectedPayMethod;
-        if (currentSelectedPayMethod === 'applepay') {
-          iamportPayMethod = 'card';
+      // Re-initialize with active userCode
+      const currentCode = (window.BAREUN_PAY_CONFIG && window.BAREUN_PAY_CONFIG.userCode) || 'imp00000000';
+      window.IMP.init(currentCode);
+
+      // Map Payment Gateway & Method
+      const pgMapping = (window.BAREUN_PAY_CONFIG && window.BAREUN_PAY_CONFIG.pgMapping) || {};
+      let pgProvider = pgMapping.card || 'html5_inicis';
+      let iamportPayMethod = 'card';
+
+      if (currentSelectedPayMethod === 'kakaopay') {
+        pgProvider = pgMapping.kakaopay || 'kakaopay';
+        iamportPayMethod = 'card';
+      } else if (currentSelectedPayMethod === 'naverpay') {
+        pgProvider = pgMapping.naverpay || 'naverpay';
+        iamportPayMethod = 'card';
+      } else if (currentSelectedPayMethod === 'tosspay') {
+        pgProvider = pgMapping.tosspay || 'tosspay';
+        iamportPayMethod = 'card';
+      } else if (currentSelectedPayMethod === 'applepay') {
+        pgProvider = pgMapping.applepay || 'html5_inicis';
+        iamportPayMethod = 'card';
+      } else if (currentSelectedPayMethod === 'vbank') {
+        pgProvider = pgMapping.vbank || 'html5_inicis';
+        iamportPayMethod = 'vbank';
+      } else {
+        pgProvider = pgMapping.card || 'html5_inicis';
+        iamportPayMethod = 'card';
+      }
+
+      const returnUrl = window.location.origin + window.location.pathname;
+
+      const reqData = {
+        pg: pgProvider,
+        pay_method: iamportPayMethod,
+        merchant_uid: orderId,
+        name: plan.fullName,
+        amount: plan.finalPrice,
+        buyer_email: (window.BAREUN_PAY_CONFIG && window.BAREUN_PAY_CONFIG.merchant && window.BAREUN_PAY_CONFIG.merchant.email) || 'bareunhaniwon@naver.com',
+        buyer_name: buyerName,
+        buyer_tel: buyerTel,
+        buyer_addr: buyerAddr,
+        buyer_postcode: '35242',
+        m_redirect_url: returnUrl
+      };
+
+      if (iamportPayMethod === 'vbank') {
+        const vbankDue = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+        reqData.vbank_due = vbankDue.getFullYear() + String(vbankDue.getMonth() + 1).padStart(2, '0') + String(vbankDue.getDate()).padStart(2, '0');
+      }
+
+      // Launch REAL PG Gateway Window
+      window.IMP.request_pay(reqData, function (rsp) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>💳 ${plan.formattedPrice} 결제하기</span><span>➔</span>`;
         }
 
-        window.IMP.request_pay({
-          pg: pgProvider,
-          pay_method: iamportPayMethod,
-          merchant_uid: orderId,
-          name: plan.fullName,
-          amount: plan.finalPrice,
-          buyer_email: 'patient@bareun.com',
-          buyer_name: buyerName,
-          buyer_tel: buyerTel,
-          buyer_addr: buyerAddr,
-          buyer_postcode: '12345',
-          m_redirect_url: window.location.href
-        }, function (rsp) {
-          if (rsp.success) {
-            paymentPayload.impUid = rsp.imp_uid;
-            paymentPayload.paidAmount = rsp.paid_amount || plan.finalPrice;
-            closePaymentModal();
-            showPaymentSuccessModal(paymentPayload);
-          } else {
-            // If PG popup was closed or cancelled
-            if (rsp.error_msg && rsp.error_msg.includes('취소')) {
-              alert('결제가 취소되었습니다.');
-            } else {
-              alert('결제 처리 중 안내: ' + (rsp.error_msg || '테스트 결제 모드로 전환하여 확인하실 수 있습니다.'));
-            }
+        if (rsp.success) {
+          paymentPayload.impUid = rsp.imp_uid;
+          paymentPayload.paidAmount = rsp.paid_amount || plan.finalPrice;
+          if (rsp.vbank_num) {
+            paymentPayload.vbankNum = rsp.vbank_num;
+            paymentPayload.vbankName = rsp.vbank_name;
+            paymentPayload.vbankHolder = rsp.vbank_holder;
+            paymentPayload.vbankDate = rsp.vbank_date;
           }
-        });
-      } else {
-        // Fallback if SDK couldn't be loaded (e.g. adblocker)
-        closePaymentModal();
-        showPaymentSuccessModal(paymentPayload);
-      }
+          closePaymentModal();
+          showPaymentSuccessModal(paymentPayload);
+        } else {
+          if (rsp.error_msg && rsp.error_msg.includes('취소')) {
+            alert('고객님에 의해 결제가 취소되었습니다.');
+          } else {
+            alert('결제 승인 오류: ' + (rsp.error_msg || 'PG사 응답을 확인해 주세요.'));
+          }
+        }
+      });
     }
 
     // 7. Payment Success Modal Handler
@@ -3881,8 +3926,52 @@
       });
     }
 
-    // URL hash deep linking check (e.g. #pay, #checkout-zone)
+    // Check Mobile Payment Redirection Return (m_redirect_url callback handler)
+    function checkMobilePaymentReturn() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const impUid = urlParams.get('imp_uid');
+      const merchantUid = urlParams.get('merchant_uid');
+      const impSuccess = urlParams.get('imp_success');
+
+      if (impUid && (impSuccess === 'true' || impSuccess === null)) {
+        let pending = {};
+        try {
+          const stored = sessionStorage.getItem('bareun_pending_order');
+          if (stored) pending = JSON.parse(stored);
+        } catch (e) {}
+
+        const successData = {
+          orderId: merchantUid || pending.orderId || ('BAR-' + Date.now()),
+          impUid: impUid,
+          planKey: pending.planKey || '4주 시그니처',
+          planName: pending.planName || '식욕 ZERO [4주 시그니처 플랜]',
+          amount: pending.amount || 189000,
+          payMethod: pending.payMethod || 'card',
+          buyerName: pending.buyerName || '고객',
+          buyerTel: pending.buyerTel || '-',
+          buyerAddr: pending.buyerAddr || '-',
+          consultTime: pending.consultTime || '상담 요청',
+          memo: pending.memo || '',
+          paidAt: new Date().toLocaleString('ko-KR')
+        };
+
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
+        showPaymentSuccessModal(successData);
+      } else if (impSuccess === 'false') {
+        const errorMsg = urlParams.get('error_msg') || '결제가 취소되었거나 정상 승인되지 않았습니다.';
+        alert('결제 결과 안내: ' + decodeURIComponent(errorMsg));
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
+      }
+    }
+
+    // URL hash deep linking check (e.g. #pay, #checkout-zone) & mobile payment return
     window.addEventListener('DOMContentLoaded', () => {
+      checkMobilePaymentReturn();
+
       if (window.location.hash === '#pay' || window.location.hash === '#payment') {
         setTimeout(() => openPaymentModal('4주 시그니처'), 400);
       }
