@@ -140,8 +140,8 @@ class BareunClinicApp {
     this.introSplash = document.getElementById('intro-splash');
     this.introVideo = document.getElementById('intro-video');
     this.introEnterBtn = document.getElementById('intro-enter-btn');
-    this.introSkipBtn = document.getElementById('intro-skip-btn');
     this.replayIntroBtn = document.getElementById('replay-intro-btn');
+    this.introProgressFill = document.getElementById('intro-progress-fill');
 
     // Gesture & Drag State
     this.wasDragging = false;
@@ -165,10 +165,21 @@ class BareunClinicApp {
   }
 
   /* --------------------------------------------------------------------------
-     CINEMATIC INTRO VIDEO SPLASH
+     CINEMATIC INTRO VIDEO SPLASH ("아트" 예술적 인터랙션 & 영상 종료 시 타이포그래피 등장)
      -------------------------------------------------------------------------- */
   initIntro() {
     if (!this.introSplash) return;
+
+    let hasEnded = false;
+
+    const showEndedState = () => {
+      if (hasEnded) return;
+      hasEnded = true;
+      this.introSplash.classList.add('video-ended');
+      if (this.introProgressFill) {
+        this.introProgressFill.style.width = '100%';
+      }
+    };
 
     const dismissIntro = () => {
       if (this.introSplash.classList.contains('leaving') || this.introSplash.style.display === 'none') return;
@@ -182,8 +193,50 @@ class BareunClinicApp {
       }, 950);
     };
 
-    // Clicking anywhere on the intro splash screen enters the main page
-    this.introSplash.addEventListener('click', dismissIntro);
+    // 비디오 이벤트 리스너 등록
+    if (this.introVideo) {
+      // 재생 진행률 업데이트 및 조기 fallback
+      this.introVideo.addEventListener('timeupdate', () => {
+        if (!hasEnded && this.introVideo.duration) {
+          const pct = Math.min(100, (this.introVideo.currentTime / this.introVideo.duration) * 100);
+          if (this.introProgressFill) {
+            this.introProgressFill.style.width = `${pct}%`;
+          }
+          // 영상 끝부분(0.3초 전) 도달 시 자연스럽게 텍스트 등장
+          if (this.introVideo.currentTime >= this.introVideo.duration - 0.3) {
+            showEndedState();
+          }
+        }
+      });
+
+      // 영상 재생이 끝났을 때 드라마틱하게 글과 버튼 애니메이션 등장
+      this.introVideo.addEventListener('ended', () => {
+        showEndedState();
+      });
+
+      // 브라우저 정책으로 자동 재생 차단 시 즉시 텍스트 노출하여 사용자 블로킹 방지
+      this.introVideo.play().catch(() => {
+        showEndedState();
+      });
+    } else {
+      showEndedState();
+    }
+
+    // 인트로 스플래시 화면 클릭/터치 시 인터랙션
+    this.introSplash.addEventListener('click', () => {
+      if (!hasEnded) {
+        // 영상 재생 중 클릭 시: 영상을 끝내고 예술적 타이포그래피를 즉시 펼침
+        if (this.introVideo) {
+          try {
+            this.introVideo.currentTime = this.introVideo.duration || 10;
+          } catch(e) {}
+        }
+        showEndedState();
+      } else {
+        // 영상 종료 후 클릭 시: 힐링 차임과 함께 메인 공간으로 입장
+        dismissIntro();
+      }
+    });
 
     if (this.introEnterBtn) {
       this.introEnterBtn.addEventListener('click', (e) => {
@@ -192,27 +245,24 @@ class BareunClinicApp {
       });
     }
 
-    if (this.introSkipBtn) {
-      this.introSkipBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        dismissIntro();
-      });
-    }
-
+    // 인트로 다시보기 (Replay)
     if (this.replayIntroBtn) {
       this.replayIntroBtn.addEventListener('click', () => {
         this.playClick();
-        this.introSplash.style.display = 'flex';
+        hasEnded = false;
+        this.introSplash.classList.remove('video-ended');
         this.introSplash.classList.remove('leaving');
+        this.introSplash.style.display = 'flex';
+        if (this.introProgressFill) {
+          this.introProgressFill.style.width = '0%';
+        }
         if (this.introVideo) {
           this.introVideo.currentTime = 0;
-          this.introVideo.play().catch(() => {});
+          this.introVideo.play().catch(() => {
+            showEndedState();
+          });
         }
       });
-    }
-
-    if (this.introVideo) {
-      this.introVideo.play().catch(() => {});
     }
   }
 
