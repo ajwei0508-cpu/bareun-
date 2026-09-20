@@ -694,6 +694,14 @@ html, body {
   width: 100%;
   overflow: hidden;
   padding: 10px 0 20px;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.carousel-container.is-dragging {
+  cursor: grabbing;
 }
 
 .carousel-track {
@@ -702,6 +710,16 @@ html, body {
   padding-left: 32px;
   transition: transform 0.6s var(--transition-smooth);
   will-change: transform;
+}
+
+.carousel-track.is-dragging {
+  transition: none !important;
+}
+
+.card-img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .project-card {

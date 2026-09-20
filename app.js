@@ -143,6 +143,9 @@ class BareunClinicApp {
     this.introSkipBtn = document.getElementById('intro-skip-btn');
     this.replayIntroBtn = document.getElementById('replay-intro-btn');
 
+    // Gesture & Drag State
+    this.wasDragging = false;
+
     // Cursor tracking state
     this.mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
     this.follower = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
@@ -156,6 +159,7 @@ class BareunClinicApp {
     this.initClock();
     this.initAudio();
     this.initIntro();
+    this.initTouchAndDrag();
     this.initEvents();
     this.updateProjectView(0, false);
   }
@@ -351,8 +355,9 @@ class BareunClinicApp {
         </div>
       `;
 
-      // Click ANY card to immediately animate and open detail page
-      card.addEventListener('click', () => {
+      // Click ANY card to immediately animate and open detail page (ignored if user was swiping)
+      card.addEventListener('click', (e) => {
+        if (this.wasDragging) return;
         this.updateProjectView(index);
         this.openProjectModal(item);
       });
@@ -401,10 +406,130 @@ class BareunClinicApp {
       c.classList.toggle('active', idx === index);
     });
 
-    // Move track to center the card
-    const cardWidth = 420 + 28;
+    // Move track to center the card dynamically
+    const firstCard = this.track.querySelector('.project-card');
+    const cardWidth = firstCard ? (firstCard.offsetWidth + 28) : (window.innerWidth <= 768 ? 328 : 448);
     const targetX = -(index * cardWidth);
     this.track.style.transform = `translateX(${targetX}px)`;
+  }
+
+  /* --------------------------------------------------------------------------
+     TOUCH & DRAG SWIPE GESTURES (Mobile & Desktop)
+     -------------------------------------------------------------------------- */
+  initTouchAndDrag() {
+    let startX = 0;
+    let startY = 0;
+    let isPointerDown = false;
+    let isHorizontalSwipe = false;
+    let dragDistance = 0;
+    let initialTrackX = 0;
+
+    const getCardWidth = () => {
+      const card = this.track.querySelector('.project-card');
+      return card ? (card.offsetWidth + 28) : (window.innerWidth <= 768 ? 328 : 448);
+    };
+
+    const getBaseX = () => -(this.currentIndex * getCardWidth());
+
+    const onStart = (clientX, clientY) => {
+      isPointerDown = true;
+      startX = clientX;
+      startY = clientY;
+      dragDistance = 0;
+      isHorizontalSwipe = false;
+      this.wasDragging = false;
+      initialTrackX = getBaseX();
+    };
+
+    const onMove = (clientX, clientY, e) => {
+      if (!isPointerDown) return;
+      const diffX = clientX - startX;
+      const diffY = clientY - startY;
+
+      // Determine swipe direction after 8px threshold
+      if (!isHorizontalSwipe) {
+        if (Math.abs(diffX) > 8 && Math.abs(diffX) > Math.abs(diffY)) {
+          isHorizontalSwipe = true;
+          this.container.classList.add('is-dragging');
+          this.track.classList.add('is-dragging');
+        } else if (Math.abs(diffY) > 8) {
+          // Vertical page scroll intent -> cancel carousel dragging
+          isPointerDown = false;
+          return;
+        }
+      }
+
+      if (isHorizontalSwipe) {
+        if (e && e.cancelable) e.preventDefault();
+        dragDistance = diffX;
+        if (Math.abs(dragDistance) > 10) {
+          this.wasDragging = true;
+        }
+
+        // Boundary resistance on first and last card
+        let delta = dragDistance;
+        if ((this.currentIndex === 0 && delta > 0) || 
+            (this.currentIndex === this.projects.length - 1 && delta < 0)) {
+          delta *= 0.35; // rubber-band dampening
+        }
+
+        this.track.style.transform = `translateX(${initialTrackX + delta}px)`;
+      }
+    };
+
+    const onEnd = () => {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      this.container.classList.remove('is-dragging');
+      this.track.classList.remove('is-dragging');
+
+      if (isHorizontalSwipe) {
+        const threshold = 40; // 40px swipe threshold
+        if (dragDistance < -threshold) {
+          // Swiped left -> Next card
+          this.updateProjectView(this.currentIndex + 1);
+        } else if (dragDistance > threshold) {
+          // Swiped right -> Previous card
+          this.updateProjectView(this.currentIndex - 1);
+        } else {
+          // Snap back to current card
+          this.updateProjectView(this.currentIndex);
+        }
+      }
+
+      // Reset wasDragging after click event propagation
+      setTimeout(() => {
+        this.wasDragging = false;
+      }, 60);
+    };
+
+    // Mobile touch events
+    this.container.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        onStart(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    this.container.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1) {
+        onMove(e.touches[0].clientX, e.touches[0].clientY, e);
+      }
+    }, { passive: false });
+
+    this.container.addEventListener('touchend', onEnd);
+    this.container.addEventListener('touchcancel', onEnd);
+
+    // Desktop pointer drag events
+    this.container.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return; // left click only
+      onStart(e.clientX, e.clientY);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      onMove(e.clientX, e.clientY, e);
+    });
+
+    window.addEventListener('mouseup', onEnd);
   }
 
   /* --------------------------------------------------------------------------
@@ -447,6 +572,11 @@ class BareunClinicApp {
         this.updateProjectView(this.currentIndex - 1);
       }
     }, { passive: false });
+
+    // Responsive Window Resize realignment
+    window.addEventListener('resize', () => {
+      this.updateProjectView(this.currentIndex, false);
+    });
 
     // Menu Drawer
     this.menuBtn.addEventListener('click', () => this.openMenu());
