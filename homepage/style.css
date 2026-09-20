@@ -1698,3 +1698,118 @@ html, body {
     display: none;
   }
 }
+
+/* ==========================================================================
+   TERMS & STATUTORY POLICIES MODAL (공통 모달 스타일)
+   ========================================================================== */
+.terms-modal-window {
+  background: #FFFFFF;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 680px;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(223, 126, 142, 0.4);
+  color: #1E1618;
+}
+.terms-modal-header {
+  padding: 22px 26px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.terms-modal-header h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1E1618;
+  margin-bottom: 2px;
+}
+.terms-modal-header span {
+  font-size: 12px;
+  color: #8E8085;
+}
+.terms-modal-body {
+  padding: 24px 26px;
+  overflow-y: auto;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #4F4347;
+  flex: 1;
+}
+.terms-modal-body h4 {
+  font-size: 14px;
+  font-weight: 800;
+  color: #C76173;
+  margin: 18px 0 6px;
+}
+.terms-modal-body h4:first-child {
+  margin-top: 0;
+}
+.terms-modal-footer {
+  padding: 16px 26px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: right;
+}
+.btn-terms-confirm {
+  padding: 10px 24px;
+  border-radius: 8px;
+  background: #C76173;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn-terms-confirm:hover {
+  background: #AC4B5C;
+}
+.bareun-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 10, 12, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+.bareun-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.drawer-legal-box {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+}
+.drawer-legal-box strong {
+  color: rgba(255, 255, 255, 0.9);
+}
+.drawer-terms-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+.drawer-terms-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--accent-rose, #C76173);
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+

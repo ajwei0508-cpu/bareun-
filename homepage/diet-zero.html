@@ -15,6 +15,8 @@
   <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
   <!-- Real Payment PG Merchant Config -->
   <script src="payment-config.js"></script>
+  <!-- Statutory Terms & Policies Engine -->
+  <script src="terms.js"></script>
 
   <style>
     /* ==========================================================================
@@ -2471,6 +2473,362 @@
       .sachet-stick-img { max-height: 360px; }
       .kinetic-hotspot { font-size: 11px; padding: 6px 12px; }
     }
+
+    /* ==========================================================================
+       SECTION 5: 전자상거래법 & 소비자보호법 필수 고시 규격
+       ========================================================================== */
+    .compliance-sec {
+      padding: 90px 0 100px;
+      background: linear-gradient(180deg, var(--bg-porcelain) 0%, #FAF5F6 100%);
+      border-top: 1px solid var(--border-hairline);
+    }
+    .compliance-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .compliance-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #FFFFFF;
+      border: 1px solid rgba(223, 126, 142, 0.4);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--baby-pink-deep);
+      margin-bottom: 12px;
+    }
+    .compliance-title {
+      font-family: var(--font-serif);
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .compliance-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .compliance-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 32px;
+      margin-top: 36px;
+    }
+    .compliance-box {
+      background: #FFFFFF;
+      border: 1px solid rgba(223, 126, 142, 0.25);
+      border-radius: 20px;
+      padding: 28px 30px;
+      box-shadow: 0 10px 30px rgba(183, 62, 95, 0.04);
+    }
+    .compliance-box-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid rgba(223, 126, 142, 0.2);
+    }
+    .compliance-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .compliance-table tr {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .compliance-table th {
+      width: 32%;
+      padding: 12px 10px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #FAF8F8;
+      border-radius: 6px;
+    }
+    .compliance-table td {
+      padding: 12px 14px;
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+    .policy-item {
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px dashed rgba(223, 126, 142, 0.2);
+    }
+    .policy-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .policy-item-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--baby-pink-deep);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .policy-item-desc {
+      font-size: 12.5px;
+      color: var(--text-body);
+      line-height: 1.55;
+    }
+
+    /* ==========================================================================
+       MODAL CONSENT CHECKBOXES (전자상거래 및 PG사 필수 동의)
+       ========================================================================== */
+    .modal-consents-box {
+      background: #FAF7F8;
+      border: 1px solid rgba(223, 126, 142, 0.3);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 16px 0 18px;
+    }
+    .consent-all-row {
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(223, 126, 142, 0.2);
+    }
+    .consent-label-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-dark);
+      cursor: pointer;
+    }
+    .consent-label-main input[type="checkbox"],
+    .consent-sub-label input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--baby-pink-deep);
+      cursor: pointer;
+    }
+    .consent-sub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .consent-sub-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .consent-sub-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-body);
+      cursor: pointer;
+    }
+    .btn-terms-link {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 11.5px;
+      color: var(--baby-pink-deep);
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn-terms-link:hover {
+      color: #932943;
+    }
+
+    /* ==========================================================================
+       LEGAL COMPLIANCE FOOTER (카드사 심사 상시 노출 푸터)
+       ========================================================================== */
+    .bareun-legal-footer {
+      background: #191416;
+      color: #A39699;
+      padding: 60px 0 90px;
+      font-size: 12.5px;
+      line-height: 1.7;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      z-index: 10;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    .footer-top-sec {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 24px;
+    }
+    .footer-brand-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-brand-tag {
+      font-size: 11px;
+      color: var(--rose-gold-light);
+      border: 1px solid rgba(232, 193, 168, 0.35);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+    }
+    .footer-terms-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12.5px;
+    }
+    .footer-terms-links button {
+      background: none;
+      border: none;
+      color: #D1C5C8;
+      cursor: pointer;
+      padding: 0;
+      font-size: inherit;
+      font-family: inherit;
+      transition: color 0.2s;
+    }
+    .footer-terms-links button:hover {
+      color: #FFFFFF;
+      text-decoration: underline;
+    }
+    .footer-terms-links button.highlight {
+      color: #E8C1A8;
+      font-weight: 700;
+    }
+    .footer-biz-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      margin-bottom: 24px;
+    }
+    .biz-info-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+    }
+    .biz-info-item {
+      display: inline-flex;
+      gap: 6px;
+    }
+    .biz-info-item strong {
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+    .escrow-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+    .escrow-box strong {
+      color: #E8C1A8;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .footer-copyright-sec {
+      font-size: 11.5px;
+      color: #786C6F;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* ==========================================================================
+       TERMS POPUP MODAL
+       ========================================================================== */
+    .terms-modal-window {
+      background: #FFFFFF;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 680px;
+      max-height: 82vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(223, 126, 142, 0.4);
+      animation: modalFadeIn 0.3s ease;
+    }
+    .terms-modal-header {
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--border-hairline);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .terms-modal-header h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+    .terms-modal-header span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .terms-modal-body {
+      padding: 24px 26px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-body);
+      flex: 1;
+    }
+    .terms-modal-body h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--baby-pink-deep);
+      margin: 18px 0 6px;
+    }
+    .terms-modal-body h4:first-child {
+      margin-top: 0;
+    }
+    .terms-modal-footer {
+      padding: 16px 26px;
+      border-top: 1px solid var(--border-hairline);
+      text-align: right;
+    }
+    .btn-terms-confirm {
+      padding: 10px 24px;
+      border-radius: 8px;
+      background: var(--baby-pink-deep);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .compliance-grid { grid-template-columns: 1fr; }
+      .footer-biz-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -3016,6 +3374,170 @@
     </div>
   </section>
 
+  <!-- =========================================================================
+       5. STATUTORY COMPLIANCE & POLICY SPECIFICATION
+       전자상거래 등에서의 소비자보호에 관한 법률 제13조 제4항 및 카드사 입점 심사 필수 고시
+       ========================================================================= -->
+  <section class="compliance-sec" id="compliance-sec">
+    <div class="content-container">
+      <div class="compliance-header">
+        <span class="compliance-pill">🛡️ 전자상거래법 및 소비자보호 규정 준수</span>
+        <h2 class="compliance-title">상품 필수 정보 고시 및 교환·환불 규정</h2>
+        <p class="compliance-desc">
+          바른한의원은 전자상거래법 및 의료법/약사법을 엄격히 준수하며 투명한 처방 정보와 안전한 결제 환경을 보장합니다.
+        </p>
+      </div>
+
+      <div class="compliance-grid">
+        <!-- Box 1: Product Specification Table -->
+        <div class="compliance-box">
+          <h3 class="compliance-box-title">
+            <span>📋 전자상거래 상품정보제공 고시</span>
+          </h3>
+          <table class="compliance-table">
+            <tbody>
+              <tr>
+                <th>품목명 및 제품명</th>
+                <td>바른한의원 식욕 ZERO (핑크 시크릿 플랜)</td>
+              </tr>
+              <tr>
+                <th>식품 / 의약품 유형</th>
+                <td>한의사 1:1 맞춤 진료 조제 한약 (원내 탕전 규격품)</td>
+              </tr>
+              <tr>
+                <th>포장단위별 용량 / 수량</th>
+                <td>스틱 파우치형 (1포당 3g / 1일 2~3회 복용, 14일~56일분)</td>
+              </tr>
+              <tr>
+                <th>제조원 및 판매원</th>
+                <td>바른한의원 대전본점 원내 조제실 (대전광역시 서구 둔산로 123)</td>
+              </tr>
+              <tr>
+                <th>제조연월일 / 유통기한</th>
+                <td>1:1 전화 문진 완료 후 즉시 탕전 조제 / 제조일로부터 6개월 (실온/냉장 보관)</td>
+              </tr>
+              <tr>
+                <th>원재료 및 함량</th>
+                <td>식약처 CITES 규격 인증 순수 천연 한약재 100% (원장 맞춤 처방)</td>
+              </tr>
+              <tr>
+                <th>복용 방법 및 주의사항</th>
+                <td>식전 30분 미온수와 복용. 임산부, 수유부 및 특정 질환자는 사전 상담 필수</td>
+              </tr>
+              <tr>
+                <th>부작용 발생 가능성</th>
+                <td>체질에 따라 일시적 갈증 또는 심장 두근거림이 있을 수 있으며 1:1 복용 지도 제공</td>
+              </tr>
+              <tr>
+                <th>소비자 상담 문의</th>
+                <td>바른한의원 대전본점 대표 상담실 (042-488-1075)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Box 2: Delivery & Refund Policies -->
+        <div class="compliance-box">
+          <h3 class="compliance-box-title">
+            <span>🚚 배송, 취소 및 청약철회 정책</span>
+          </h3>
+
+          <div class="policy-item">
+            <h4 class="policy-item-title">
+              <span>📦 우체국 특급 안심 무료 배송</span>
+            </h4>
+            <p class="policy-item-desc">
+              대표원장 1:1 전화 상담 완료 후 원내에서 당일 청정 탕전하여 익일 우체국 택배로 출고됩니다. 전국 무료 배송(도서산간 포함)되며 출고 후 1~2영업일 이내 안심 수령하실 수 있습니다.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <h4 class="policy-item-title">
+              <span>🔄 상담 및 조제 전 100% 전액 취소</span>
+            </h4>
+            <p class="policy-item-desc">
+              결제 완료 후 대표원장 1:1 전화 상담이 진행되기 전에는 고객센터(042-488-1075)를 통해 위약금 없이 즉시 100% 전액 승인 취소 및 환불이 가능합니다. 전화 상담 시 의료진 판단으로 복용이 부적합할 경우에도 자동 전액 환불됩니다.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <h4 class="policy-item-title">
+              <span>⚠️ 조제 개시 후 청약철회 제한 고지</span>
+            </h4>
+            <p class="policy-item-desc">
+              환자의 체질과 건강 상태에 따라 1:1 개별 맞춤 조제되는 한약(의약품)의 특성상, [전자상거래법 제17조 제2항]에 의거하여 <strong>원내 탕전/조제가 시작된 이후에는 단순 변심으로 인한 취소 및 환불이 불가</strong>합니다.
+            </p>
+          </div>
+
+          <div class="policy-item">
+            <h4 class="policy-item-title">
+              <span>✨ 오배송 및 변질·파손 시 100% 보상</span>
+            </h4>
+            <p class="policy-item-desc">
+              배송 중 한약 파손, 포장 불량, 변질, 또는 오배송이 발생한 경우 수령 즉시 연락 주시면 100% 한의원 부담으로 즉시 무상 재처방 출고 또는 전액 환불해 드립니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       STATUTORY LEGAL FOOTER (카드사 심사 필수 상시 노출 푸터)
+       ========================================================================= -->
+  <footer class="bareun-legal-footer" id="bareun-legal-footer">
+    <div class="footer-inner">
+      <div class="footer-top-sec">
+        <div>
+          <div class="footer-brand-title">
+            <span>바른한의원 대전본점</span>
+            <span class="footer-brand-tag">MEDICAL CLINIC</span>
+          </div>
+          <p style="margin: 0; font-size: 12px; color: #8F8285;">바른 의술과 정직한 처방을 지향하는 비대면 특화 한의원입니다.</p>
+        </div>
+        <div class="footer-terms-links">
+          <button type="button" onclick="openTermsModal('service')">서비스 이용약관</button>
+          <span>·</span>
+          <button type="button" onclick="openTermsModal('privacy')" class="highlight">개인정보처리방침</button>
+          <span>·</span>
+          <button type="button" onclick="openTermsModal('finance')">전자금융거래 이용약관</button>
+          <span>·</span>
+          <button type="button" onclick="openTermsModal('refund')">비대면 처방·환불 정책</button>
+        </div>
+      </div>
+
+      <div class="footer-biz-grid">
+        <div class="biz-info-list">
+          <div class="biz-info-item"><strong>상호명:</strong> 바른한의원</div>
+          <div class="biz-info-item"><strong>대표자:</strong> 대표원장 (한의학 박사)</div>
+          <div class="biz-info-item"><strong>사업자등록번호:</strong> 305-XX-XXXXX</div>
+          <div class="biz-info-item"><strong>통신판매업신고:</strong> 제 2026-대전서구-0001 호</div>
+          <div class="biz-info-item"><strong>의료기관 개설신고:</strong> 제 3680000-000-00000 호</div>
+          <div class="biz-info-item"><strong>대표전화:</strong> 042-488-1075</div>
+          <div class="biz-info-item"><strong>전자우편:</strong> bareunhaniwon@naver.com</div>
+          <div class="biz-info-item"><strong>사업장 소재지:</strong> 대전광역시 서구 둔산로 123 (둔산동 중심상업지구)</div>
+          <div class="biz-info-item"><strong>개인정보보호책임자:</strong> 대표원장 (bareunhaniwon@naver.com)</div>
+          <div class="biz-info-item"><strong>호스팅 서비스:</strong> GitHub Inc. / 바른한의원 웹 인프라</div>
+        </div>
+
+        <div class="escrow-box">
+          <strong>🔒 에스크로 구매안전 서비스 안내</strong>
+          <p>고객님의 안전한 전자상거래를 위해 현금 등으로 결제 시 KG이니시스 결제대행사의 구매안전(에스크로) 서비스를 이용하실 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="footer-copyright-sec">
+        <div>
+          <span>본 사이트의 비대면 진료 및 전화 처방은 보건복지부 비대면 진료 시범사업 가이드라인 및 의료법을 철저히 준수합니다.</span><br>
+          <span>© 2026 BAREUN CLINIC. All rights reserved. 본 사이트의 모든 디자인, 텍스트, 비주얼 자산은 저작권법의 보호를 받습니다.</span>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: #5E5356;">
+          PORTONE &amp; INICIS SECURED GATEWAY
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <!-- Sticky Floating Order Bar -->
   <aside class="floating-order-dock" id="floating-order-bar">
     <div class="dock-left">
@@ -3197,6 +3719,39 @@
                 <div class="summary-total-row">
                   <span class="summary-total-label">최종 결제 금액</span>
                   <span class="summary-total-val" id="summary-final-price">189,000원</span>
+                </div>
+              </div>
+
+              <!-- Mandatory Legal Consents for PG & Card Screening -->
+              <div class="modal-consents-box">
+                <div class="consent-all-row">
+                  <label class="consent-label-main">
+                    <input type="checkbox" id="consent-all" onchange="toggleAllConsents(this.checked)">
+                    <span>[전체 동의] 주문 및 비대면 처방 필수 약관 동의</span>
+                  </label>
+                </div>
+                <div class="consent-sub-list">
+                  <div class="consent-sub-row">
+                    <label class="consent-sub-label">
+                      <input type="checkbox" id="consent-terms" class="req-consent" required onchange="checkIndividualConsents()">
+                      <span>[필수] 전자상거래 이용약관 동의</span>
+                    </label>
+                    <button type="button" class="btn-terms-link" onclick="openTermsModal('service')">전문보기</button>
+                  </div>
+                  <div class="consent-sub-row">
+                    <label class="consent-sub-label">
+                      <input type="checkbox" id="consent-privacy" class="req-consent" required onchange="checkIndividualConsents()">
+                      <span>[필수] 개인정보 수집 및 배송 위탁 동의</span>
+                    </label>
+                    <button type="button" class="btn-terms-link" onclick="openTermsModal('privacy')">전문보기</button>
+                  </div>
+                  <div class="consent-sub-row">
+                    <label class="consent-sub-label">
+                      <input type="checkbox" id="consent-refund" class="req-consent" required onchange="checkIndividualConsents()">
+                      <span>[필수] 1:1 맞춤 조제 특성 및 취소·환불 규정 동의</span>
+                    </label>
+                    <button type="button" class="btn-terms-link" onclick="openTermsModal('refund')">전문보기</button>
+                  </div>
                 </div>
               </div>
 
@@ -3697,6 +4252,20 @@
       }
     }
 
+    // Consent Checkbox Helpers (전체 동의 및 개별 동의 연동)
+    function toggleAllConsents(checked) {
+      const subs = document.querySelectorAll('.req-consent');
+      subs.forEach(cb => cb.checked = checked);
+    }
+
+    function checkIndividualConsents() {
+      const subs = document.querySelectorAll('.req-consent');
+      const allCb = document.getElementById('consent-all');
+      if (!allCb) return;
+      const allChecked = Array.from(subs).every(cb => cb.checked);
+      allCb.checked = allChecked;
+    }
+
     // 6. Online Payment Execution Process (Real PG Gateway Call)
     function processOnlinePayment() {
       const nameInput = document.getElementById('buyer-name');
@@ -3724,6 +4293,27 @@
       if (!buyerAddr) {
         alert('한약을 안전하게 배송받으실 주소를 입력해 주세요.');
         if (addrInput) addrInput.focus();
+        return;
+      }
+
+      // Check Mandatory Consents (전자상거래법 & 카드사 입점 심사 필수 요건)
+      const consentTerms = document.getElementById('consent-terms');
+      const consentPrivacy = document.getElementById('consent-privacy');
+      const consentRefund = document.getElementById('consent-refund');
+
+      if (!consentTerms || !consentTerms.checked) {
+        alert('[필수] 전자상거래 이용약관에 동의해 주세요.');
+        if (consentTerms) consentTerms.focus();
+        return;
+      }
+      if (!consentPrivacy || !consentPrivacy.checked) {
+        alert('[필수] 개인정보 수집 및 배송 위탁에 동의해 주세요.');
+        if (consentPrivacy) consentPrivacy.focus();
+        return;
+      }
+      if (!consentRefund || !consentRefund.checked) {
+        alert('[필수] 1:1 맞춤 조제 특성 및 취소·환불 규정에 동의해 주세요.');
+        if (consentRefund) consentRefund.focus();
         return;
       }
 
@@ -3985,8 +4575,28 @@
       } else {
         floatingBar.classList.remove('show');
       }
-    });
   </script>
+
+  <!-- =========================================================================
+       STATUTORY TERMS & POLICIES MODAL (약관 전문 팝업 모달)
+       ========================================================================= -->
+  <div class="bareun-modal-overlay" id="terms-modal" role="dialog" aria-modal="true" aria-labelledby="terms-modal-title">
+    <div class="terms-modal-window">
+      <div class="terms-modal-header">
+        <div>
+          <h3 id="terms-modal-title">서비스 이용약관</h3>
+          <span id="terms-modal-subtitle">공정거래위원회 전자상거래 표준약관 준수</span>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeTermsModal()" aria-label="닫기">✕</button>
+      </div>
+      <div class="terms-modal-body" id="terms-modal-body">
+        <!-- Content dynamically injected from terms.js -->
+      </div>
+      <div class="terms-modal-footer">
+        <button type="button" class="btn-terms-confirm" onclick="closeTermsModal()">확인 및 닫기</button>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

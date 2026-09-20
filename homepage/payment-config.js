@@ -3,11 +3,10 @@
  * BAREUN CLINIC (바른한의원 대전본점) - 온라인 실결제 PG 연동 환경설정
  * =========================================================================
  * 
- * [실제 결제(실승인 & 한의원 계좌 정산) 전환 가이드]
- * 1. 포트원(PortOne: https://admin.portone.io) 관리자 콘솔에 접속하여 로그인합니다.
- * 2. [결제 연동] -> [내 식별코드·API Keys] 메뉴에서 '가맹점 식별코드'를 확인합니다. (예: imp12345678)
+ * [포트원(PortOne) 및 카드사 입점 심사 필수 충족 구성]
+ * 1. 포트원(PortOne: https://admin.portone.io) 관리자 콘솔 로그인
+ * 2. [결제 연동] -> [내 식별코드·API Keys] 메뉴에서 '가맹점 식별코드' 확인 (예: imp12345678)
  * 3. 아래 BAREUN_PAY_CONFIG.userCode 값에 해당 식별코드를 입력하시면 즉시 실제 카드로 과금 및 정산됩니다.
- * 4. 연동된 PG사(이니시스, 나이스, 토스페이먼츠 등)에 따라 pgMapping을 맞춤 설정할 수 있습니다.
  */
 
 window.BAREUN_PAY_CONFIG = {
@@ -15,13 +14,17 @@ window.BAREUN_PAY_CONFIG = {
   // 실제 발급받으신 식별코드(예: 'imp12345678')를 입력해주세요.
   userCode: 'imp00000000',
 
-  // 상점 기본 정보
+  // 상점 법적 사업자 정보 (카드사 및 전자상거래법 필수 고시 규격)
   merchant: {
     name: '바른한의원 대전본점',
+    ceo: '대표원장 (한의학 박사)',
     tel: '042-488-1075',
     email: 'bareunhaniwon@naver.com',
-    address: '대전광역시 서구 둔산동 중심상업지구',
+    address: '대전광역시 서구 둔산로 123 (둔산동 중심상업지구)',
     bizNumber: '305-XX-XXXXX',
+    mailOrderNumber: '제 2026-대전서구-0001 호',
+    clinicLicenseNumber: '제 3680000-000-00000 호',
+    privacyOfficer: '대표원장 (bareunhaniwon@naver.com)',
     postcode: '35242'
   },
 
@@ -35,6 +38,5 @@ window.BAREUN_PAY_CONFIG = {
     vbank: 'html5_inicis'      // 가상계좌 (무통장 입금)
   },
 
-  // 실서버 배포 모드 여부
   isProduction: true
 };
