@@ -836,23 +836,6 @@
       50% { opacity: 1; transform: scale(1.25); }
     }
 
-    /* Intuitive Caption Bar */
-    .visual-caption-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--bg-pink-soft);
-      border: 1px solid rgba(223, 126, 142, 0.16);
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 12.5px;
-      line-height: 1.45;
-      color: var(--text-body);
-    }
-    .visual-caption-bar .caption-icon {
-      font-size: 15px;
-      flex-shrink: 0;
-    }
 
     /* ==========================================================================
        ANIMATION 1: 뇌 찌릿 자극 애니메이션 (Electric Neural Zap)
@@ -1024,52 +1007,55 @@
        ANIMATION 2: 심부 체지방 분해 (지방 연소 열역학 애니메이션)
        ========================================================================== */
     .thermal-frame {
-      background: radial-gradient(circle at 50% 50%, #FFF7F0 0%, #FFFFFF 100%);
+      background: #FFFFFF;
       position: relative;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .fat-img {
-      width: 126%;
-      height: 126%;
-      margin-left: -13%;
-      margin-top: -13%;
+      width: 100%;
+      height: 100%;
+      margin: 0;
       object-fit: cover;
-      object-position: center;
+      object-position: center center;
       transform-origin: center center;
       animation: fatCombustionShrink 4.2s cubic-bezier(0.25, 1, 0.35, 1) infinite;
+      display: block;
     }
 
     @keyframes fatCombustionShrink {
       0% {
-        transform: scale(1);
+        transform: scale(1.30);
         filter: brightness(1) saturate(1.05) drop-shadow(0 4px 14px rgba(212, 157, 126, 0.15));
       }
       22% {
-        transform: scale(1.02);
+        transform: scale(1.33);
         filter: brightness(1.16) saturate(1.25) drop-shadow(0 0 20px rgba(255, 130, 50, 0.65));
       }
       38% {
         /* Peak combustion flame */
-        transform: scale(1.035);
+        transform: scale(1.38);
         filter: brightness(1.32) saturate(1.45) contrast(1.12) drop-shadow(0 0 34px rgba(255, 90, 20, 0.9)) drop-shadow(0 0 16px rgba(255, 200, 70, 0.95));
       }
       56% {
-        /* Active fat shrinkage: thermal dissolution */
-        transform: scale(0.81);
+        /* Active fat shrinkage down to container boundary with ZERO empty margins! */
+        transform: scale(1.0);
         filter: brightness(1.18) saturate(1.3) drop-shadow(0 0 22px rgba(255, 120, 40, 0.7));
       }
       78% {
         /* Sustained contracted fat mass */
-        transform: scale(0.81);
+        transform: scale(1.0);
         filter: brightness(1.06) saturate(1.12) drop-shadow(0 0 14px rgba(240, 140, 60, 0.45));
       }
       92% {
-        transform: scale(0.84);
+        transform: scale(1.08);
         filter: brightness(1) saturate(1.02);
       }
       100% {
-        transform: scale(1);
+        transform: scale(1.30);
         filter: brightness(1) saturate(1.05);
       }
     }
@@ -1120,24 +1106,24 @@
     }
     @keyframes fatRingContract {
       0%, 22% {
-        transform: translate(-50%, -50%) scale(1.12);
+        transform: translate(-50%, -50%) scale(1.30);
         opacity: 0.35;
         border-color: rgba(255, 140, 60, 0.4);
       }
       38% {
-        transform: translate(-50%, -50%) scale(1.18);
+        transform: translate(-50%, -50%) scale(1.38);
         opacity: 0.85;
         border-color: rgba(255, 70, 20, 0.9);
         box-shadow: 0 0 16px rgba(255, 100, 30, 0.5);
       }
       56%, 78% {
-        transform: translate(-50%, -50%) scale(0.81);
+        transform: translate(-50%, -50%) scale(1.0);
         opacity: 0.9;
         border-color: rgba(255, 180, 60, 0.75);
         box-shadow: 0 0 12px rgba(255, 160, 40, 0.35);
       }
       92%, 100% {
-        transform: translate(-50%, -50%) scale(1.12);
+        transform: translate(-50%, -50%) scale(1.30);
         opacity: 0.35;
       }
     }
@@ -1196,6 +1182,9 @@
       background: #FFFFFF;
       position: relative;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .body-morph-wrapper {
@@ -1224,44 +1213,46 @@
     @keyframes ghostEdemaPulse {
       0%, 18% {
         opacity: 0.9;
-        transform: translate(-50%, -50%) scaleX(1.2) scaleY(1.04);
+        transform: translate(-50%, -50%) scaleX(1.30) scaleY(1.05);
         border-color: rgba(223, 126, 142, 0.7);
       }
       48%, 82% {
         opacity: 0.15;
-        transform: translate(-50%, -50%) scaleX(0.92) scaleY(0.98);
+        transform: translate(-50%, -50%) scaleX(0.96) scaleY(1.0);
         border-color: rgba(120, 180, 140, 0.35);
       }
       100% {
         opacity: 0.9;
-        transform: translate(-50%, -50%) scaleX(1.2) scaleY(1.04);
+        transform: translate(-50%, -50%) scaleX(1.30) scaleY(1.05);
       }
     }
 
     .body-slim-img {
-      width: 130%;
-      height: 106%;
-      margin-left: -15%;
-      margin-top: -3%;
+      width: 100%;
+      height: 100%;
+      margin: 0;
       object-fit: cover;
-      object-position: center;
+      object-position: center center;
       position: relative;
       z-index: 2;
       animation: bodySubjectSlimMorph 4s cubic-bezier(0.25, 1, 0.35, 1) infinite;
       transform-origin: center center;
+      display: block;
     }
 
     @keyframes bodySubjectSlimMorph {
       0%, 18% {
-        transform: scaleX(1.04) scaleY(1.01);
+        /* Swollen state: scaled wider with water retention */
+        transform: scaleX(1.30) scaleY(1.04);
         filter: drop-shadow(0 6px 14px rgba(223, 126, 142, 0.25)) saturate(1.05);
       }
       48%, 82% {
-        transform: scaleX(0.80) scaleY(0.98);
+        /* Drained, slim, contoured silhouette: scaled down to container boundary with ZERO empty margins! */
+        transform: scaleX(1.0) scaleY(1.0);
         filter: drop-shadow(0 10px 22px rgba(100, 180, 140, 0.35)) brightness(1.04) saturate(1.2);
       }
       100% {
-        transform: scaleX(1.04) scaleY(1.01);
+        transform: scaleX(1.30) scaleY(1.04);
       }
     }
 
@@ -2499,41 +2490,90 @@
       color: var(--baby-pink-deep);
       margin-bottom: 12px;
     }
+    .compliance-sec {
+      padding: 70px 0 85px;
+      background: #FDFBFC;
+      border-top: 1px solid var(--border-hairline);
+    }
+    .compliance-unified-wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .compliance-header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
     .compliance-title {
       font-family: var(--font-serif);
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 800;
       color: var(--text-dark);
       margin-bottom: 10px;
     }
     .compliance-desc {
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--text-muted);
-      max-width: 620px;
+      max-width: 640px;
       margin: 0 auto;
       line-height: 1.6;
     }
-    .compliance-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 32px;
-      margin-top: 36px;
+    .compliance-tabs-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
     }
-    .compliance-box {
+    .compliance-tab-btn {
+      padding: 10px 22px;
+      border-radius: 30px;
+      border: 1.5px solid rgba(223, 126, 142, 0.28);
       background: #FFFFFF;
-      border: 1px solid rgba(223, 126, 142, 0.25);
-      border-radius: 20px;
-      padding: 28px 30px;
-      box-shadow: 0 10px 30px rgba(183, 62, 95, 0.04);
+      color: var(--text-body);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.02);
     }
-    .compliance-box-title {
-      font-size: 17px;
+    .compliance-tab-btn:hover {
+      border-color: var(--baby-pink-prime);
+      color: var(--baby-pink-deep);
+      transform: translateY(-1px);
+    }
+    .compliance-tab-btn.active {
+      background: linear-gradient(135deg, #22181B 0%, #3C2227 100%);
+      color: #FFFFFF;
+      border-color: rgba(212, 157, 126, 0.6);
+      box-shadow: 0 6px 18px rgba(223, 126, 142, 0.22);
+    }
+    .compliance-unified-card {
+      background: #FFFFFF;
+      border: 1.5px solid rgba(223, 126, 142, 0.28);
+      border-radius: 22px;
+      padding: 34px 36px;
+      box-shadow: 0 14px 40px rgba(183, 62, 95, 0.05);
+    }
+    .compliance-panels-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: start;
+    }
+    .compliance-unified-card.mode-info .compliance-panels-grid {
+      grid-template-columns: 1fr;
+    }
+    .compliance-unified-card.mode-policy .compliance-panels-grid {
+      grid-template-columns: 1fr;
+    }
+    .compliance-panel-title {
+      font-size: 16px;
       font-weight: 800;
       color: var(--text-dark);
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       padding-bottom: 12px;
       border-bottom: 1.5px solid rgba(223, 126, 142, 0.2);
     }
@@ -2547,7 +2587,7 @@
     }
     .compliance-table th {
       width: 32%;
-      padding: 12px 10px;
+      padding: 11px 10px;
       text-align: left;
       font-weight: 700;
       color: var(--text-muted);
@@ -2555,25 +2595,28 @@
       border-radius: 6px;
     }
     .compliance-table td {
-      padding: 12px 14px;
+      padding: 11px 14px;
       color: var(--text-dark);
       line-height: 1.5;
     }
+    .policy-items-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
     .policy-item {
-      margin-bottom: 18px;
-      padding-bottom: 18px;
+      padding-bottom: 16px;
       border-bottom: 1px dashed rgba(223, 126, 142, 0.2);
     }
     .policy-item:last-child {
-      margin-bottom: 0;
       padding-bottom: 0;
       border-bottom: none;
     }
     .policy-item-title {
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 800;
       color: var(--baby-pink-deep);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -2582,6 +2625,11 @@
       font-size: 12.5px;
       color: var(--text-body);
       line-height: 1.55;
+      margin: 0;
+    }
+    @media (max-width: 900px) {
+      .compliance-panels-grid { grid-template-columns: 1fr; gap: 28px; }
+      .compliance-unified-card { padding: 24px 20px; }
     }
 
     /* ==========================================================================
@@ -3045,10 +3093,6 @@
                 <span class="visual-badge-text">⚡ 뇌 식욕 신호 찌릿! 즉각 차단</span>
               </div>
             </div>
-            <div class="visual-caption-bar">
-              <span class="caption-icon">🧠</span>
-              <span class="caption-text"><strong>식욕 중추 찌릿 자극:</strong> 포만 신경 신호가 시상하부를 자극하여 가짜 식탐을 즉각 멈춥니다.</span>
-            </div>
           </div>
         </article>
 
@@ -3087,10 +3131,6 @@
                 <span class="pulse-dot-gold fire-pulse-dot"></span>
                 <span class="visual-badge-text">🔥 심부 발열 · 지방 연소 가속</span>
               </div>
-            </div>
-            <div class="visual-caption-bar">
-              <span class="caption-icon">🔥</span>
-              <span class="caption-text"><strong>심부 체지방 연소:</strong> 유산소 2시간 열역학 발열로 묵은 내장지방을 쉬지 않고 태웁니다.</span>
             </div>
           </div>
         </article>
@@ -3136,10 +3176,6 @@
                 <span class="pulse-dot-crystal water-pulse-dot"></span>
                 <span class="visual-badge-text">💧 수독 배출 · 외형 부피 슬림 축소</span>
               </div>
-            </div>
-            <div class="visual-caption-bar">
-              <span class="caption-icon">💧</span>
-              <span class="caption-text"><strong>외형 부피 축소:</strong> 정체된 수독과 림프 부종을 쾌속 배출하여 슬림한 라인을 되찾습니다.</span>
             </div>
           </div>
         </article>
@@ -3375,110 +3411,135 @@
   </section>
 
   <!-- =========================================================================
-       5. STATUTORY COMPLIANCE & POLICY SPECIFICATION
-       전자상거래 등에서의 소비자보호에 관한 법률 제13조 제4항 및 카드사 입점 심사 필수 고시
+       5. STATUTORY COMPLIANCE & POLICY SPECIFICATION (UNIFIED GROUP)
+       전자상거래 등에서의 소비자보호에 관한 법률 제13조 제4항 및 카드사 심사 필수 고시 묶음
        ========================================================================= -->
   <section class="compliance-sec" id="compliance-sec">
     <div class="content-container">
-      <div class="compliance-header">
-        <span class="compliance-pill">🛡️ 전자상거래법 및 소비자보호 규정 준수</span>
-        <h2 class="compliance-title">상품 필수 정보 고시 및 교환·환불 규정</h2>
-        <p class="compliance-desc">
-          바른한의원은 전자상거래법 및 의료법/약사법을 엄격히 준수하며 투명한 처방 정보와 안전한 결제 환경을 보장합니다.
-        </p>
-      </div>
-
-      <div class="compliance-grid">
-        <!-- Box 1: Product Specification Table -->
-        <div class="compliance-box">
-          <h3 class="compliance-box-title">
-            <span>📋 전자상거래 상품정보제공 고시</span>
-          </h3>
-          <table class="compliance-table">
-            <tbody>
-              <tr>
-                <th>품목명 및 제품명</th>
-                <td>바른한의원 식욕 ZERO (핑크 시크릿 플랜)</td>
-              </tr>
-              <tr>
-                <th>식품 / 의약품 유형</th>
-                <td>한의사 1:1 맞춤 진료 조제 한약 (원내 탕전 규격품)</td>
-              </tr>
-              <tr>
-                <th>포장단위별 용량 / 수량</th>
-                <td>스틱 파우치형 (1포당 3g / 1일 2~3회 복용, 14일~56일분)</td>
-              </tr>
-              <tr>
-                <th>제조원 및 판매원</th>
-                <td>바른한의원 대전본점 원내 조제실 (대전광역시 서구 둔산로 123)</td>
-              </tr>
-              <tr>
-                <th>제조연월일 / 유통기한</th>
-                <td>1:1 전화 문진 완료 후 즉시 탕전 조제 / 제조일로부터 6개월 (실온/냉장 보관)</td>
-              </tr>
-              <tr>
-                <th>원재료 및 함량</th>
-                <td>식약처 CITES 규격 인증 순수 천연 한약재 100% (원장 맞춤 처방)</td>
-              </tr>
-              <tr>
-                <th>복용 방법 및 주의사항</th>
-                <td>식전 30분 미온수와 복용. 임산부, 수유부 및 특정 질환자는 사전 상담 필수</td>
-              </tr>
-              <tr>
-                <th>부작용 발생 가능성</th>
-                <td>체질에 따라 일시적 갈증 또는 심장 두근거림이 있을 수 있으며 1:1 복용 지도 제공</td>
-              </tr>
-              <tr>
-                <th>소비자 상담 문의</th>
-                <td>바른한의원 대전본점 대표 상담실 (042-488-1075)</td>
-              </tr>
-            </tbody>
-          </table>
+      
+      <div class="compliance-unified-wrapper">
+        <div class="compliance-header">
+          <span class="compliance-pill">🛡️ 전자상거래법 및 소비자보호 규정 준수</span>
+          <h2 class="compliance-title">상품 필수 정보 고시 & 교환·환불 규정 통합 안내</h2>
+          <p class="compliance-desc">
+            바른한의원은 전자상거래법 및 의료법·약사법을 엄격히 준수하며 투명한 처방 정보와 안전한 결제 환경을 보장합니다.
+          </p>
         </div>
 
-        <!-- Box 2: Delivery & Refund Policies -->
-        <div class="compliance-box">
-          <h3 class="compliance-box-title">
+        <!-- Unified Tab Switcher -->
+        <div class="compliance-tabs-bar">
+          <button type="button" class="compliance-tab-btn active" onclick="switchComplianceTab('all')" id="tab-btn-all">
+            <span>📑 전체 한눈에 보기</span>
+          </button>
+          <button type="button" class="compliance-tab-btn" onclick="switchComplianceTab('info')" id="tab-btn-info">
+            <span>📋 상품정보제공 고시</span>
+          </button>
+          <button type="button" class="compliance-tab-btn" onclick="switchComplianceTab('policy')" id="tab-btn-policy">
             <span>🚚 배송, 취소 및 청약철회 정책</span>
-          </h3>
+          </button>
+        </div>
 
-          <div class="policy-item">
-            <h4 class="policy-item-title">
-              <span>📦 우체국 특급 안심 무료 배송</span>
-            </h4>
-            <p class="policy-item-desc">
-              대표원장 1:1 전화 상담 완료 후 원내에서 당일 청정 탕전하여 익일 우체국 택배로 출고됩니다. 전국 무료 배송(도서산간 포함)되며 출고 후 1~2영업일 이내 안심 수령하실 수 있습니다.
-            </p>
-          </div>
+        <!-- Unified Single Master Card -->
+        <div class="compliance-unified-card mode-all" id="compliance-unified-card">
+          <div class="compliance-panels-grid">
+            
+            <!-- Panel 1: Product Information Table -->
+            <div class="compliance-panel" id="panel-compliance-info">
+              <h3 class="compliance-panel-title">
+                <span>📋 전자상거래 상품정보제공 고시</span>
+              </h3>
+              <table class="compliance-table">
+                <tbody>
+                  <tr>
+                    <th>품목명 및 제품명</th>
+                    <td>바른한의원 식욕 ZERO (핑크 시크릿 플랜)</td>
+                  </tr>
+                  <tr>
+                    <th>식품 / 의약품 유형</th>
+                    <td>한의사 1:1 맞춤 진료 조제 한약 (원내 탕전 규격품)</td>
+                  </tr>
+                  <tr>
+                    <th>포장단위별 용량 / 수량</th>
+                    <td>스틱 파우치형 (1포당 3g / 1일 2~3회 복용, 14일~56일분)</td>
+                  </tr>
+                  <tr>
+                    <th>제조원 및 판매원</th>
+                    <td>바른한의원 대전본점 원내 조제실 (대전광역시 서구 둔산로 123)</td>
+                  </tr>
+                  <tr>
+                    <th>제조연월일 / 유통기한</th>
+                    <td>1:1 전화 문진 완료 후 즉시 탕전 조제 / 제조일로부터 6개월 (실온/냉장 보관)</td>
+                  </tr>
+                  <tr>
+                    <th>원재료 및 함량</th>
+                    <td>식약처 CITES 규격 인증 순수 천연 한약재 100% (원장 맞춤 처방)</td>
+                  </tr>
+                  <tr>
+                    <th>복용 방법 및 주의사항</th>
+                    <td>식전 30분 미온수와 복용. 임산부, 수유부 및 특정 질환자는 사전 상담 필수</td>
+                  </tr>
+                  <tr>
+                    <th>부작용 발생 가능성</th>
+                    <td>체질에 따라 일시적 갈증 또는 심장 두근거림이 있을 수 있으며 1:1 복용 지도 제공</td>
+                  </tr>
+                  <tr>
+                    <th>소비자 상담 문의</th>
+                    <td>바른한의원 대전본점 대표 상담실 (042-488-1075)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-          <div class="policy-item">
-            <h4 class="policy-item-title">
-              <span>🔄 상담 및 조제 전 100% 전액 취소</span>
-            </h4>
-            <p class="policy-item-desc">
-              결제 완료 후 대표원장 1:1 전화 상담이 진행되기 전에는 고객센터(042-488-1075)를 통해 위약금 없이 즉시 100% 전액 승인 취소 및 환불이 가능합니다. 전화 상담 시 의료진 판단으로 복용이 부적합할 경우에도 자동 전액 환불됩니다.
-            </p>
-          </div>
+            <!-- Panel 2: Delivery & Refund Policies -->
+            <div class="compliance-panel" id="panel-compliance-policy">
+              <h3 class="compliance-panel-title">
+                <span>🚚 배송, 취소 및 청약철회 정책</span>
+              </h3>
 
-          <div class="policy-item">
-            <h4 class="policy-item-title">
-              <span>⚠️ 조제 개시 후 청약철회 제한 고지</span>
-            </h4>
-            <p class="policy-item-desc">
-              환자의 체질과 건강 상태에 따라 1:1 개별 맞춤 조제되는 한약(의약품)의 특성상, [전자상거래법 제17조 제2항]에 의거하여 <strong>원내 탕전/조제가 시작된 이후에는 단순 변심으로 인한 취소 및 환불이 불가</strong>합니다.
-            </p>
-          </div>
+              <div class="policy-items-group">
+                <div class="policy-item">
+                  <h4 class="policy-item-title">
+                    <span>📦 우체국 특급 안심 무료 배송</span>
+                  </h4>
+                  <p class="policy-item-desc">
+                    대표원장 1:1 전화 상담 완료 후 원내에서 당일 청정 탕전하여 익일 우체국 택배로 출고됩니다. 전국 무료 배송(도서산간 포함)되며 출고 후 1~2영업일 이내 안심 수령하실 수 있습니다.
+                  </p>
+                </div>
 
-          <div class="policy-item">
-            <h4 class="policy-item-title">
-              <span>✨ 오배송 및 변질·파손 시 100% 보상</span>
-            </h4>
-            <p class="policy-item-desc">
-              배송 중 한약 파손, 포장 불량, 변질, 또는 오배송이 발생한 경우 수령 즉시 연락 주시면 100% 한의원 부담으로 즉시 무상 재처방 출고 또는 전액 환불해 드립니다.
-            </p>
+                <div class="policy-item">
+                  <h4 class="policy-item-title">
+                    <span>🔄 상담 및 조제 전 100% 전액 취소</span>
+                  </h4>
+                  <p class="policy-item-desc">
+                    결제 완료 후 대표원장 1:1 전화 상담이 진행되기 전에는 고객센터(042-488-1075)를 통해 위약금 없이 즉시 100% 전액 승인 취소 및 환불이 가능합니다. 전화 상담 시 의료진 판단으로 복용이 부적합할 경우에도 자동 전액 환불됩니다.
+                  </p>
+                </div>
+
+                <div class="policy-item">
+                  <h4 class="policy-item-title">
+                    <span>⚠️ 조제 개시 후 청약철회 제한 고지</span>
+                  </h4>
+                  <p class="policy-item-desc">
+                    환자의 체질과 건강 상태에 따라 1:1 개별 맞춤 조제되는 한약(의약품)의 특성상, [전자상거래법 제17조 제2항]에 의거하여 <strong>원내 탕전/조제가 시작된 이후에는 단순 변심으로 인한 취소 및 환불이 불가</strong>합니다.
+                  </p>
+                </div>
+
+                <div class="policy-item">
+                  <h4 class="policy-item-title">
+                    <span>✨ 오배송 및 변질·파손 시 100% 보상</span>
+                  </h4>
+                  <p class="policy-item-desc">
+                    배송 중 한약 파손, 포장 불량, 변질, 또는 오배송이 발생한 경우 수령 즉시 연락 주시면 100% 한의원 부담으로 즉시 무상 재처방 출고 또는 전액 환불해 드립니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
+
       </div>
+
     </div>
   </section>
 
@@ -4569,12 +4630,50 @@
 
     // Floating Dock visibility on scroll
     const floatingBar = document.getElementById('floating-order-bar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 450) {
-        floatingBar.classList.add('show');
+    if (floatingBar) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 450) {
+          floatingBar.classList.add('show');
+        } else {
+          floatingBar.classList.remove('show');
+        }
+      });
+    }
+
+    // Statutory Compliance Tab Switcher (전자상거래 규정 묶음 탭 전환)
+    function switchComplianceTab(tab) {
+      const btnAll = document.getElementById('tab-btn-all');
+      const btnInfo = document.getElementById('tab-btn-info');
+      const btnPolicy = document.getElementById('tab-btn-policy');
+      const panelInfo = document.getElementById('panel-compliance-info');
+      const panelPolicy = document.getElementById('panel-compliance-policy');
+      const card = document.getElementById('compliance-unified-card');
+
+      if (!card || !panelInfo || !panelPolicy) return;
+
+      if (btnAll) btnAll.classList.remove('active');
+      if (btnInfo) btnInfo.classList.remove('active');
+      if (btnPolicy) btnPolicy.classList.remove('active');
+
+      card.classList.remove('mode-all', 'mode-info', 'mode-policy');
+
+      if (tab === 'info') {
+        if (btnInfo) btnInfo.classList.add('active');
+        card.classList.add('mode-info');
+        panelInfo.style.display = 'block';
+        panelPolicy.style.display = 'none';
+      } else if (tab === 'policy') {
+        if (btnPolicy) btnPolicy.classList.add('active');
+        card.classList.add('mode-policy');
+        panelInfo.style.display = 'none';
+        panelPolicy.style.display = 'block';
       } else {
-        floatingBar.classList.remove('show');
+        if (btnAll) btnAll.classList.add('active');
+        card.classList.add('mode-all');
+        panelInfo.style.display = 'block';
+        panelPolicy.style.display = 'block';
       }
+    }
   </script>
 
   <!-- =========================================================================
