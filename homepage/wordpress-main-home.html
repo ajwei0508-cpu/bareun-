@@ -2333,6 +2333,12 @@ window.addEventListener('keydown', (e) => {
  * World-Class High-End Creative Website Architecture
  */
 
+const GET_DIET_ZERO_URL = () => {
+  return (window.location.protocol === 'file:' || window.location.pathname.endsWith('.html'))
+    ? 'diet-zero.html'
+    : '/diet-zero/';
+};
+
 const CLINIC_PROGRAMS = [
   {
     id: "00",
@@ -2777,7 +2783,7 @@ class BareunClinicApp {
         if (item.slug === 'appetite-zero') {
           if (e.target.closest('.card-hover-cue') || this.currentIndex === index) {
             this.playClick();
-            window.location.href = 'diet-zero.html';
+            window.location.href = GET_DIET_ZERO_URL();
             return;
           }
         }
@@ -3045,7 +3051,7 @@ class BareunClinicApp {
 
     const isZero = item.slug === 'appetite-zero';
     const zeroLandingBtnHtml = isZero ? `
-      <a href="diet-zero.html" class="modal-cta-btn modal-cta-accent" style="background: linear-gradient(135deg, #1C1917 0%, #382A24 100%); color: #F5EFEB; font-weight: 700; border: 1px solid rgba(197, 160, 89, 0.4); box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; text-decoration: none; width: 100%;">
+      <a href="${GET_DIET_ZERO_URL()}" class="modal-cta-btn modal-cta-accent" style="background: linear-gradient(135deg, #1C1917 0%, #382A24 100%); color: #F5EFEB; font-weight: 700; border: 1px solid rgba(197, 160, 89, 0.4); box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; text-decoration: none; width: 100%;">
         <span>✨ 식욕 ZERO 시네마틱 상세페이지 & 결제창 바로가기</span>
         <span style="color: var(--accent-gold);">➔</span>
       </a>

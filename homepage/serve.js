@@ -16,7 +16,13 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url);
+  let reqPath = req.url.split('?')[0];
+  if (reqPath === '/') {
+    reqPath = '/index.html';
+  } else if (reqPath === '/diet-zero' || reqPath === '/diet-zero/') {
+    reqPath = '/diet-zero.html';
+  }
+  let filePath = path.join(__dirname, reqPath);
   const ext = path.extname(filePath).toLowerCase();
   const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
