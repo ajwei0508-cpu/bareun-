@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>식욕 ZERO (SECRET PLAN) — 바른한의원 대전본점 비대면 처방 1위</title>
+  <title>식욕 ZERO (SECRET PLAN) — 바른한의원 대전본점 핑크 시크릿 플랜</title>
   <link rel="icon" href="https://framerusercontent.com/images/T9Y2v9h5BFE7g3Jmw9iWd4WngyQ.svg">
 
-  <!-- Typography (Pretendard, Noto Serif KR, Space Grotesk, Space Mono) -->
+  <!-- Premium Typography: Pretendard, Noto Serif KR, Space Grotesk, Space Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -14,32 +14,44 @@
 
   <style>
     /* ==========================================================================
-       BAREUN CLINIC — "식욕 ZERO" MASTERPIECE KINETIC DETAIL & CHECKOUT ARCHITECTURE
+       BAREUN CLINIC — "식욕 ZERO" MASTERPIECE KINETIC 3D & 3-STAGE EFFICACY ARCHITECTURE
        Design Persona: "아트" (Art) — World-Class High-End Creative Director
-       Palette: Pure Porcelain, Soft Dusty Rose, Warm Cashmere & Champagne Gold
+       Aesthetic: Pure White + Soft Baby Pink + Champagne Rose-Gold
        ========================================================================== */
     :root {
-      --bg-cream: #FDFBF8;
-      --bg-cashmere: #F6EFEA;
+      --pure-white: #FFFFFF;
+      --bg-porcelain: #FFFDFD;
+      --bg-pink-soft: #FDF3F5;
+      --bg-pink-tint: #FAF0F2;
       --bg-card: #FFFFFF;
-      --text-dark: #1E1A18;
-      --text-body: #4F4742;
-      --text-muted: #887E77;
-      
-      --rose-prime: #C2847A;
-      --rose-soft: #F8ECE8;
-      --rose-glow: rgba(194, 132, 122, 0.28);
-      --gold-champagne: #D6A874;
-      --gold-soft: #FAF3EA;
-      
-      --border-hairline: rgba(200, 185, 175, 0.28);
-      --border-strong: rgba(194, 132, 122, 0.45);
-      
+
+      --baby-pink-light: #FCEEEF;
+      --baby-pink-soft: #FBE6EA;
+      --baby-pink-prime: #DF7E8E;
+      --baby-pink-deep: #C76173;
+      --baby-pink-glow: rgba(223, 126, 142, 0.35);
+
+      --rose-gold-prime: #D49D7E;
+      --rose-gold-light: #E8C1A8;
+      --rose-gold-champagne: #E4BA9E;
+      --rose-gold-gradient: linear-gradient(135deg, #FBECEE 0%, #E4BA9E 50%, #C88265 100%);
+      --rose-gold-soft: #FAF2EB;
+      --rose-gold-glow: rgba(212, 157, 126, 0.35);
+
+      --text-dark: #1E1618;
+      --text-body: #4F4347;
+      --text-muted: #8E8085;
+
+      --border-hairline: rgba(223, 126, 142, 0.22);
+      --border-rose-gold: rgba(212, 157, 126, 0.38);
+      --border-strong: rgba(223, 126, 142, 0.45);
+
       --font-serif: "Noto Serif KR", Georgia, serif;
       --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: "Space Mono", monospace;
-      
+
       --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     *, *::before, *::after {
@@ -54,7 +66,7 @@
     }
 
     body {
-      background-color: var(--bg-cream);
+      background-color: var(--bg-porcelain);
       color: var(--text-dark);
       font-family: var(--font-sans);
       font-size: 15px;
@@ -75,23 +87,23 @@
     .ambient-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.55;
+      filter: blur(100px);
+      opacity: 0.65;
     }
     .orb-1 {
-      top: -10%; right: -5%;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(248, 236, 232, 0.9) 0%, transparent 70%);
+      top: -12%; right: -6%;
+      width: 650px; height: 650px;
+      background: radial-gradient(circle, rgba(252, 230, 235, 0.95) 0%, transparent 70%);
     }
     .orb-2 {
-      top: 40%; left: -10%;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(246, 239, 234, 0.8) 0%, transparent 70%);
+      top: 38%; left: -10%;
+      width: 750px; height: 750px;
+      background: radial-gradient(circle, rgba(248, 236, 228, 0.85) 0%, transparent 70%);
     }
     .orb-3 {
-      bottom: -15%; right: 15%;
-      width: 650px; height: 650px;
-      background: radial-gradient(circle, rgba(238, 214, 208, 0.6) 0%, transparent 70%);
+      bottom: -15%; right: 12%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(254, 228, 234, 0.75) 0%, transparent 70%);
     }
 
     /* Top Fixed Navigation HUD */
@@ -103,11 +115,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(253, 251, 248, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(255, 253, 253, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border-hairline);
       z-index: 100;
+      transition: background 0.3s ease;
     }
 
     .nav-brand {
@@ -123,17 +136,18 @@
       gap: 6px;
       font-size: 13px;
       color: var(--text-muted);
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 20px;
       border: 1px solid var(--border-hairline);
-      background: rgba(255, 255, 255, 0.7);
-      transition: all 0.2s ease;
+      background: rgba(255, 255, 255, 0.8);
+      transition: all 0.25s ease;
       text-decoration: none;
     }
     .brand-back-btn:hover {
       color: var(--text-dark);
-      border-color: var(--rose-prime);
+      border-color: var(--baby-pink-prime);
       background: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(223, 126, 142, 0.15);
     }
     .brand-logo-text {
       font-weight: 800;
@@ -143,11 +157,12 @@
     .brand-tag {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: var(--rose-prime);
+      color: var(--baby-pink-prime);
       font-weight: 700;
-      background: rgba(194, 132, 122, 0.1);
-      padding: 3px 8px;
+      background: rgba(223, 126, 142, 0.12);
+      padding: 3px 9px;
       border-radius: 6px;
+      letter-spacing: 0.05em;
     }
 
     .nav-actions {
@@ -160,10 +175,10 @@
       align-items: center;
       gap: 6px;
       font-size: 12px;
-      color: #2F613A;
+      color: #385E42;
       font-weight: 600;
       background: rgba(82, 107, 89, 0.08);
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 20px;
       border: 1px solid rgba(82, 107, 89, 0.2);
     }
@@ -183,25 +198,26 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 9px 20px;
-      background: var(--text-dark);
+      padding: 9px 22px;
+      background: linear-gradient(135deg, #1E1618 0%, #38252A 100%);
       color: #FFFFFF;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       border-radius: 30px;
       text-decoration: none;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 14px rgba(30, 26, 24, 0.15);
+      transition: all 0.25s var(--transition-smooth);
+      box-shadow: 0 6px 18px rgba(30, 22, 24, 0.18);
+      border: 1px solid rgba(212, 157, 126, 0.4);
     }
     .nav-cta-btn:hover {
-      background: var(--rose-prime);
+      background: linear-gradient(135deg, var(--baby-pink-prime) 0%, #BD5466 100%);
       transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(194, 132, 122, 0.35);
+      box-shadow: 0 8px 24px rgba(223, 126, 142, 0.4);
     }
 
     /* Container Standard */
     .content-container {
-      max-width: 1140px;
+      max-width: 1160px;
       margin: 0 auto;
       padding: 0 28px;
       position: relative;
@@ -209,36 +225,37 @@
     }
 
     /* ==========================================================================
-       SECTION 1: THE KINETIC SACHET (시네마틱 히어로)
+       SECTION 1: HERO WITH KINETIC 3D SACHET STAGE
        ========================================================================== */
     .hero-section {
-      padding-top: 130px;
-      padding-bottom: 90px;
-      min-height: 92vh;
+      padding-top: 125px;
+      padding-bottom: 80px;
+      min-height: 94vh;
       display: flex;
       align-items: center;
+      position: relative;
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: 1.15fr 1fr;
-      gap: 56px;
+      gap: 50px;
       align-items: center;
     }
 
     .hero-badge-row {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
+      gap: 12px;
+      margin-bottom: 22px;
     }
     .best-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: linear-gradient(135deg, #25201D 0%, #151210 100%);
-      color: #F8EFE6;
-      border: 1px solid rgba(214, 168, 116, 0.5);
+      background: linear-gradient(135deg, #241C1E 0%, #151011 100%);
+      color: #FCEEEF;
+      border: 1px solid rgba(212, 157, 126, 0.5);
       font-size: 12px;
       font-weight: 700;
       padding: 6px 14px;
@@ -247,16 +264,16 @@
     }
     .kicker-mono {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 11.5px;
       letter-spacing: 0.15em;
-      color: var(--rose-prime);
+      color: var(--baby-pink-prime);
       text-transform: uppercase;
       font-weight: 700;
     }
 
     .hero-title {
       font-family: var(--font-serif);
-      font-size: clamp(38px, 5.2vw, 58px);
+      font-size: clamp(38px, 5.2vw, 56px);
       font-weight: 700;
       line-height: 1.18;
       letter-spacing: -0.03em;
@@ -264,20 +281,20 @@
       color: var(--text-dark);
     }
     .hero-title .title-accent {
-      background: linear-gradient(135deg, var(--rose-prime) 0%, #9F584E 100%);
+      background: linear-gradient(135deg, var(--baby-pink-prime) 0%, var(--rose-gold-prime) 60%, #9F584E 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero-desc {
-      font-size: 17px;
-      line-height: 1.8;
+      font-size: 16.5px;
+      line-height: 1.82;
       color: var(--text-body);
       margin-bottom: 34px;
     }
     .hero-desc strong {
       color: var(--text-dark);
-      font-weight: 600;
+      font-weight: 700;
     }
 
     /* Kinetic Core Pillars */
@@ -285,25 +302,26 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
     .pillar-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
       border: 1px solid var(--border-hairline);
       padding: 16px 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       transition: all 0.3s var(--transition-smooth);
+      box-shadow: 0 6px 20px rgba(223, 126, 142, 0.06);
     }
     .pillar-card:hover {
       transform: translateY(-4px);
-      border-color: var(--border-strong);
-      box-shadow: 0 10px 24px rgba(194, 132, 122, 0.14);
+      border-color: var(--baby-pink-prime);
+      box-shadow: 0 12px 28px rgba(223, 126, 142, 0.18);
     }
     .pillar-num {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: var(--rose-prime);
+      color: var(--baby-pink-prime);
       font-weight: 700;
       margin-bottom: 4px;
     }
@@ -316,7 +334,7 @@
     .pillar-sub {
       font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
     .hero-cta-zone {
@@ -329,25 +347,25 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 18px 38px;
-      background: linear-gradient(135deg, #1E1A18 0%, #2D2522 100%);
+      padding: 18px 36px;
+      background: linear-gradient(135deg, #1E1618 0%, #352125 100%);
       color: #FFFFFF;
-      border: 1px solid rgba(226, 194, 164, 0.35);
+      border: 1px solid rgba(228, 186, 158, 0.45);
       border-radius: 50px;
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 700;
       letter-spacing: -0.01em;
       text-decoration: none;
-      box-shadow: 0 16px 36px rgba(30, 26, 24, 0.25);
+      box-shadow: 0 16px 36px rgba(30, 22, 24, 0.25);
       transition: all 0.35s var(--transition-smooth);
     }
     .main-order-btn:hover {
-      background: linear-gradient(135deg, var(--rose-prime) 0%, #9F584E 100%);
+      background: linear-gradient(135deg, var(--baby-pink-prime) 0%, var(--rose-gold-prime) 100%);
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 20px 42px rgba(194, 132, 122, 0.4);
+      box-shadow: 0 20px 42px rgba(223, 126, 142, 0.4);
     }
     .main-order-btn .sparkle {
-      color: var(--gold-champagne);
+      color: var(--rose-gold-champagne);
     }
 
     .secondary-chat-btn {
@@ -355,7 +373,7 @@
       align-items: center;
       gap: 8px;
       padding: 16px 28px;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       color: var(--text-dark);
       border: 1px solid var(--border-hairline);
       border-radius: 50px;
@@ -363,73 +381,170 @@
       font-weight: 600;
       text-decoration: none;
       transition: all 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
     }
     .secondary-chat-btn:hover {
       background: #FFFFFF;
-      border-color: var(--text-dark);
+      border-color: var(--baby-pink-prime);
       transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(223, 126, 142, 0.15);
     }
 
-    /* Kinetic Sachet Interactive Stage */
-    .kinetic-stage-wrap {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .kinetic-frame {
+    /* ==========================================================================
+       THE 3D KINETIC SACHET STAGE (허공 3D 회전 & 오픈 비주얼)
+       ========================================================================== */
+    .sachet-3d-stage {
       position: relative;
       width: 100%;
-      max-width: 480px;
-      aspect-ratio: 1 / 1;
-      border-radius: 24px;
-      background: #FFFFFF;
-      border: 1px solid var(--border-hairline);
-      box-shadow: 0 32px 70px rgba(190, 160, 145, 0.22);
-      overflow: hidden;
+      height: 520px;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: transform 0.6s var(--transition-smooth);
+      perspective: 1400px;
+      user-select: none;
     }
-    .kinetic-frame:hover {
-      transform: translateY(-6px) scale(1.015);
-    }
-    .kinetic-frame img {
+
+    /* Particle Canvas Layer */
+    .herbal-canvas {
+      position: absolute;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      transition: transform 1s var(--transition-smooth);
-    }
-    .kinetic-frame:hover img {
-      transform: scale(1.05);
+      pointer-events: none;
+      z-index: 3;
     }
 
-    /* Floating Interactive Hotspot Badges */
+    /* Ambient Rose-Gold Lighting Aura */
+    .sachet-aura-halo {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(248, 206, 216, 0.75) 0%, rgba(228, 186, 158, 0.35) 45%, transparent 70%);
+      transform: translate(-50%, -50%);
+      filter: blur(45px);
+      pointer-events: none;
+      animation: auraBreathe 5s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+    @keyframes auraBreathe {
+      0% { transform: translate(-50%, -50%) scale(0.92); opacity: 0.6; }
+      100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+    }
+
+    /* 3D Stick Rig */
+    .sachet-stick-rig {
+      position: relative;
+      width: 260px;
+      height: 460px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform-style: preserve-3d;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 4;
+      cursor: grab;
+    }
+    .sachet-stick-rig:active {
+      cursor: grabbing;
+    }
+
+    /* The Stick Pouch Image */
+    .sachet-stick-img {
+      width: auto;
+      height: 100%;
+      max-height: 450px;
+      object-fit: contain;
+      filter: drop-shadow(0 28px 45px rgba(180, 110, 125, 0.32)) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.12));
+      transition: filter 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* Sachet Top Unseal Opening Notch & Crest */
+    .sachet-tear-crest {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(254, 238, 242, 0.92) 100%);
+      border: 1px solid rgba(212, 157, 126, 0.55);
+      border-radius: 20px;
+      padding: 4px 12px;
+      box-shadow: 0 8px 24px rgba(223, 126, 142, 0.35), 0 0 16px rgba(212, 157, 126, 0.45);
+      z-index: 6;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      animation: crestFloat 3.2s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes crestFloat {
+      0% { transform: translateX(-50%) translateY(0); }
+      100% { transform: translateX(-50%) translateY(-6px); }
+    }
+    .tear-sparkle {
+      color: var(--rose-gold-prime);
+      font-size: 13px;
+    }
+
+    /* Sachet Floating Plinth (Glass Pedestal) */
+    .sachet-plinth {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 240px;
+      height: 28px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .plinth-disc {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.85) 0%, rgba(248, 218, 226, 0.4) 60%, transparent 100%);
+      border: 1px solid rgba(212, 157, 126, 0.3);
+      filter: blur(2px);
+    }
+    .plinth-shadow {
+      position: absolute;
+      top: 8px; left: 15%; width: 70%; height: 18px;
+      border-radius: 50%;
+      background: rgba(185, 120, 135, 0.28);
+      filter: blur(14px);
+    }
+
+    /* Floating Hotspot Badges */
     .kinetic-hotspot {
       position: absolute;
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(194, 132, 122, 0.4);
+      border: 1px solid rgba(223, 126, 142, 0.38);
       border-radius: 30px;
       padding: 8px 16px;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 12px 28px rgba(223, 126, 142, 0.16);
       display: flex;
       align-items: center;
       gap: 8px;
       font-size: 12px;
       font-weight: 700;
       color: var(--text-dark);
+      z-index: 7;
       animation: floatBadge 3.6s ease-in-out infinite alternate;
-      z-index: 5;
+      pointer-events: none;
     }
     .hotspot-1 {
-      top: 14%; left: -6%;
+      top: 16%; left: -4%;
       animation-delay: 0s;
     }
     .hotspot-2 {
-      bottom: 18%; right: -6%;
+      bottom: 14%; right: -4%;
       animation-delay: 1.8s;
     }
     @keyframes floatBadge {
@@ -438,28 +553,31 @@
     }
     .hotspot-icon {
       font-size: 14px;
-      color: var(--rose-prime);
+      color: var(--baby-pink-prime);
     }
 
     /* ==========================================================================
-       SECTION 2: SENSUAL SANCTUARY (스위스 에디토리얼 비대면 1:1 진료 플로우)
+       SECTION 2: 3-STAGE NATURAL HERBAL EFFICACY INTERACTIVE SHOWCASE
+       순수 천연 한약재(식욕 중추 안정, 심부 체지방 분해, 붓기 완화) 입자 확산 & 효능 3단계
        ========================================================================== */
-    .sanctuary-section {
-      padding: 100px 0;
-      background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cashmere) 50%, var(--bg-cream) 100%);
+    .efficacy-section {
+      padding: 100px 0 110px;
+      background: linear-gradient(180deg, var(--bg-porcelain) 0%, var(--bg-pink-soft) 50%, var(--bg-porcelain) 100%);
       position: relative;
+      border-top: 1px solid var(--border-hairline);
+      border-bottom: 1px solid var(--border-hairline);
     }
 
     .section-header-center {
       text-align: center;
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto 60px;
     }
     .section-kicker {
       font-family: var(--font-mono);
       font-size: 12px;
       letter-spacing: 0.2em;
-      color: var(--rose-prime);
+      color: var(--baby-pink-prime);
       text-transform: uppercase;
       font-weight: 700;
       margin-bottom: 12px;
@@ -467,7 +585,7 @@
     }
     .section-title {
       font-family: var(--font-serif);
-      font-size: clamp(30px, 4vw, 44px);
+      font-size: clamp(30px, 4.2vw, 44px);
       font-weight: 700;
       letter-spacing: -0.025em;
       color: var(--text-dark);
@@ -477,7 +595,164 @@
     .section-subtitle {
       font-size: 16px;
       color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* 3 Stage Navigator Tabs */
+    .efficacy-stage-nav {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 46px;
+      flex-wrap: wrap;
+    }
+    .stage-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 40px;
+      border: 1.5px solid var(--border-hairline);
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-body);
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s var(--transition-smooth);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+    }
+    .stage-nav-btn:hover {
+      border-color: var(--baby-pink-prime);
+      transform: translateY(-2px);
+    }
+    .stage-nav-btn.active {
+      background: linear-gradient(135deg, #22181B 0%, #3C2227 100%);
+      color: #FFFFFF;
+      border-color: rgba(212, 157, 126, 0.6);
+      box-shadow: 0 12px 30px rgba(223, 126, 142, 0.3);
+      transform: translateY(-2px);
+    }
+    .stage-nav-btn .stage-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--baby-pink-prime);
+      transition: background 0.3s ease;
+    }
+    .stage-nav-btn.active .stage-dot {
+      background: var(--rose-gold-champagne);
+      box-shadow: 0 0 8px var(--rose-gold-champagne);
+    }
+
+    /* 3-Stage Cards Grid */
+    .efficacy-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .efficacy-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-hairline);
+      border-radius: 22px;
+      padding: 34px 26px;
+      position: relative;
+      transition: all 0.35s var(--transition-smooth);
+      box-shadow: 0 12px 32px rgba(223, 126, 142, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .efficacy-card.active {
+      border-color: var(--baby-pink-prime);
+      box-shadow: 0 20px 48px rgba(223, 126, 142, 0.22);
+      transform: translateY(-6px);
+    }
+    .efficacy-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--baby-pink-prime) 0%, var(--rose-gold-champagne) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .efficacy-card.active::before {
+      opacity: 1;
+    }
+
+    .card-stage-badge {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--baby-pink-prime);
+      background: var(--baby-pink-light);
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .card-stage-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .card-stage-lead {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--baby-pink-deep);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .card-stage-body {
+      font-size: 14px;
+      color: var(--text-body);
       line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .herbal-ingredients-box {
+      background: var(--bg-pink-soft);
+      border: 1px solid rgba(223, 126, 142, 0.18);
+      border-radius: 12px;
+      padding: 16px 14px;
+      margin-top: auto;
+    }
+    .herbal-box-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--rose-gold-prime);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .herbal-tag-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12.5px;
+      color: var(--text-body);
+    }
+    .herbal-tag-list li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .herbal-tag-list li::before {
+      content: "✦";
+      color: var(--baby-pink-prime);
+      font-size: 10px;
+    }
+
+    /* ==========================================================================
+       SECTION 3: SENSUAL SANCTUARY (스위스 에디토리얼 비대면 1:1 진료 플로우)
+       ========================================================================== */
+    .sanctuary-section {
+      padding: 100px 0;
+      position: relative;
     }
 
     /* 4-Step Interactive Telemedicine Track */
@@ -490,19 +765,19 @@
     .flow-step-card {
       background: #FFFFFF;
       border: 1px solid var(--border-hairline);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 28px 22px;
       position: relative;
       transition: all 0.35s var(--transition-smooth);
-      box-shadow: 0 12px 30px rgba(180, 160, 150, 0.08);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     .flow-step-card:hover {
       transform: translateY(-6px);
-      border-color: var(--rose-prime);
-      box-shadow: 0 20px 40px rgba(194, 132, 122, 0.18);
+      border-color: var(--baby-pink-prime);
+      box-shadow: 0 18px 38px rgba(223, 126, 142, 0.18);
     }
     .step-header {
       display: flex;
@@ -512,10 +787,10 @@
     }
     .step-number {
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      color: var(--rose-prime);
-      background: var(--rose-soft);
+      color: var(--baby-pink-prime);
+      background: var(--baby-pink-light);
       padding: 4px 10px;
       border-radius: 12px;
     }
@@ -545,7 +820,7 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 32px;
       text-align: center;
-      box-shadow: 0 16px 40px rgba(180, 160, 150, 0.1);
+      box-shadow: 0 16px 40px rgba(223, 126, 142, 0.08);
     }
     .trust-metric-num {
       font-family: var(--font-mono);
@@ -557,7 +832,7 @@
       margin-bottom: 6px;
     }
     .trust-metric-num span {
-      color: var(--rose-prime);
+      color: var(--baby-pink-prime);
       font-size: 24px;
     }
     .trust-metric-label {
@@ -567,19 +842,19 @@
     }
 
     /* ==========================================================================
-       SECTION 3: DIRECT SMART CHECKOUT (원스톱 처방 옵션 선택 및 결제창)
+       SECTION 4: DIRECT SMART CHECKOUT (원스톱 처방 옵션 선택 및 결제창)
        ========================================================================== */
     .checkout-section {
-      padding: 100px 0 120px;
+      padding: 90px 0 120px;
       position: relative;
     }
 
     .checkout-card-wrapper {
       background: #FFFFFF;
-      border: 2px solid var(--border-strong);
+      border: 2px solid rgba(223, 126, 142, 0.35);
       border-radius: 28px;
       padding: 50px 46px;
-      box-shadow: 0 32px 80px rgba(194, 132, 122, 0.18);
+      box-shadow: 0 32px 80px rgba(223, 126, 142, 0.16);
       position: relative;
     }
     .checkout-header-row {
@@ -608,9 +883,9 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--gold-soft);
-      border: 1px solid rgba(214, 168, 116, 0.4);
-      color: #7A5528;
+      background: var(--rose-gold-soft);
+      border: 1px solid rgba(212, 157, 126, 0.45);
+      color: #7A5338;
       font-size: 12px;
       font-weight: 700;
       padding: 8px 16px;
@@ -626,7 +901,7 @@
     }
     .plan-option-card {
       border: 2px solid var(--border-hairline);
-      background: var(--bg-cream);
+      background: var(--bg-porcelain);
       border-radius: 20px;
       padding: 28px 24px;
       cursor: pointer;
@@ -637,22 +912,22 @@
       justify-content: space-between;
     }
     .plan-option-card:hover {
-      border-color: var(--rose-prime);
+      border-color: var(--baby-pink-prime);
       transform: translateY(-4px);
     }
     .plan-option-card.selected {
-      border-color: var(--rose-prime);
+      border-color: var(--baby-pink-prime);
       background: #FFFFFF;
-      box-shadow: 0 16px 36px rgba(194, 132, 122, 0.22);
+      box-shadow: 0 16px 36px rgba(223, 126, 142, 0.22);
       transform: translateY(-4px);
     }
     .plan-popular-tag {
       position: absolute;
       top: -13px;
       right: 20px;
-      background: linear-gradient(135deg, #1E1A18 0%, #382C27 100%);
-      color: #FFE6D6;
-      border: 1px solid rgba(214, 168, 116, 0.6);
+      background: linear-gradient(135deg, #1E1618 0%, #3B2329 100%);
+      color: #FFE6EA;
+      border: 1px solid rgba(212, 157, 126, 0.6);
       font-size: 11px;
       font-weight: 800;
       padding: 4px 12px;
@@ -690,7 +965,7 @@
     }
     .plan-price-sub {
       font-size: 12px;
-      color: var(--rose-prime);
+      color: var(--baby-pink-prime);
       font-weight: 700;
     }
     .plan-features-list {
@@ -709,7 +984,7 @@
     }
     .plan-features-list li::before {
       content: "✓";
-      color: var(--rose-prime);
+      color: var(--baby-pink-prime);
       font-weight: 800;
     }
     .plan-select-radio {
@@ -718,22 +993,22 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 10px;
+      padding: 11px;
       border-radius: 30px;
       background: rgba(0, 0, 0, 0.04);
       color: var(--text-dark);
-      font-weight: 600;
+      font-weight: 700;
       font-size: 13px;
       transition: all 0.2s ease;
     }
     .plan-option-card.selected .plan-select-radio {
-      background: var(--rose-prime);
+      background: var(--baby-pink-prime);
       color: #FFFFFF;
     }
 
     /* Checkout Action Panel */
     .checkout-submit-box {
-      background: linear-gradient(135deg, #FAF6F2 0%, #F5EDE6 100%);
+      background: linear-gradient(135deg, #FAF4F6 0%, #F6EDEE 100%);
       border: 1px solid var(--border-hairline);
       border-radius: 20px;
       padding: 28px 32px;
@@ -804,10 +1079,10 @@
       transform: translateX(-50%) translateY(120%);
       width: calc(100% - 48px);
       max-width: 820px;
-      background: rgba(30, 26, 24, 0.94);
+      background: rgba(30, 22, 24, 0.94);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(226, 194, 164, 0.4);
+      border: 1px solid rgba(228, 186, 158, 0.45);
       border-radius: 50px;
       padding: 12px 24px;
       display: flex;
@@ -832,9 +1107,9 @@
     }
     .dock-pill {
       font-size: 11px;
-      color: var(--gold-champagne);
+      color: var(--rose-gold-champagne);
       font-family: var(--font-mono);
-      background: rgba(214, 168, 116, 0.15);
+      background: rgba(212, 157, 126, 0.2);
       padding: 3px 8px;
       border-radius: 12px;
     }
@@ -845,21 +1120,24 @@
     }
     .dock-btn {
       padding: 10px 22px;
-      background: var(--rose-prime);
+      background: var(--baby-pink-prime);
       color: #FFFFFF;
       font-weight: 700;
       font-size: 13px;
       border-radius: 30px;
       text-decoration: none;
       transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(223, 126, 142, 0.35);
     }
     .dock-btn:hover {
-      background: #A6655B;
+      background: var(--baby-pink-deep);
     }
 
     /* Responsive adjustments */
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .sachet-3d-stage { height: 440px; }
+      .efficacy-cards-grid { grid-template-columns: 1fr; }
       .tele-flow-grid { grid-template-columns: repeat(2, 1fr); }
       .trust-strip { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       .plans-grid { grid-template-columns: 1fr; }
@@ -869,11 +1147,14 @@
       .top-nav { padding: 0 20px; }
       .checkout-card-wrapper { padding: 32px 20px; }
     }
-    @media (max-width: 500px) {
+    @media (max-width: 540px) {
       .tele-flow-grid { grid-template-columns: 1fr; }
       .kinetic-pillars { grid-template-columns: 1fr; }
       .hero-title { font-size: 32px; }
       .floating-order-dock .dock-pill { display: none; }
+      .sachet-3d-stage { height: 380px; }
+      .sachet-stick-img { max-height: 360px; }
+      .kinetic-hotspot { font-size: 11px; padding: 6px 12px; }
     }
   </style>
 </head>
@@ -909,7 +1190,7 @@
   </header>
 
   <!-- =========================================================================
-       1. THE KINETIC SACHET: 시네마틱 인터랙티브 3D 패키지 히어로
+       1. THE KINETIC SACHET HERO: 시네마틱 3D 스틱 파우치 & 에디토리얼 스토리
        ========================================================================= -->
   <section class="hero-section">
     <div class="content-container">
@@ -919,7 +1200,7 @@
         <div class="hero-content">
           <div class="hero-badge-row">
             <span class="best-pill">🏆 비대면 처방 BEST 1위</span>
-            <span class="kicker-mono">BAREUN CLINIC · SECRET PLAN</span>
+            <span class="kicker-mono">BAREUN CLINIC · PINK SECRET PLAN</span>
           </div>
 
           <h1 class="hero-title">
@@ -937,19 +1218,19 @@
           <!-- 3 Kinetic Pillars -->
           <div class="kinetic-pillars">
             <div class="pillar-card">
-              <div class="pillar-num">01 / APPETITE</div>
-              <div class="pillar-title">식탐 즉각 차단</div>
-              <div class="pillar-sub">식욕 중추를 안정시켜 스트레스성 폭식 예방</div>
+              <div class="pillar-num">01 / NEURO-CALM</div>
+              <div class="pillar-title">식욕 중추 안정</div>
+              <div class="pillar-sub">포만감 호르몬 분비 & 가짜 식탐 즉각 차단</div>
             </div>
             <div class="pillar-card">
-              <div class="pillar-num">02 / METABOLISM</div>
-              <div class="pillar-title">심부 지방 분해</div>
+              <div class="pillar-num">02 / LIPOLYSIS</div>
+              <div class="pillar-title">심부 체지방 분해</div>
               <div class="pillar-sub">유산소 운동 2시간 효과의 기초대사 부스팅</div>
             </div>
             <div class="pillar-card">
               <div class="pillar-num">03 / DETOX</div>
-              <div class="pillar-title">부종 및 붓기 배출</div>
-              <div class="pillar-sub">노폐물과 체내 독소를 림프 순환으로 배출</div>
+              <div class="pillar-title">붓기 & 독소 완화</div>
+              <div class="pillar-sub">림프 순환 활성화 및 부종 수분 쾌속 배출</div>
             </div>
           </div>
 
@@ -966,20 +1247,43 @@
           </div>
         </div>
 
-        <!-- Right: Kinetic Floating Sachet Package Visual -->
-        <div class="kinetic-stage-wrap">
-          <div class="kinetic-frame">
-            <img src="http://bareunhaniwon.com/wp-content/uploads/2026/09/멋대로환-4.jpeg" alt="바른한의원 식욕 ZERO 시크릿 플랜 한약 패키지" />
+        <!-- Right: 3D Kinetic Floating Stick Pouch Stage (스크롤 & 마우스 3D 회전 + 한약재 입자 확산) -->
+        <div class="sachet-3d-stage" id="sachet-stage">
+          <!-- Canvas for subtle herbal essence particles -->
+          <canvas id="herbal-particle-canvas" class="herbal-canvas"></canvas>
+
+          <!-- Ambient Glow Background Behind Pouch -->
+          <div class="sachet-aura-halo"></div>
+
+          <!-- Floating 3D Rig -->
+          <div class="sachet-stick-rig" id="sachet-rig">
+            <!-- Unseal / Opening Top Crest -->
+            <div class="sachet-tear-crest" id="sachet-crest">
+              <span class="tear-sparkle">✦</span>
+              <span>EASY CUT · 은은한 한약재 입자 확산</span>
+            </div>
+
+            <!-- Authentic Pink Secret Stick Pouch Image -->
+            <img class="sachet-stick-img" 
+                 id="sachet-img"
+                 src="http://bareunhaniwon.com/wp-content/uploads/2026/09/핑크환-개인-사진.png" 
+                 alt="바른한의원 식욕 ZERO 핑크 시크릿 플랜 스틱 파우치" />
           </div>
-          
-          <!-- Interactive Floating Hotspots -->
+
+          <!-- Glass Pedestal Plinth & Soft Shadow -->
+          <div class="sachet-plinth">
+            <div class="plinth-disc"></div>
+            <div class="plinth-shadow"></div>
+          </div>
+
+          <!-- Floating Interactive Hotspots -->
           <div class="kinetic-hotspot hotspot-1">
             <span class="hotspot-icon">🌸</span>
-            <span>간편한 스틱 파우치 포장 · 가방 쏙 휴대</span>
+            <span>간편한 슬림 스틱 파우치 · 가방 쏙 휴대</span>
           </div>
           <div class="kinetic-hotspot hotspot-2">
             <span class="hotspot-icon">✨</span>
-            <span>목넘김 편한 미세환 특수 제형</span>
+            <span>목넘김 편한 무취·무미 미세환 제형</span>
           </div>
         </div>
 
@@ -988,7 +1292,110 @@
   </section>
 
   <!-- =========================================================================
-       2. SENSUAL SANCTUARY: 스위스 에디토리얼 4단계 비대면 진료 플로우
+       2. 3-STAGE NATURAL HERBAL EFFICACY INTERACTIVE SECTION
+       스틱 안에서 순수 천연 한약재 입자들이 퍼지며 효능이 3단계 인터랙티브로 펼쳐집니다.
+       ========================================================================= -->
+  <section class="efficacy-section" id="efficacy-zone">
+    <div class="content-container">
+      
+      <div class="section-header-center">
+        <span class="section-kicker">HERBAL ESSENCE TRANSFORMATION</span>
+        <h2 class="section-title">스틱 안에서 깨어나는 순수 천연 한약재<br>3단계 시크릿 메커니즘</h2>
+        <p class="section-subtitle">
+          인위적인 화학 억제제가 아닙니다. 스크롤과 터치에 반응하는 핑크 스틱 속 순수 약재 입자들이<br>
+          식욕 억제, 지방 연소, 붓기 배출의 3가지 핵심 밸런스를 건강하게 조율합니다.
+        </p>
+      </div>
+
+      <!-- 3 Stage Interactive Navigation Tabs -->
+      <div class="efficacy-stage-nav" id="stage-nav-group">
+        <button class="stage-nav-btn active" data-stage="0">
+          <span class="stage-dot"></span>
+          <span>1단계 · 식욕 중추 안정</span>
+        </button>
+        <button class="stage-nav-btn" data-stage="1">
+          <span class="stage-dot"></span>
+          <span>2단계 · 심부 체지방 분해</span>
+        </button>
+        <button class="stage-nav-btn" data-stage="2">
+          <span class="stage-dot"></span>
+          <span>3단계 · 붓기 & 독소 완화</span>
+        </button>
+      </div>
+
+      <!-- 3 Stage Efficacy Cards Grid -->
+      <div class="efficacy-cards-grid">
+        
+        <!-- Stage 1 -->
+        <article class="efficacy-card active" data-card-stage="0">
+          <div>
+            <span class="card-stage-badge">STAGE 01 · NEURO-CALM</span>
+            <h3 class="card-stage-title">식욕 중추 안정</h3>
+            <p class="card-stage-lead">"가짜 배고픔과 야식의 유혹, 뇌에서부터 우아하게 잠재웁니다."</p>
+            <p class="card-stage-body">
+              스트레스와 불규칙한 식습관으로 교란된 시상하부 식욕 중추를 편안하게 진정시킵니다.
+              식사 전 가벼운 복용만으로 포만감 호르몬(GLP-1) 분비를 촉진하여, 억지로 참지 않아도 자연스럽게 식사량이 절반으로 줄어듭니다.
+            </p>
+          </div>
+          <div class="herbal-ingredients-box">
+            <div class="herbal-box-title">KEY HERBAL FORMULA</div>
+            <ul class="herbal-tag-list">
+              <li><strong>의이인(율무)</strong> — 공복감 완화 및 소화기 점막 보호</li>
+              <li><strong>황기</strong> — 기력 보강 및 장시간 든든한 포만감 지속</li>
+              <li><strong>숙지황</strong> — 음혈을 보하여 다이어트 빈혈·어지럼 예방</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Stage 2 -->
+        <article class="efficacy-card" data-card-stage="1">
+          <div>
+            <span class="card-stage-badge">STAGE 02 · DEEP LIPOLYSIS</span>
+            <h3 class="card-stage-title">심부 체지방 분해</h3>
+            <p class="card-stage-lead">"가만히 있어도 유산소 2시간 러닝머신을 뛴 듯한 대사 가속."</p>
+            <p class="card-stage-body">
+              몸속 깊은 심부 체온을 미세 상승시켜 기초대사율을 35% 이상 부스팅합니다.
+              일상생활 중에도 축적된 복부 내장지방과 옆구리 피하지방을 스스로 분해하며, 잠자는 수면 시간까지 쉬지 않고 칼로리를 연소시킵니다.
+            </p>
+          </div>
+          <div class="herbal-ingredients-box">
+            <div class="herbal-box-title">KEY HERBAL FORMULA</div>
+            <ul class="herbal-tag-list">
+              <li><strong>마황(황금비율 정제)</strong> — 두근거림 없는 안전한 대사 증강</li>
+              <li><strong>사인</strong> — 비위 순환 소통 및 심부 지방 연소 가속</li>
+              <li><strong>백복령</strong> — 자율신경 안정 및 숙면 유도 요요 방지</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Stage 3 -->
+        <article class="efficacy-card" data-card-stage="2">
+          <div>
+            <span class="card-stage-badge">STAGE 03 · DETOX FLUSH</span>
+            <h3 class="card-stage-title">붓기 & 독소 완화</h3>
+            <p class="card-stage-lead">"정체된 체내 수분과 노폐물을 씻어내어 가벼운 바디 라인."</p>
+            <p class="card-stage-body">
+              다이어트 시 정체되기 쉬운 수독(水毒)과 림프 순환 장애를 신속하게 개선합니다.
+              아침마다 반복되는 얼굴 붓기와 저녁 무거운 하체 부종을 체외로 배출하여, 체중 감량과 함께 맑고 매끄러운 피부 결을 완성합니다.
+            </p>
+          </div>
+          <div class="herbal-ingredients-box">
+            <div class="herbal-box-title">KEY HERBAL FORMULA</div>
+            <ul class="herbal-tag-list">
+              <li><strong>택사</strong> — 이수삼습(利水蔘濕) 작용으로 하체 부종 쾌속 해소</li>
+              <li><strong>저령</strong> — 신장 기능 보조 및 체내 불필요 노폐물 배출</li>
+              <li><strong>당귀 · 천궁</strong> — 혈액 순환 촉진 및 슬리밍 피부 탄력 케어</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. SENSUAL SANCTUARY: 스위스 에디토리얼 4단계 비대면 진료 플로우
        ========================================================================= -->
   <section class="sanctuary-section">
     <div class="content-container">
@@ -998,7 +1405,7 @@
         <h2 class="section-title">내원 없이 집에서 받는<br>1:1 평생 주치의 체질 처방</h2>
         <p class="section-subtitle">
           바쁜 일상 속, 전국 어디서나 안심하고 진료받으실 수 있도록<br>
-          대전본점 대표원장이 직접 전화 상담 후 100% 맞춤 탕전하여 직배송합니다.
+          대전본점 대표원장이 직접 전화 상담 후 직배송합니다.
         </p>
       </div>
 
@@ -1065,7 +1472,7 @@
   </section>
 
   <!-- =========================================================================
-       3. DIRECT SMART CHECKOUT: 처방 옵션 선택 & 결제/신청 직결창
+       4. DIRECT SMART CHECKOUT: 처방 옵션 선택 & 결제/신청 직결창
        ========================================================================= -->
   <section class="checkout-section" id="checkout-zone">
     <div class="content-container">
@@ -1171,7 +1578,7 @@
   <aside class="floating-order-dock" id="floating-order-bar">
     <div class="dock-left">
       <span class="dock-pill">🏆 BEST 1위</span>
-      <span class="dock-title">바른한의원 식욕 ZERO 비대면 처방</span>
+      <span class="dock-title">바른한의원 식욕 ZERO 핑크 시크릿 플랜</span>
     </div>
     <div class="dock-right">
       <a href="https://naver.me/GBvNnIom" target="_blank" rel="noopener noreferrer" class="dock-btn">
@@ -1180,8 +1587,239 @@
     </div>
   </aside>
 
+  <!-- Interactive JavaScript: 3D Kinetic Motion & Herbal Particle Simulation -->
   <script>
-    // Plan Option Selector Interaction
+    /* ==========================================================================
+       1. HERBAL ESSENCE PARTICLE SYSTEM (Canvas 2D Engine)
+       순수 천연 한약재 입자들이 스틱 안에서 은은하게 퍼져 나오는 모션
+       ========================================================================== */
+    class HerbalParticleEngine {
+      constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas) return;
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.stage = 0; // 0: 식욕 중추 안정, 1: 심부 체지방 분해, 2: 붓기 완화
+        this.maxParticles = 65;
+        this.animId = null;
+
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        this.initParticles();
+        this.animate();
+      }
+
+      resize() {
+        const rect = this.canvas.getBoundingClientRect();
+        this.canvas.width = rect.width;
+        this.canvas.height = rect.height;
+      }
+
+      setStage(newStage) {
+        this.stage = newStage;
+        // Burst extra particles on stage shift
+        for (let i = 0; i < 15; i++) {
+          this.particles.push(this.createParticle(true));
+        }
+      }
+
+      createParticle(isBurst = false) {
+        const w = this.canvas.width;
+        const h = this.canvas.height;
+        // Originates around top of sachet stick
+        const originX = w * 0.5 + (Math.random() - 0.5) * 50;
+        const originY = h * 0.32 + (Math.random() - 0.5) * 30;
+
+        // Stage-based color variations: Baby Pink, Champagne Gold, Soft Rose
+        let hVal = 348; // Pink base
+        let sVal = 75;
+        let lVal = 78;
+
+        if (this.stage === 1) { // 심부 체지방 분해 (Warm Rose Gold Embers)
+          hVal = 28 + Math.random() * 15;
+          sVal = 70;
+          lVal = 72;
+        } else if (this.stage === 2) { // 붓기 완화 (Crystal Rose Water Dew)
+          hVal = 335 + Math.random() * 20;
+          sVal = 55;
+          lVal = 85;
+        }
+
+        return {
+          x: originX,
+          y: originY,
+          vx: (Math.random() - 0.5) * (isBurst ? 2.5 : 1.2),
+          vy: -Math.random() * (isBurst ? 2.8 : 1.4) - 0.5,
+          radius: Math.random() * 3.2 + 1.2,
+          alpha: Math.random() * 0.7 + 0.3,
+          decay: Math.random() * 0.007 + 0.004,
+          wobble: Math.random() * Math.PI * 2,
+          wobbleSpeed: Math.random() * 0.04 + 0.015,
+          color: `hsla(${hVal}, ${sVal}%, ${lVal}%, `
+        };
+      }
+
+      initParticles() {
+        this.particles = [];
+        for (let i = 0; i < this.maxParticles; i++) {
+          const p = this.createParticle();
+          // Pre-distribute in space
+          p.y -= Math.random() * (this.canvas.height * 0.45);
+          p.alpha = Math.random() * 0.6 + 0.2;
+          this.particles.push(p);
+        }
+      }
+
+      animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          p.wobble += p.wobbleSpeed;
+          p.x += p.vx + Math.sin(p.wobble) * 0.65;
+          p.y += p.vy;
+          p.alpha -= p.decay;
+
+          if (p.alpha <= 0 || p.y < 0) {
+            this.particles.splice(i, 1);
+            if (this.particles.length < this.maxParticles) {
+              this.particles.push(this.createParticle());
+            }
+            continue;
+          }
+
+          this.ctx.save();
+          this.ctx.beginPath();
+          this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          this.ctx.fillStyle = p.color + p.alpha + ')';
+          this.ctx.shadowColor = p.color + '0.8)';
+          this.ctx.shadowBlur = 10;
+          this.ctx.fill();
+          this.ctx.restore();
+        }
+
+        this.animId = requestAnimationFrame(() => this.animate());
+      }
+    }
+
+    const particleEngine = new HerbalParticleEngine('herbal-particle-canvas');
+
+    /* ==========================================================================
+       2. 3D KINETIC SACHET STICK SCROLL & MOUSE ROTATION
+       스크롤 시 허공에서 3D 입체 회전 및 열리는 모션 연출
+       ========================================================================== */
+    const sachetRig = document.getElementById('sachet-rig');
+    const sachetStage = document.getElementById('sachet-stage');
+    const sachetCrest = document.getElementById('sachet-crest');
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetRotY = -12;
+    let targetRotX = 8;
+    let targetRotZ = -3;
+    let currentRotY = -12;
+    let currentRotX = 8;
+    let currentRotZ = -3;
+
+    // Stage rotation presets for the 3 natural herbal stages
+    const STAGE_ROTATIONS = [
+      { y: -14, x: 8, z: -3 },   // Stage 0: 1단계 식욕 중추 안정
+      { y: 16, x: 6, z: 4 },     // Stage 1: 2단계 심부 체지방 분해
+      { y: -2, x: 12, z: 0 }     // Stage 2: 3단계 붓기 완화
+    ];
+    let activeStageIdx = 0;
+
+    // Mouse Tracking in 3D
+    window.addEventListener('mousemove', (e) => {
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      mouseX = (e.clientX - centerX) / centerX;
+      mouseY = (e.clientY - centerY) / centerY;
+    });
+
+    // Scroll-based dynamic rotation
+    let scrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      scrollY = window.scrollY;
+    }, { passive: true });
+
+    // Smooth Lerp Animation Loop
+    function update3DStick() {
+      const stagePreset = STAGE_ROTATIONS[activeStageIdx];
+      const scrollFactor = Math.min(scrollY / 700, 1.5);
+
+      // Fusing stage preset + scroll angle + mouse parallax
+      targetRotY = stagePreset.y + (scrollFactor * 22) + (mouseX * 15);
+      targetRotX = stagePreset.x - (scrollFactor * 12) - (mouseY * 12);
+      targetRotZ = stagePreset.z + Math.sin(scrollFactor * Math.PI) * 5;
+
+      currentRotY += (targetRotY - currentRotY) * 0.08;
+      currentRotX += (targetRotX - currentRotX) * 0.08;
+      currentRotZ += (targetRotZ - currentRotZ) * 0.08;
+
+      const floatY = Math.sin(Date.now() * 0.002) * 8 - (scrollFactor * 15);
+
+      if (sachetRig) {
+        sachetRig.style.transform = `
+          translateY(${floatY}px)
+          rotateY(${currentRotY}deg)
+          rotateX(${currentRotX}deg)
+          rotateZ(${currentRotZ}deg)
+        `;
+      }
+
+      // Unseal crest glow intensity based on scroll and rotation
+      if (sachetCrest) {
+        const glowScale = 1 + Math.sin(Date.now() * 0.003) * 0.06;
+        sachetCrest.style.transform = `translateX(-50%) scale(${glowScale})`;
+      }
+
+      requestAnimationFrame(update3DStick);
+    }
+    update3DStick();
+
+    /* ==========================================================================
+       3. 3-STAGE INTERACTIVE EFFICACY SWITCHER
+       ========================================================================== */
+    const stageNavBtns = document.querySelectorAll('.stage-nav-btn');
+    const efficacyCards = document.querySelectorAll('.efficacy-card');
+
+    function selectEfficacyStage(index) {
+      activeStageIdx = index;
+
+      // Update Nav Buttons
+      stageNavBtns.forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+
+      // Update Cards
+      efficacyCards.forEach((card, i) => {
+        card.classList.toggle('active', i === index);
+      });
+
+      // Notify particle system
+      if (particleEngine) {
+        particleEngine.setStage(index);
+      }
+    }
+
+    stageNavBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const stageIndex = parseInt(btn.dataset.stage, 10);
+        selectEfficacyStage(stageIndex);
+      });
+    });
+
+    efficacyCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const cardIndex = parseInt(card.dataset.cardStage, 10);
+        selectEfficacyStage(cardIndex);
+      });
+    });
+
+    /* ==========================================================================
+       4. DIRECT SMART CHECKOUT: PLAN SELECTOR & FLOATING DOCK
+       ========================================================================== */
     const planCards = document.querySelectorAll('.plan-option-card');
     const selectedTitleEl = document.getElementById('selected-plan-title');
 

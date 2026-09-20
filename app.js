@@ -15,7 +15,7 @@ const CLINIC_PROGRAMS = [
     year: "TELEMEDICINE",
     awards: "🏆 비대면 처방 베스트 1위 · 누적 처방 50,000건 돌파 · 100% 개별 체질 맞춤 탕전",
     description: "굶지 않고 자연스럽게 식탐을 억제하며 체질별 기초 대사율을 끌어올리는 바른한의원만의 시그니처 다이어트 탕약. 내원 없이 전화 상담 후 집 앞까지 안전하게 직배송됩니다.",
-    image: "http://bareunhaniwon.com/wp-content/uploads/2026/09/멋대로환-4.jpeg",
+    image: "http://bareunhaniwon.com/wp-content/uploads/2026/09/식욕제로.jpg",
     details: [
       "✓ 1:1 비대면 전화 진료를 통한 맞춤형 체질 감별 및 정밀 처방",
       "✓ 위장 장애 및 심장 두근거림 최소화 원내 특수 탕전 공법",
