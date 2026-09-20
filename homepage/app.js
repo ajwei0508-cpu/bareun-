@@ -505,15 +505,20 @@ class BareunClinicApp {
       c.classList.toggle('active', idx === index);
     });
 
+    const getTrackGap = () => {
+      const gap = parseFloat(window.getComputedStyle(this.track).gap);
+      return isNaN(gap) ? (window.innerWidth <= 768 ? 16 : 28) : gap;
+    };
+
     // Move track to center the card dynamically
     const firstCard = this.track.querySelector('.project-card');
-    const cardWidth = firstCard ? (firstCard.offsetWidth + 28) : (window.innerWidth <= 768 ? 328 : 448);
+    const cardWidth = firstCard ? (firstCard.offsetWidth + getTrackGap()) : (window.innerWidth <= 768 ? 336 : 448);
     const targetX = -(index * cardWidth);
     this.track.style.transform = `translateX(${targetX}px)`;
   }
 
   /* --------------------------------------------------------------------------
-     TOUCH & DRAG SWIPE GESTURES (Mobile & Desktop)
+     TOUCH & POINTER DRAG INTERACTION (모바일 터치 스와이프 & 데스크톱 드래그)
      -------------------------------------------------------------------------- */
   initTouchAndDrag() {
     let startX = 0;
@@ -523,9 +528,14 @@ class BareunClinicApp {
     let dragDistance = 0;
     let initialTrackX = 0;
 
+    const getTrackGap = () => {
+      const gap = parseFloat(window.getComputedStyle(this.track).gap);
+      return isNaN(gap) ? (window.innerWidth <= 768 ? 16 : 28) : gap;
+    };
+
     const getCardWidth = () => {
       const card = this.track.querySelector('.project-card');
-      return card ? (card.offsetWidth + 28) : (window.innerWidth <= 768 ? 328 : 448);
+      return card ? (card.offsetWidth + getTrackGap()) : (window.innerWidth <= 768 ? 336 : 448);
     };
 
     const getBaseX = () => -(this.currentIndex * getCardWidth());
@@ -641,6 +651,15 @@ class BareunClinicApp {
 
     this.nextBtn.addEventListener('click', () => {
       this.updateProjectView(this.currentIndex + 1);
+    });
+
+    // Window resize / mobile orientation change re-centering
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        this.updateProjectView(this.currentIndex, false);
+      }, 100);
     });
 
     // Keyboard navigation

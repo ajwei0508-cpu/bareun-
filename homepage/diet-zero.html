@@ -2426,43 +2426,242 @@
       cursor: pointer;
     }
 
-    /* Modal Responsive Queries */
-    @media (max-width: 768px) {
-      .modal-body-grid { grid-template-columns: 1fr; gap: 20px; }
-      .modal-content-wrap { padding: 28px 20px; }
-      .modal-plan-pills-row { grid-template-columns: 1fr; }
-      .receipt-steps-flow { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .floating-order-dock { padding: 8px 16px; }
-      .floating-order-dock .dock-title { display: none; }
-      .submit-btns-right { width: 100%; }
-      .btn-direct-pay { width: 100%; justify-content: center; }
-      .submit-sub-btns { width: 100%; }
-      .btn-naver-form, .btn-kakao-pay { flex: 1; justify-content: center; }
-      .pay-brands-strip { flex-direction: column; align-items: flex-start; }
-    }
-
-    /* Responsive adjustments */
+    /* ==========================================================================
+       RESPONSIVE DESIGN (TABLET & MOBILE COMPLETE HIGH-END SUITE)
+       ========================================================================== */
     @media (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
       .sachet-3d-stage { height: 440px; }
-      .efficacy-cards-grid { grid-template-columns: 1fr; }
+      .efficacy-cards-grid { grid-template-columns: 1fr; gap: 28px; }
       .tele-flow-grid { grid-template-columns: repeat(2, 1fr); }
       .trust-strip { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .plans-grid { grid-template-columns: 1fr; }
+      .plans-grid { grid-template-columns: 1fr; gap: 24px; }
       .checkout-submit-box { flex-direction: column; align-items: stretch; }
       .submit-btns-right { flex-direction: column; }
       .btn-naver-form, .btn-kakao-pay { justify-content: center; width: 100%; }
       .top-nav { padding: 0 20px; }
       .checkout-card-wrapper { padding: 32px 20px; }
     }
-    @media (max-width: 540px) {
-      .tele-flow-grid { grid-template-columns: 1fr; }
-      .kinetic-pillars { grid-template-columns: 1fr; }
-      .hero-title { font-size: 32px; }
-      .floating-order-dock .dock-pill { display: none; }
-      .sachet-3d-stage { height: 380px; }
-      .sachet-stick-img { max-height: 360px; }
-      .kinetic-hotspot { font-size: 11px; padding: 6px 12px; }
+
+    @media (max-width: 768px) {
+      /* Navigation Bar */
+      .top-nav {
+        padding: 0 14px;
+        height: 54px;
+      }
+      .brand-tag,
+      .status-live {
+        display: none !important;
+      }
+      .brand-back-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+      }
+      .brand-logo-text {
+        font-size: 13.5px;
+      }
+      .nav-cta-btn {
+        padding: 6px 14px;
+        font-size: 11.5px;
+        gap: 4px;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        padding-top: 80px;
+        padding-bottom: 36px;
+        min-height: auto;
+      }
+      .hero-title {
+        font-size: clamp(28px, 7.5vw, 40px);
+        margin-bottom: 16px;
+      }
+      .hero-desc {
+        font-size: 14.5px;
+        line-height: 1.65;
+        margin-bottom: 22px;
+      }
+      .kinetic-pillars {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .pillar-card {
+        padding: 12px 14px;
+      }
+      .hero-cta-zone {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+      .main-order-btn,
+      .secondary-chat-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 14px;
+      }
+
+      /* 3D Kinetic Sachet Stage */
+      .sachet-3d-stage {
+        height: 380px;
+        overflow: hidden;
+      }
+      .sachet-stick-rig {
+        width: 210px;
+        height: 340px;
+      }
+      .sachet-stick-img {
+        max-height: 320px;
+      }
+      .kinetic-hotspot {
+        font-size: 11px;
+        padding: 5px 12px;
+      }
+      .hotspot-1 {
+        top: 6%;
+        left: 2%;
+      }
+      .hotspot-2 {
+        bottom: 6%;
+        right: 2%;
+      }
+
+      /* Efficacy Cards */
+      .efficacy-section {
+        padding: 60px 0 70px;
+      }
+      .section-header-center {
+        margin-bottom: 36px;
+      }
+      .card-interactive-stage {
+        height: 220px;
+      }
+      .card-content-body {
+        padding: 20px 16px;
+      }
+
+      /* Telemedicine Process */
+      .telemedicine-sec {
+        padding: 60px 0 70px;
+      }
+      .tele-flow-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      /* Pricing & Checkout */
+      .pricing-sec {
+        padding: 60px 0 70px;
+      }
+      .plan-card {
+        padding: 24px 18px;
+      }
+      .checkout-zone {
+        padding: 50px 0 70px;
+      }
+      .checkout-card-wrapper {
+        padding: 22px 14px;
+        border-radius: 18px;
+      }
+      .checkout-input-row {
+        grid-template-columns: 1fr !important;
+      }
+      .delivery-opt-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .submit-btns-right {
+        width: 100%;
+      }
+      .btn-direct-pay {
+        width: 100%;
+        font-size: 15px;
+        padding: 15px 18px;
+        justify-content: center;
+      }
+      .submit-sub-btns {
+        width: 100%;
+      }
+      .btn-naver-form,
+      .btn-kakao-pay {
+        flex: 1;
+        justify-content: center;
+      }
+      .pay-brands-strip {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      /* Floating Order Dock at Screen Bottom */
+      .floating-order-dock {
+        width: calc(100% - 20px);
+        left: 50%;
+        bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+        padding: 8px 12px;
+        border-radius: 40px;
+        gap: 8px;
+      }
+      .dock-title,
+      .dock-pill {
+        display: none;
+      }
+      .dock-price {
+        font-size: 13.5px;
+        padding: 2px 6px;
+      }
+      .dock-btn-pay {
+        padding: 8px 16px;
+        font-size: 12px;
+      }
+      .dock-btn-sub {
+        display: none;
+      }
+
+      /* Modal Window */
+      .modal-window {
+        width: 95vw;
+        max-height: 90vh;
+        border-radius: 18px;
+      }
+      .modal-content-wrap {
+        padding: 22px 16px;
+      }
+      .modal-body-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .modal-input-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .modal-plan-pills-row {
+        grid-template-columns: 1fr;
+      }
+      .receipt-steps-flow {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 29px;
+      }
+      .trust-strip {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .sachet-3d-stage {
+        height: 340px;
+      }
+      .sachet-stick-img {
+        max-height: 290px;
+      }
+      .btn-naver-form,
+      .btn-kakao-pay {
+        font-size: 11.5px;
+        padding: 10px 8px;
+      }
     }
 
     /* ==========================================================================
