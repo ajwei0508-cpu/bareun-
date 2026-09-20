@@ -973,10 +973,118 @@ html, body {
   transition: opacity 0.3s ease;
 }
 
-.card-badge-top,
 .card-id-tag,
 .card-year-tag {
   display: none !important;
+}
+
+/* Card Top Badge (e.g. 🏆 비대면 처방 BEST 1위) */
+.card-badge-top {
+  display: flex !important;
+  align-items: center;
+  align-self: flex-start;
+  z-index: 3;
+}
+
+.card-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(28, 23, 20, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 194, 164, 0.5);
+  color: #FFF5EC;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  padding: 5px 12px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.card-badge-pill .badge-trophy {
+  font-size: 12px;
+}
+
+.project-card:hover .card-badge-pill {
+  border-color: rgba(226, 194, 164, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Card Hover Interactive Cue: "살쪗으면 클릭해 ➔" */
+.card-hover-cue {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%) scale(0.85);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(194, 132, 122, 0.96) 0%, rgba(162, 94, 85, 0.96) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 16px 40px rgba(162, 94, 85, 0.5), 0 0 25px rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.card-hover-cue .cue-sparkle {
+  color: #FFE6D6;
+  font-size: 14px;
+  animation: cueSpin 3s linear infinite;
+}
+
+.card-hover-cue .cue-text {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-hover-cue .cue-arrow {
+  font-size: 13px;
+  color: #FFE6D6;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .card-hover-cue {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  animation: cueFloatPulse 2.2s ease-in-out infinite;
+}
+
+.project-card:hover .card-hover-cue .cue-arrow {
+  transform: translateX(4px);
+}
+
+@keyframes cueFloatPulse {
+  0%, 100% {
+    box-shadow: 0 16px 40px rgba(162, 94, 85, 0.5), 0 0 0 0 rgba(194, 132, 122, 0.45);
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    box-shadow: 0 22px 50px rgba(162, 94, 85, 0.65), 0 0 0 14px rgba(194, 132, 122, 0);
+    transform: translate(-50%, -53%) scale(1.03);
+  }
+}
+
+@keyframes cueSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .card-meta-bottom {

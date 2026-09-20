@@ -7,14 +7,15 @@ const CLINIC_PROGRAMS = [
   {
     id: "00",
     slug: "appetite-zero",
-    title: "식욕제로 다이어트",
-    subtitle: "비대면 1:1 맞춤 전화 처방 & 전국 당일 발송",
-    client: "비대면 특화 다이어트 한약",
+    title: "식욕 ZERO",
+    badge: "비대면 처방 BEST 1위",
+    subtitle: "비대면 처방 BEST 1위 · 1:1 맞춤 전화 처방 & 전국 당일 발송",
+    client: "비대면 처방 BEST 1위 · 시그니처 다이어트 한약",
     role: "식욕 억제 · 체지방 분해 · 신진대사 활성화",
     year: "TELEMEDICINE",
-    awards: "누적 처방 50,000건 돌파 · 100% 개별 체질 맞춤 탕전 · 전국 비대면 당일 배송",
+    awards: "🏆 비대면 처방 베스트 1위 · 누적 처방 50,000건 돌파 · 100% 개별 체질 맞춤 탕전",
     description: "굶지 않고 자연스럽게 식탐을 억제하며 체질별 기초 대사율을 끌어올리는 바른한의원만의 시그니처 다이어트 탕약. 내원 없이 전화 상담 후 집 앞까지 안전하게 직배송됩니다.",
-    image: "http://bareunhaniwon.com/wp-content/uploads/2026/09/Diet_pill_promotional_poster_2K_202608231705.jpeg",
+    image: "http://bareunhaniwon.com/wp-content/uploads/2026/09/멋대로환-4.jpeg",
     details: [
       "✓ 1:1 비대면 전화 진료를 통한 맞춤형 체질 감별 및 정밀 처방",
       "✓ 위장 장애 및 심장 두근거림 최소화 원내 특수 탕전 공법",
@@ -393,6 +394,7 @@ class BareunClinicApp {
       let cardClass = 'project-card';
       if (isDoctor) cardClass += ' doctor-card';
       if (isGongjindan) cardClass += ' gongjindan-card';
+      if (item.slug === 'appetite-zero') cardClass += ' zero-card';
       if (index === 0) cardClass += ' active';
 
       card.className = cardClass;
@@ -401,20 +403,41 @@ class BareunClinicApp {
       let wrapClass = 'card-image-wrap';
       if (isDoctor) wrapClass += ' doctor-wrap';
       if (isGongjindan) wrapClass += ' gongjindan-wrap';
+      if (item.slug === 'appetite-zero') wrapClass += ' zero-wrap';
 
       let imgClass = 'card-img';
       if (isDoctor) imgClass += ' doctor-img';
       if (isGongjindan) imgClass += ' gongjindan-img';
+      if (item.slug === 'appetite-zero') imgClass += ' zero-img';
+
+      const badgeHtml = item.badge ? `
+        <div class="card-badge-top">
+          <span class="card-badge-pill">
+            <span class="badge-trophy">🏆</span>
+            <span class="badge-text">${item.badge}</span>
+          </span>
+        </div>
+      ` : '';
+
+      const hoverCueHtml = item.slug === 'appetite-zero' ? `
+        <div class="card-hover-cue" aria-label="살쪗으면 클릭해">
+          <span class="cue-sparkle">✦</span>
+          <span class="cue-text">살쪗으면 클릭해</span>
+          <span class="cue-arrow">➔</span>
+        </div>
+      ` : '';
 
       card.innerHTML = `
         <div class="${wrapClass}">
           <img class="${imgClass}" src="${item.image}" alt="${item.title}" loading="lazy" />
           <div class="card-overlay">
+            ${badgeHtml}
             <div class="card-meta-bottom">
               <h3 class="card-title">${item.title}</h3>
               <p class="card-subtitle">${item.subtitle || item.role}</p>
             </div>
           </div>
+          ${hoverCueHtml}
         </div>
       `;
 
