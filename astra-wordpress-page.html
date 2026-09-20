@@ -722,20 +722,31 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #1A1614;
+  background-color: #14110F;
   overflow: hidden;
   cursor: pointer;
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.95s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
 }
 
 .intro-splash.leaving {
   opacity: 0;
-  transform: scale(1.04);
-  filter: blur(8px);
+  transform: scale(1.06);
+  filter: blur(14px);
   pointer-events: none;
+}
+
+.intro-splash.leaving .intro-video {
+  transform: translate(-50%, -50%) scale(1.12);
+  filter: brightness(1.15) blur(10px);
+}
+
+.intro-splash.leaving .intro-content {
+  transform: translateY(-24px) scale(0.96);
+  opacity: 0;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
 }
 
 .intro-media-wrap {
@@ -745,7 +756,19 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: radial-gradient(circle at 60% 40%, #352B25 0%, #151210 100%);
+  background: radial-gradient(circle at 60% 40%, #2E2520 0%, #120F0D 100%);
+  pointer-events: none;
+}
+
+.intro-media-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 25% 75%, rgba(194, 132, 122, 0.16) 0%, transparent 55%),
+              radial-gradient(circle at 75% 25%, rgba(192, 154, 103, 0.16) 0%, transparent 55%);
   pointer-events: none;
 }
 
@@ -757,10 +780,11 @@
   min-height: 100%;
   width: auto;
   height: auto;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1.02);
   object-fit: cover;
-  opacity: 0.85;
-  transition: opacity 1.2s ease;
+  opacity: 0.9;
+  filter: brightness(0.92) contrast(1.06) saturate(1.08);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease, filter 1s ease;
 }
 
 .intro-overlay-scrim {
@@ -769,8 +793,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, rgba(30, 26, 24, 0.35) 0%, rgba(16, 14, 13, 0.82) 100%),
-              linear-gradient(180deg, rgba(20, 18, 17, 0.3) 0%, rgba(20, 18, 17, 0.85) 100%);
+  background: radial-gradient(ellipse at 50% 50%, rgba(30, 26, 24, 0.22) 0%, rgba(18, 15, 13, 0.6) 60%, rgba(12, 10, 9, 0.9) 100%),
+              linear-gradient(180deg, rgba(194, 132, 122, 0.1) 0%, rgba(18, 15, 13, 0.45) 50%, rgba(12, 10, 9, 0.92) 100%);
 }
 
 .intro-content {
@@ -964,7 +988,7 @@
     <!-- 배경 비디오 레이어 -->
     <div class="intro-media-wrap">
       <video id="intro-video" class="intro-video" autoplay muted loop playsinline preload="auto">
-        <source id="intro-video-src" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/intro.mp4" type="video/mp4">
+        <source id="intro-video-src" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/Person_commuting_to_medical_clinic_20260919204253-1.mp4" type="video/mp4">
       </video>
       <div class="intro-overlay-scrim"></div>
     </div>
@@ -972,24 +996,24 @@
     <!-- 인트로 중앙 브랜드 & 입장 안내 -->
     <div class="intro-content">
       <div class="intro-badge-wrap">
-        <span class="intro-badge">DAEJEON BAREUN CLINIC · LUXURY SIGNATURE</span>
+        <span class="intro-badge">DAEJEON BAREUN CLINIC · ARCHITECTURE OF HEALING</span>
       </div>
 
-      <h1 class="intro-brand-title">바른한의원</h1>
+      <h1 class="intro-brand-title">바른 치유를 향한 발걸음</h1>
       <p class="intro-brand-subtitle">
-        정직한 처방과 깊이 있는 치유의 미학<br>
-        대전본점 1:1 맞춤 진료 & 전국 비대면 처방
+        몸과 마음이 온전히 회복되는 시간<br>
+        바른한의원 대전본점 1:1 맞춤 진료 & 전국 비대면 처방
       </p>
 
       <div class="intro-action-zone">
         <button id="intro-enter-btn" class="intro-enter-btn" aria-label="메인 페이지로 입장하기">
           <div class="enter-main-row">
             <span class="enter-sparkle">✦</span>
-            <span class="enter-text">화면을 클릭하여 입장하기</span>
+            <span class="enter-text">화면을 터치하여 입장하기</span>
           </div>
-          <span class="enter-subtext">CLICK TO ENTER</span>
+          <span class="enter-subtext">CLICK TO ENTER · 진료 과목 둘러보기</span>
         </button>
-        <p class="intro-instruction">화면의 어느 곳이든 클릭하시면 메인 화면으로 이동합니다</p>
+        <p class="intro-instruction">화면의 어느 곳이든 가볍게 터치하시면 메인 화면으로 이동합니다</p>
       </div>
 
       <div class="intro-bottom-meta">
@@ -1209,7 +1233,7 @@
      워드프레스 [미디어 ➔ 새로 추가]에 준비하신 동영상을 업로드한 후,
      복사한 [파일 URL]을 아래 따옴표 안에 넣어주시면 자동으로 재생됩니다.
      ========================================================================== */
-  const WP_INTRO_VIDEO_URL = 'http://bareunhaniwon.com/wp-content/uploads/2026/09/intro.mp4';
+  const WP_INTRO_VIDEO_URL = 'http://bareunhaniwon.com/wp-content/uploads/2026/09/Person_commuting_to_medical_clinic_20260919204253-1.mp4';
 
   /* ==========================================================================
      [2. 실제 워드프레스 미디어 라이브러리 이미지 URL 연동 완료]
@@ -1393,14 +1417,14 @@
 
       const dismissIntro = () => {
         if (this.introSplash.classList.contains('leaving') || this.introSplash.style.display === 'none') return;
-        this.playClick();
+        this.playEntryChime();
         this.introSplash.classList.add('leaving');
         setTimeout(() => {
           this.introSplash.style.display = 'none';
           if (this.introVideo) {
             try { this.introVideo.pause(); } catch(e) {}
           }
-        }, 850);
+        }, 950);
       };
 
       // 화면 아무 곳이나 클릭/터치하면 메인 페이지로 부드럽게 입장
@@ -1476,6 +1500,27 @@
 
     playClick() { this.playTone(1100, 0.03, 'sine'); }
     playSlide() { this.playTone(190, 0.08, 'triangle'); }
+
+    playEntryChime() {
+      try {
+        if (!this.audioCtx) this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+        // 528Hz (치유의 솔페지오 주파수) + 792Hz 따뜻한 화음
+        [528, 792, 1056].forEach((freq, idx) => {
+          const osc = this.audioCtx.createOscillator();
+          const gain = this.audioCtx.createGain();
+          osc.type = 'sine';
+          const start = this.audioCtx.currentTime + (idx * 0.07);
+          osc.frequency.setValueAtTime(freq, start);
+          gain.gain.setValueAtTime(0.05 / (idx + 1), start);
+          gain.gain.exponentialRampToValueAtTime(0.0001, start + 1.2);
+          osc.connect(gain);
+          gain.connect(this.audioCtx.destination);
+          osc.start(start);
+          osc.stop(start + 1.2);
+        });
+      } catch (e) {}
+    }
 
     initCursor() {
       if (!this.cursor || !this.cursorFollower) return;

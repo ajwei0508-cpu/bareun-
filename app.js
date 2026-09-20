@@ -172,14 +172,14 @@ class BareunClinicApp {
 
     const dismissIntro = () => {
       if (this.introSplash.classList.contains('leaving') || this.introSplash.style.display === 'none') return;
-      this.playClick();
+      this.playEntryChime();
       this.introSplash.classList.add('leaving');
       setTimeout(() => {
         this.introSplash.style.display = 'none';
         if (this.introVideo) {
           try { this.introVideo.pause(); } catch(e) {}
         }
-      }, 850);
+      }, 950);
     };
 
     // Clicking anywhere on the intro splash screen enters the main page
@@ -263,6 +263,31 @@ class BareunClinicApp {
 
   playSlide() {
     this.playTone(190, 0.08, 'triangle');
+  }
+
+  playEntryChime() {
+    try {
+      if (!this.audioCtx) {
+        this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (this.audioCtx.state === 'suspended') {
+        this.audioCtx.resume();
+      }
+      // 528Hz (치유의 솔페지오 주파수) + 792Hz 따뜻한 화음
+      [528, 792, 1056].forEach((freq, idx) => {
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
+        osc.type = 'sine';
+        const start = this.audioCtx.currentTime + (idx * 0.07);
+        osc.frequency.setValueAtTime(freq, start);
+        gain.gain.setValueAtTime(0.05 / (idx + 1), start);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 1.2);
+        osc.connect(gain);
+        gain.connect(this.audioCtx.destination);
+        osc.start(start);
+        osc.stop(start + 1.2);
+      });
+    } catch (e) {}
   }
 
   /* --------------------------------------------------------------------------
