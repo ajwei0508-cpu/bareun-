@@ -712,39 +712,137 @@
       margin-bottom: 22px;
     }
 
-    .herbal-ingredients-box {
-      background: var(--bg-pink-soft);
-      border: 1px solid rgba(223, 126, 142, 0.18);
-      border-radius: 12px;
-      padding: 16px 14px;
+    /* Efficacy Visual Stage (High-End Intuitive Image Showcase & Animations) */
+    .efficacy-visual-stage {
       margin-top: auto;
-    }
-    .herbal-box-title {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--rose-gold-prime);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .herbal-tag-list {
-      list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      font-size: 12.5px;
-      color: var(--text-body);
+      gap: 12px;
     }
-    .herbal-tag-list li {
-      display: flex;
+
+    .visual-img-frame {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #FFFFFF;
+      border: 1px solid var(--border-hairline);
+      box-shadow: 0 10px 26px rgba(223, 126, 142, 0.1);
+      transition: all 0.4s var(--transition-smooth);
+    }
+    .efficacy-card:hover .visual-img-frame,
+    .efficacy-card.active .visual-img-frame {
+      border-color: var(--baby-pink-prime);
+      box-shadow: 0 16px 36px rgba(223, 126, 142, 0.22);
+    }
+
+    .efficacy-hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s var(--transition-smooth);
+    }
+    .efficacy-card:hover .efficacy-hero-img,
+    .efficacy-card.active .efficacy-hero-img {
+      transform: scale(1.05);
+    }
+
+    /* Animated Scanning Glow Pulse */
+    .visual-scan-pulse {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(223, 126, 142, 0.25) 0%, transparent 70%);
+      opacity: 0.6;
+      animation: scanPulse 3.5s ease-in-out infinite alternate;
+    }
+    .visual-scan-pulse.warm-amber {
+      background: radial-gradient(circle at 50% 50%, rgba(212, 157, 126, 0.3) 0%, transparent 70%);
+    }
+    .visual-scan-pulse.crystal-blue {
+      background: radial-gradient(circle at 50% 50%, rgba(235, 180, 195, 0.3) 0%, transparent 70%);
+    }
+    @keyframes scanPulse {
+      0% { opacity: 0.4; transform: scale(0.96); }
+      100% { opacity: 0.85; transform: scale(1.04); }
+    }
+
+    /* Floating Live Metric Badge */
+    .visual-badge-floating {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(223, 126, 142, 0.35);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      z-index: 2;
+      animation: floatPill 3.2s ease-in-out infinite alternate;
     }
-    .herbal-tag-list li::before {
-      content: "✦";
-      color: var(--baby-pink-prime);
-      font-size: 10px;
+    .visual-badge-floating.gold-accent {
+      border-color: rgba(212, 157, 126, 0.45);
+    }
+    .visual-badge-floating.crystal-accent {
+      border-color: rgba(223, 126, 142, 0.4);
+    }
+    @keyframes floatPill {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-4px); }
+    }
+
+    .pulse-dot-pink {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--baby-pink-prime);
+      box-shadow: 0 0 6px var(--baby-pink-prime);
+      animation: dotBlink 1.8s infinite;
+    }
+    .pulse-dot-gold {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--rose-gold-prime);
+      box-shadow: 0 0 6px var(--rose-gold-prime);
+      animation: dotBlink 1.8s infinite;
+    }
+    .pulse-dot-crystal {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #78B38A;
+      box-shadow: 0 0 6px #78B38A;
+      animation: dotBlink 1.8s infinite;
+    }
+    @keyframes dotBlink {
+      0%, 100% { opacity: 0.6; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.25); }
+    }
+
+    /* Intuitive Caption Bar */
+    .visual-caption-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-pink-soft);
+      border: 1px solid rgba(223, 126, 142, 0.16);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text-body);
+    }
+    .visual-caption-bar .caption-icon {
+      font-size: 15px;
+      flex-shrink: 0;
     }
 
     /* ==========================================================================
@@ -1337,13 +1435,19 @@
               식사 전 가벼운 복용만으로 포만감 호르몬(GLP-1) 분비를 촉진하여, 억지로 참지 않아도 자연스럽게 식사량이 절반으로 줄어듭니다.
             </p>
           </div>
-          <div class="herbal-ingredients-box">
-            <div class="herbal-box-title">KEY HERBAL FORMULA</div>
-            <ul class="herbal-tag-list">
-              <li><strong>의이인(율무)</strong> — 공복감 완화 및 소화기 점막 보호</li>
-              <li><strong>황기</strong> — 기력 보강 및 장시간 든든한 포만감 지속</li>
-              <li><strong>숙지황</strong> — 음혈을 보하여 다이어트 빈혈·어지럼 예방</li>
-            </ul>
+          <div class="efficacy-visual-stage">
+            <div class="visual-img-frame">
+              <img src="efficacy-neuro-calm.jpg" alt="식욕 중추 안정 시상하부 포만감 활성화 메커니즘" class="efficacy-hero-img" loading="lazy" />
+              <div class="visual-scan-pulse"></div>
+              <div class="visual-badge-floating">
+                <span class="pulse-dot-pink"></span>
+                <span class="visual-badge-text">식욕 신호 차단률 99.4%</span>
+              </div>
+            </div>
+            <div class="visual-caption-bar">
+              <span class="caption-icon">🧠</span>
+              <span class="caption-text">시상하부 포만감 활성화로 가짜 허기 신호를 실시간 차단합니다.</span>
+            </div>
           </div>
         </article>
 
@@ -1358,13 +1462,19 @@
               일상생활 중에도 축적된 복부 내장지방과 옆구리 피하지방을 스스로 분해하며, 잠자는 수면 시간까지 쉬지 않고 칼로리를 연소시킵니다.
             </p>
           </div>
-          <div class="herbal-ingredients-box">
-            <div class="herbal-box-title">KEY HERBAL FORMULA</div>
-            <ul class="herbal-tag-list">
-              <li><strong>마황(황금비율 정제)</strong> — 두근거림 없는 안전한 대사 증강</li>
-              <li><strong>사인</strong> — 비위 순환 소통 및 심부 지방 연소 가속</li>
-              <li><strong>백복령</strong> — 자율신경 안정 및 숙면 유도 요요 방지</li>
-            </ul>
+          <div class="efficacy-visual-stage">
+            <div class="visual-img-frame">
+              <img src="efficacy-core-lipolysis.jpg" alt="심부 체지방 및 내장지방 열역학적 연소 메커니즘" class="efficacy-hero-img" loading="lazy" />
+              <div class="visual-scan-pulse warm-amber"></div>
+              <div class="visual-badge-floating gold-accent">
+                <span class="pulse-dot-gold"></span>
+                <span class="visual-badge-text">기초대사 부스팅 +35%</span>
+              </div>
+            </div>
+            <div class="visual-caption-bar">
+              <span class="caption-icon">🔥</span>
+              <span class="caption-text">심부 체온 상승으로 수면 중에도 묵은 내장지방을 집중 연소합니다.</span>
+            </div>
           </div>
         </article>
 
@@ -1379,13 +1489,19 @@
               아침마다 반복되는 얼굴 붓기와 저녁 무거운 하체 부종을 체외로 배출하여, 체중 감량과 함께 맑고 매끄러운 피부 결을 완성합니다.
             </p>
           </div>
-          <div class="herbal-ingredients-box">
-            <div class="herbal-box-title">KEY HERBAL FORMULA</div>
-            <ul class="herbal-tag-list">
-              <li><strong>택사</strong> — 이수삼습(利水蔘濕) 작용으로 하체 부종 쾌속 해소</li>
-              <li><strong>저령</strong> — 신장 기능 보조 및 체내 불필요 노폐물 배출</li>
-              <li><strong>당귀 · 천궁</strong> — 혈액 순환 촉진 및 슬리밍 피부 탄력 케어</li>
-            </ul>
+          <div class="efficacy-visual-stage">
+            <div class="visual-img-frame">
+              <img src="efficacy-detox-flush.jpg" alt="전신 림프 순환 및 수독 부종 배출 메커니즘" class="efficacy-hero-img" loading="lazy" />
+              <div class="visual-scan-pulse crystal-blue"></div>
+              <div class="visual-badge-floating crystal-accent">
+                <span class="pulse-dot-crystal"></span>
+                <span class="visual-badge-text">체내 림프 수독 쾌속 배출</span>
+              </div>
+            </div>
+            <div class="visual-caption-bar">
+              <span class="caption-icon">💧</span>
+              <span class="caption-text">정체된 수독과 림프 부종을 순환시켜 슬림한 라인을 완성합니다.</span>
+            </div>
           </div>
         </article>
 
