@@ -798,28 +798,6 @@
   transition: background 1.4s ease;
 }
 
-/* 하단 샴페인 골드 헤어라인 프로그레스 바 */
-.intro-progress-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.08);
-  z-index: 4;
-  pointer-events: none;
-  overflow: hidden;
-  transition: opacity 0.8s ease;
-}
-
-.intro-progress-fill {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #C2847A 0%, #D6A874 50%, #F5EFEB 100%);
-  box-shadow: 0 0 10px rgba(214, 168, 116, 0.85);
-  transition: width 0.15s linear;
-}
-
 /* --------------------------------------------------------------------------
    INTRO CONTENT: HIDDEN DURING VIDEO, BLOOMS AFTER VIDEO ENDS
    -------------------------------------------------------------------------- */
@@ -873,10 +851,6 @@
 .intro-splash.video-ended .intro-overlay-scrim {
   background: radial-gradient(ellipse at 50% 50%, rgba(20, 17, 15, 0.4) 0%, rgba(18, 15, 13, 0.76) 60%, rgba(12, 10, 9, 0.94) 100%),
               linear-gradient(180deg, rgba(194, 132, 122, 0.14) 0%, rgba(18, 15, 13, 0.65) 50%, rgba(12, 10, 9, 0.95) 100%);
-}
-
-.intro-splash.video-ended .intro-progress-bar {
-  opacity: 0;
 }
 
 .intro-splash.video-ended .intro-content {
@@ -1135,11 +1109,6 @@
         <source id="intro-video-src" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/Person_commuting_to_medical_clinic_20260919204253-1.mp4" type="video/mp4">
       </video>
       <div class="intro-overlay-scrim"></div>
-    </div>
-
-    <!-- 하단 샴페인 골드 프로그레스 바 (영상 진행 표시) -->
-    <div class="intro-progress-bar" aria-hidden="true">
-      <div id="intro-progress-fill" class="intro-progress-fill"></div>
     </div>
 
     <!-- 인트로 중앙 브랜드 & 예술적 타이포그래피 (영상 종료 시 애니메이션으로 등장) -->
@@ -1533,7 +1502,6 @@
       this.introEnterBtn = document.getElementById('intro-enter-btn');
       this.replayIntroBtn = document.getElementById('replay-intro-btn');
       this.drawerReplayIntroBtn = document.getElementById('drawer-replay-intro-btn');
-      this.introProgressFill = document.getElementById('intro-progress-fill');
 
       // 제스처 및 드래그 상태
       this.wasDragging = false;
@@ -1567,9 +1535,6 @@
         if (hasEnded) return;
         hasEnded = true;
         this.introSplash.classList.add('video-ended');
-        if (this.introProgressFill) {
-          this.introProgressFill.style.width = '100%';
-        }
       };
 
       // 동영상 소스 동적 URL 주입
@@ -1594,13 +1559,9 @@
       };
 
       if (this.introVideo) {
-        // 재생 진행률 업데이트 및 조기 fallback
+        // 영상 끝부분 도달 시 조기 fallback
         this.introVideo.addEventListener('timeupdate', () => {
           if (!hasEnded && this.introVideo.duration) {
-            const pct = Math.min(100, (this.introVideo.currentTime / this.introVideo.duration) * 100);
-            if (this.introProgressFill) {
-              this.introProgressFill.style.width = `${pct}%`;
-            }
             if (this.introVideo.currentTime >= this.introVideo.duration - 0.3) {
               showEndedState();
             }
@@ -1650,9 +1611,6 @@
         this.introSplash.style.display = 'flex';
         this.introSplash.classList.remove('video-ended');
         this.introSplash.classList.remove('leaving');
-        if (this.introProgressFill) {
-          this.introProgressFill.style.width = '0%';
-        }
         if (this.introVideo) {
           this.introVideo.currentTime = 0;
           this.introVideo.play().catch(() => {

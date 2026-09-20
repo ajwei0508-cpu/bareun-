@@ -141,7 +141,6 @@ class BareunClinicApp {
     this.introVideo = document.getElementById('intro-video');
     this.introEnterBtn = document.getElementById('intro-enter-btn');
     this.replayIntroBtn = document.getElementById('replay-intro-btn');
-    this.introProgressFill = document.getElementById('intro-progress-fill');
 
     // Gesture & Drag State
     this.wasDragging = false;
@@ -176,9 +175,6 @@ class BareunClinicApp {
       if (hasEnded) return;
       hasEnded = true;
       this.introSplash.classList.add('video-ended');
-      if (this.introProgressFill) {
-        this.introProgressFill.style.width = '100%';
-      }
     };
 
     const dismissIntro = () => {
@@ -195,14 +191,9 @@ class BareunClinicApp {
 
     // 비디오 이벤트 리스너 등록
     if (this.introVideo) {
-      // 재생 진행률 업데이트 및 조기 fallback
+      // 영상 끝부분 도달 시 조기 fallback
       this.introVideo.addEventListener('timeupdate', () => {
         if (!hasEnded && this.introVideo.duration) {
-          const pct = Math.min(100, (this.introVideo.currentTime / this.introVideo.duration) * 100);
-          if (this.introProgressFill) {
-            this.introProgressFill.style.width = `${pct}%`;
-          }
-          // 영상 끝부분(0.3초 전) 도달 시 자연스럽게 텍스트 등장
           if (this.introVideo.currentTime >= this.introVideo.duration - 0.3) {
             showEndedState();
           }
@@ -253,9 +244,6 @@ class BareunClinicApp {
         this.introSplash.classList.remove('video-ended');
         this.introSplash.classList.remove('leaving');
         this.introSplash.style.display = 'flex';
-        if (this.introProgressFill) {
-          this.introProgressFill.style.width = '0%';
-        }
         if (this.introVideo) {
           this.introVideo.currentTime = 0;
           this.introVideo.play().catch(() => {

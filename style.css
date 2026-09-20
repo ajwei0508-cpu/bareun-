@@ -216,28 +216,6 @@ html, body {
   transition: background 1.4s ease;
 }
 
-/* 하단 샴페인 골드 헤어라인 프로그레스 바 */
-.intro-progress-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.08);
-  z-index: 4;
-  pointer-events: none;
-  overflow: hidden;
-  transition: opacity 0.8s ease;
-}
-
-.intro-progress-fill {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #C2847A 0%, #D6A874 50%, #F5EFEB 100%);
-  box-shadow: 0 0 10px rgba(214, 168, 116, 0.85);
-  transition: width 0.15s linear;
-}
-
 /* --------------------------------------------------------------------------
    INTRO CONTENT: HIDDEN DURING VIDEO, BLOOMS AFTER VIDEO ENDS
    -------------------------------------------------------------------------- */
@@ -291,10 +269,6 @@ html, body {
 .intro-splash.video-ended .intro-overlay-scrim {
   background: radial-gradient(ellipse at 50% 50%, rgba(20, 17, 15, 0.4) 0%, rgba(18, 15, 13, 0.76) 60%, rgba(12, 10, 9, 0.94) 100%),
               linear-gradient(180deg, rgba(194, 132, 122, 0.14) 0%, rgba(18, 15, 13, 0.65) 50%, rgba(12, 10, 9, 0.95) 100%);
-}
-
-.intro-splash.video-ended .intro-progress-bar {
-  opacity: 0;
 }
 
 .intro-splash.video-ended .intro-content {
