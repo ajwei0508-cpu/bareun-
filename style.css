@@ -1015,7 +1015,7 @@ html, body {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Card Hover Interactive Cue: "살쪗으면 클릭해 ➔" */
+/* Card Hover Interactive Cue: "식욕 폭주 클릭 ➔" */
 .card-hover-cue {
   position: absolute;
   top: 50%;

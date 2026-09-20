@@ -420,9 +420,9 @@ class BareunClinicApp {
       ` : '';
 
       const hoverCueHtml = item.slug === 'appetite-zero' ? `
-        <div class="card-hover-cue" aria-label="살쪗으면 클릭해">
+        <div class="card-hover-cue" aria-label="식욕 폭주 클릭">
           <span class="cue-sparkle">✦</span>
-          <span class="cue-text">살쪗으면 클릭해</span>
+          <span class="cue-text">식욕 폭주 클릭</span>
           <span class="cue-arrow">➔</span>
         </div>
       ` : '';
