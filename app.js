@@ -444,6 +444,13 @@ class BareunClinicApp {
       // Click ANY card to immediately animate and open detail page (ignored if user was swiping)
       card.addEventListener('click', (e) => {
         if (this.wasDragging) return;
+        if (item.slug === 'appetite-zero') {
+          if (e.target.closest('.card-hover-cue') || this.currentIndex === index) {
+            this.playClick();
+            window.location.href = 'diet-zero.html';
+            return;
+          }
+        }
         this.updateProjectView(index);
         this.openProjectModal(item);
       });
@@ -706,6 +713,14 @@ class BareunClinicApp {
       heroImgStyle = 'object-fit: contain; max-height: 380px; width: auto; padding: 12px 0;';
     }
 
+    const isZero = item.slug === 'appetite-zero';
+    const zeroLandingBtnHtml = isZero ? `
+      <a href="diet-zero.html" class="modal-cta-btn modal-cta-accent" style="background: linear-gradient(135deg, #1C1917 0%, #382A24 100%); color: #F5EFEB; font-weight: 700; border: 1px solid rgba(197, 160, 89, 0.4); box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; text-decoration: none; width: 100%;">
+        <span>✨ 식욕 ZERO 시네마틱 상세페이지 & 결제창 바로가기</span>
+        <span style="color: var(--accent-gold);">➔</span>
+      </a>
+    ` : '';
+
     this.modalContent.innerHTML = `
       <div style="background: ${heroBg}; display: flex; justify-content: center; align-items: center; overflow: hidden; height: 380px;">
         <img class="modal-hero-img" src="${item.image}" alt="${item.title}" style="${heroImgStyle}" />
@@ -729,13 +744,16 @@ class BareunClinicApp {
           </ul>
         </div>
 
-        <div class="modal-cta-group">
-          <a href="${item.primaryLink}" target="_blank" rel="noopener noreferrer" class="modal-cta-btn modal-cta-primary">
-            ${item.primaryText} ↗
-          </a>
-          <a href="${item.secondaryLink}" target="_blank" rel="noopener noreferrer" class="modal-cta-btn modal-cta-secondary">
-            ${item.secondaryText} ↗
-          </a>
+        <div class="modal-cta-group" style="${isZero ? 'flex-direction: column; gap: 10px;' : ''}">
+          ${zeroLandingBtnHtml}
+          <div style="display: flex; gap: 12px; width: 100%;">
+            <a href="${item.primaryLink}" target="_blank" rel="noopener noreferrer" class="modal-cta-btn modal-cta-primary" style="flex: 1;">
+              ${item.primaryText} ↗
+            </a>
+            <a href="${item.secondaryLink}" target="_blank" rel="noopener noreferrer" class="modal-cta-btn modal-cta-secondary" style="flex: 1;">
+              ${item.secondaryText} ↗
+            </a>
+          </div>
         </div>
       </div>
     `;

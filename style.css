@@ -1063,6 +1063,8 @@ html, body {
 
 .project-card:hover .card-hover-cue {
   opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
   transform: translate(-50%, -50%) scale(1);
   animation: cueFloatPulse 2.2s ease-in-out infinite;
 }
