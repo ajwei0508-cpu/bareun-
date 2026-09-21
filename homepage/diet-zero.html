@@ -303,44 +303,39 @@
       font-weight: 700;
     }
 
-    /* Kinetic Core Pillars */
-    .kinetic-pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 36px;
-    }
-    .pillar-card {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
+    /* Editorial Luxury Feature Ribbon (Refined & Minimalist) */
+    .hero-editorial-feature {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 38px;
+      padding: 12px 22px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border-hairline);
-      padding: 16px 14px;
-      border-radius: 14px;
-      transition: all 0.3s var(--transition-smooth);
-      box-shadow: 0 6px 20px rgba(223, 126, 142, 0.06);
+      border-radius: 40px;
+      box-shadow: 0 8px 24px rgba(223, 126, 142, 0.08);
+      flex-wrap: wrap;
     }
-    .pillar-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--baby-pink-prime);
-      box-shadow: 0 12px 28px rgba(223, 126, 142, 0.18);
+    .feature-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13.5px;
+      color: var(--text-body);
     }
-    .pillar-num {
-      font-family: var(--font-mono);
+    .feature-bullet {
+      color: var(--rose-gold-prime);
       font-size: 11px;
-      color: var(--baby-pink-prime);
-      font-weight: 700;
-      margin-bottom: 4px;
     }
-    .pillar-title {
-      font-size: 14px;
-      font-weight: 700;
+    .feature-item strong {
       color: var(--text-dark);
-      margin-bottom: 3px;
+      font-weight: 700;
     }
-    .pillar-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.45;
+    .feature-sep {
+      color: rgba(223, 126, 142, 0.35);
+      font-size: 13px;
     }
 
     .hero-cta-zone {
@@ -658,8 +653,8 @@
     .efficacy-card {
       background: #FFFFFF;
       border: 1.5px solid var(--border-hairline);
-      border-radius: 22px;
-      padding: 34px 26px;
+      border-radius: 24px;
+      padding: 36px 28px;
       position: relative;
       transition: all 0.35s var(--transition-smooth);
       box-shadow: 0 12px 32px rgba(223, 126, 142, 0.08);
@@ -729,8 +724,8 @@
     .visual-img-frame {
       position: relative;
       width: 100%;
-      height: 220px;
-      border-radius: 16px;
+      height: 236px;
+      border-radius: 18px;
       overflow: hidden;
       background: #FFFFFF;
       border: 1px solid var(--border-hairline);
@@ -1338,130 +1333,121 @@
     }
 
     /* ==========================================================================
-       SECTION 3: SENSUAL SANCTUARY (스위스 에디토리얼 비대면 1:1 진료 플로우)
+       SECTION 3: SENSUAL SANCTUARY (시네마틱 비대면 진료 컨시어지 스위트)
        ========================================================================== */
     .sanctuary-section {
-      padding: 100px 0;
+      padding: 90px 0;
       position: relative;
     }
 
-    /* 4-Step Interactive Telemedicine Track */
-    .tele-flow-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-bottom: 60px;
-    }
-    .flow-step-card {
+    .concierge-cinema-suite {
       background: #FFFFFF;
-      border: 1px solid var(--border-hairline);
-      border-radius: 18px;
-      padding: 28px 22px;
-      position: relative;
-      transition: all 0.35s var(--transition-smooth);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .flow-step-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--baby-pink-prime);
-      box-shadow: 0 18px 38px rgba(223, 126, 142, 0.18);
-    }
-    .step-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-    .step-number {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--baby-pink-prime);
-      background: var(--baby-pink-light);
-      padding: 4px 10px;
-      border-radius: 12px;
-    }
-    .step-icon {
-      font-size: 22px;
-    }
-    .step-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
-    }
-    .step-desc {
-      font-size: 13.5px;
-      color: var(--text-body);
-      line-height: 1.65;
-    }
-
-    /* 4-Step Process & Delivery Cinema Showcase (Under Steps 1-4) */
-    .tele-video-showcase {
-      margin-top: -10px;
-      margin-bottom: 50px;
-      background: linear-gradient(180deg, #FFFFFF 0%, #FFF8F9 100%);
-      border: 1px solid rgba(223, 126, 142, 0.35);
-      border-radius: 24px;
-      padding: 36px 32px 32px;
-      box-shadow: 0 16px 45px rgba(223, 126, 142, 0.10);
+      border: 1.5px solid rgba(223, 126, 142, 0.28);
+      border-radius: 28px;
+      padding: 40px 36px 32px;
+      box-shadow: 0 20px 50px rgba(223, 126, 142, 0.08);
       position: relative;
       overflow: hidden;
+      max-width: 1040px;
+      margin: 0 auto;
     }
-    .tele-video-showcase::before {
+    .concierge-cinema-suite::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #DF7E8E, #EAA6B1, #DF7E8E);
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--baby-pink-prime), var(--rose-gold-champagne), var(--baby-pink-prime));
     }
-    .tele-video-header {
-      text-align: center;
-      max-width: 680px;
-      margin: 0 auto 24px;
-    }
-    .tele-video-badge {
-      display: inline-flex;
+
+    /* 4-Step Timeline Bar */
+    .concierge-steps-bar {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 6px;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--bg-pink-soft);
+      border: 1px solid rgba(223, 126, 142, 0.18);
+      border-radius: 18px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .concierge-step-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 180px;
+    }
+    .step-badge-num {
       font-family: var(--font-mono);
-      font-size: 11.5px;
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--baby-pink-prime);
-      background: var(--baby-pink-light);
-      padding: 5px 14px;
-      border-radius: 20px;
-      margin-bottom: 12px;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, var(--baby-pink-prime) 0%, var(--baby-pink-deep) 100%);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(223, 126, 142, 0.35);
     }
-    .tele-video-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--text-dark);
-      letter-spacing: -0.025em;
-      margin-bottom: 8px;
+    .step-text-wrap {
+      display: flex;
+      flex-direction: column;
     }
-    .tele-video-desc {
+    .step-mini-title {
       font-size: 14.5px;
-      color: var(--text-body);
-      line-height: 1.6;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin: 0 0 2px 0;
+    }
+    .step-mini-desc {
+      font-size: 12px;
+      color: var(--text-muted);
       margin: 0;
     }
+    .step-flow-arrow {
+      color: rgba(212, 157, 126, 0.45);
+      font-size: 14px;
+      user-select: none;
+    }
+
+    /* Cinema Video Stage */
+    .tele-video-frame-wrap {
+      margin-bottom: 28px;
+    }
+    .video-meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .video-live-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--baby-pink-deep);
+      background: var(--baby-pink-light);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .video-sub-tag {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
     .tele-video-frame {
-      max-width: 960px;
-      margin: 0 auto;
+      width: 100%;
       border-radius: 16px;
       overflow: hidden;
       background: #000000;
-      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.16);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
       border: 1px solid rgba(223, 126, 142, 0.25);
-      position: relative;
     }
     .tele-video-frame video {
       width: 100%;
@@ -1471,72 +1457,50 @@
       object-fit: cover;
       background: #000000;
     }
-    .tele-video-footer {
+
+    /* Minimal Frosted Trust Ribbon */
+    .concierge-trust-ribbon {
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
-      gap: 16px;
-      margin-top: 16px;
-      flex-wrap: wrap;
-    }
-    .tele-video-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--text-muted);
+      padding: 16px 20px;
       background: #FFFFFF;
       border: 1px solid var(--border-hairline);
-      padding: 6px 14px;
-      border-radius: 20px;
+      border-radius: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .step-card-footer {
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 1px dashed var(--border-hairline);
+    .trust-stat-item {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
     }
-    .step-footer-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 12px;
-      font-weight: 600;
+    .trust-stat-item .stat-num {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+    }
+    .trust-stat-item .stat-num span {
+      color: var(--baby-pink-prime);
+      font-size: 15px;
+    }
+    .trust-stat-item .stat-label {
+      font-size: 12.5px;
       color: var(--text-muted);
-      background: #F9F6F7;
-      padding: 5px 10px;
-      border-radius: 8px;
+      font-weight: 600;
+    }
+    .trust-sep {
+      color: rgba(223, 126, 142, 0.25);
+      font-size: 14px;
     }
 
-    /* Trust Data Proof Strip */
-    .trust-strip {
-      background: #FFFFFF;
-      border: 1px solid var(--border-hairline);
-      border-radius: 20px;
-      padding: 32px 40px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      text-align: center;
-      box-shadow: 0 16px 40px rgba(223, 126, 142, 0.08);
-    }
-    .trust-metric-num {
-      font-family: var(--font-mono);
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--text-dark);
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 6px;
-    }
-    .trust-metric-num span {
-      color: var(--baby-pink-prime);
-      font-size: 24px;
-    }
-    .trust-metric-label {
-      font-size: 13px;
-      color: var(--text-muted);
-      font-weight: 600;
+    @media (max-width: 900px) {
+      .concierge-cinema-suite { padding: 24px 18px; }
+      .step-flow-arrow { display: none; }
+      .trust-sep { display: none; }
+      .concierge-trust-ribbon { justify-content: space-between; gap: 16px; }
     }
 
     /* ==========================================================================
@@ -3265,22 +3229,21 @@
             기초 대사율을 끌어올려 잠자는 시간까지 <strong>체지방을 스스로 연소</strong>시킵니다.
           </p>
 
-          <!-- 3 Kinetic Pillars -->
-          <div class="kinetic-pillars">
-            <div class="pillar-card">
-              <div class="pillar-num">01 / NEURO-CALM</div>
-              <div class="pillar-title">식욕 중추 안정</div>
-              <div class="pillar-sub">포만감 호르몬 분비 & 가짜 식탐 즉각 차단</div>
+          <!-- Editorial Luxury Feature Ribbon (Subtle & Elegant, No Clutter) -->
+          <div class="hero-editorial-feature">
+            <div class="feature-item">
+              <span class="feature-bullet">✦</span>
+              <span class="feature-text"><strong>식욕 중추 안정</strong></span>
             </div>
-            <div class="pillar-card">
-              <div class="pillar-num">02 / LIPOLYSIS</div>
-              <div class="pillar-title">심부 체지방 분해</div>
-              <div class="pillar-sub">유산소 운동 2시간 효과의 기초대사 부스팅</div>
+            <div class="feature-sep">·</div>
+            <div class="feature-item">
+              <span class="feature-bullet">✦</span>
+              <span class="feature-text"><strong>심부 체지방 분해</strong></span>
             </div>
-            <div class="pillar-card">
-              <div class="pillar-num">03 / DETOX</div>
-              <div class="pillar-title">붓기 & 독소 완화</div>
-              <div class="pillar-sub">림프 순환 활성화 및 부종 수분 쾌속 배출</div>
+            <div class="feature-sep">·</div>
+            <div class="feature-item">
+              <span class="feature-bullet">✦</span>
+              <span class="feature-text"><strong>수독 부종 완화</strong></span>
             </div>
           </div>
 
@@ -3326,14 +3289,14 @@
             <div class="plinth-shadow"></div>
           </div>
 
-          <!-- Floating Interactive Hotspots -->
+          <!-- Floating Interactive Micro Pins -->
           <div class="kinetic-hotspot hotspot-1">
-            <span class="hotspot-icon">🌸</span>
-            <span>간편한 슬림 스틱 파우치 · 가방 쏙 휴대</span>
+            <span class="hotspot-icon">✦</span>
+            <span>간편한 슬림 스틱 휴대</span>
           </div>
           <div class="kinetic-hotspot hotspot-2">
-            <span class="hotspot-icon">✨</span>
-            <span>목넘김 편한 무취·무미 미세환 제형</span>
+            <span class="hotspot-icon">✦</span>
+            <span>목넘김 편한 무취 미세환</span>
           </div>
         </div>
 
@@ -3529,104 +3492,85 @@
         </p>
       </div>
 
-      <!-- 4-Step Interactive Flow -->
-      <div class="tele-flow-grid">
-        <div class="flow-step-card">
-          <div>
-            <div class="step-header">
-              <span class="step-number">STEP 01</span>
-              <span class="step-icon">📝</span>
+      <!-- Unified Cinematic Telemedicine Concierge Suite -->
+      <div class="concierge-cinema-suite">
+        
+        <!-- Part 1: Connected 4-Step Flow Bar (Horizontal Timeline) -->
+        <div class="concierge-steps-bar">
+          <div class="concierge-step-item">
+            <span class="step-badge-num">01</span>
+            <div class="step-text-wrap">
+              <h4 class="step-mini-title">온라인 설문</h4>
+              <p class="step-mini-desc">1분 간편 체질 접수</p>
             </div>
-            <h3 class="step-title">온라인 체질 설문</h3>
-            <p class="step-desc">1분 간단 설문으로 현재 체중, 식습관, 건강 고민 및 복용 이력을 접수합니다.</p>
           </div>
-          <div class="step-card-footer">
-            <span class="step-footer-pill">⏱️ 1분 간편 설문</span>
-          </div>
-        </div>
+          <div class="step-flow-arrow">➔</div>
 
-        <div class="flow-step-card">
-          <div>
-            <div class="step-header">
-              <span class="step-number">STEP 02</span>
-              <span class="step-icon">📞</span>
+          <div class="concierge-step-item">
+            <span class="step-badge-num">02</span>
+            <div class="step-text-wrap">
+              <h4 class="step-mini-title">원장 1:1 전화 진료</h4>
+              <p class="step-mini-desc">대표원장 직접 상담</p>
             </div>
-            <h3 class="step-title">원장 1:1 전화 진료</h3>
-            <p class="step-desc">대표원장이 직접 전화로 체질과 기저질환을 정밀 감별하여 맞춤 단계를 처방합니다.</p>
           </div>
-          <div class="step-card-footer">
-            <span class="step-footer-pill">🩺 대표원장 1:1 진료</span>
-          </div>
-        </div>
+          <div class="step-flow-arrow">➔</div>
 
-        <div class="flow-step-card">
-          <div>
-            <div class="step-header">
-              <span class="step-number">STEP 03</span>
-              <span class="step-icon">🌿</span>
+          <div class="concierge-step-item">
+            <span class="step-badge-num">03</span>
+            <div class="step-text-wrap">
+              <h4 class="step-mini-title">원내 맞춤 탕전</h4>
+              <p class="step-mini-desc">식약처 인증 정품 약재</p>
             </div>
-            <h3 class="step-title">원내 직접 맞춤 조제</h3>
-            <p class="step-desc">식약처 규격품 한약재만을 고집하여 두근거림과 메스꺼움을 최소화해 원내 조제합니다.</p>
           </div>
-          <div class="step-card-footer">
-            <span class="step-footer-pill">🌱 100% 원내 탕전</span>
-          </div>
-        </div>
+          <div class="step-flow-arrow">➔</div>
 
-        <div class="flow-step-card">
-          <div>
-            <div class="step-header">
-              <span class="step-number">STEP 04</span>
-              <span class="step-icon">📦</span>
+          <div class="concierge-step-item">
+            <span class="step-badge-num">04</span>
+            <div class="step-text-wrap">
+              <h4 class="step-mini-title">안심 특급 배송</h4>
+              <p class="step-mini-desc">우체국/CJ 전국 직배송</p>
             </div>
-            <h3 class="step-title">안심 특급 택배 배송</h3>
-            <p class="step-desc">우체국/CJ 안심 택배로 안전하고 신속하게 환자분 집 앞까지 당일/익일 수령됩니다.</p>
-          </div>
-          <div class="step-card-footer">
-            <span class="step-footer-pill">🚀 우체국/CJ 안심 직배송</span>
           </div>
         </div>
-      </div>
 
-      <!-- 4-Step Process & Delivery Cinema Showcase (스탭 1234 하단 와이드 비디오) -->
-      <div class="tele-video-showcase">
-        <div class="tele-video-header">
-          <span class="tele-video-badge">🎬 PROGRAM & DELIVERY GUIDE FILM</span>
-          <h3 class="tele-video-title">식욕 ZERO 비대면 1:1 처방 & 안심 택배 배송 안내 영상</h3>
+        <!-- Part 2: Widescreen Cinema Film Stage -->
+        <div class="tele-video-frame-wrap">
+          <div class="video-meta-top">
+            <span class="video-live-tag">🎬 PROGRAM & DELIVERY GUIDE FILM</span>
+            <span class="video-sub-tag">식욕 ZERO 비대면 1:1 처방 & 안심 배송 가이드 영상</span>
+          </div>
+          <div class="tele-video-frame">
+            <video controls playsinline preload="metadata" poster="http://bareunhaniwon.com/wp-content/uploads/2026/09/식욕제로.jpg">
+              <source src="https://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8_%EC%95%88%EB%82%B4_%EC%98%81%EC%83%81_%EC%A0%9C%EC%9E%91_20260921140439.mp4" type="video/mp4">
+              <source src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8_%EC%95%88%EB%82%B4_%EC%98%81%EC%83%81_%EC%A0%9C%EC%9E%91_20260921140439.mp4" type="video/mp4">
+              브라우저가 비디오 재생을 지원하지 않습니다.
+            </video>
+          </div>
         </div>
-        <div class="tele-video-frame">
-          <video controls playsinline preload="metadata">
-            <source src="https://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8_%EC%95%88%EB%82%B4_%EC%98%81%EC%83%81_%EC%A0%9C%EC%9E%91_20260921140439.mp4" type="video/mp4">
-            <source src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8_%EC%95%88%EB%82%B4_%EC%98%81%EC%83%81_%EC%A0%9C%EC%9E%91_20260921140439.mp4" type="video/mp4">
-            <source src="http://bareunhaniwon.com/wp-content/uploads/2026/09/다이어트_프로그램_안내_영상_제작_20260921140439.mp4" type="video/mp4">
-            브라우저가 비디오 재생을 지원하지 않습니다.
-          </video>
-        </div>
-        <div class="tele-video-footer">
-          <span class="tele-video-pill">✓ 전국 어디서나 비대면 처방</span>
-          <span class="tele-video-pill">✓ 대표원장 1:1 직접 전화 상담</span>
-          <span class="tele-video-pill">✓ 우체국/CJ 안심 특급 배송</span>
-        </div>
-      </div>
 
-      <!-- Trust Data Strip -->
-      <div class="trust-strip">
-        <div class="trust-item">
-          <div class="trust-metric-num">52,000<span>+</span></div>
-          <div class="trust-metric-label">누적 비대면 처방 건수</div>
+        <!-- Part 3: Slim Frosted Trust Metrics Ribbon -->
+        <div class="concierge-trust-ribbon">
+          <div class="trust-stat-item">
+            <strong class="stat-num">52,000<span>+</span></strong>
+            <span class="stat-label">누적 비대면 처방</span>
+          </div>
+          <div class="trust-sep">|</div>
+          <div class="trust-stat-item">
+            <strong class="stat-num">98.6<span>%</span></strong>
+            <span class="stat-label">치료 만족도</span>
+          </div>
+          <div class="trust-sep">|</div>
+          <div class="trust-stat-item">
+            <strong class="stat-num">100<span>%</span></strong>
+            <span class="stat-label">식약처 인증 정품 약재</span>
+          </div>
+          <div class="trust-sep">|</div>
+          <div class="trust-stat-item">
+            <strong class="stat-num">1:1<span>케어</span></strong>
+            <span class="stat-label">요요방지 코칭</span>
+          </div>
         </div>
-        <div class="trust-item">
-          <div class="trust-metric-num">98.6<span>%</span></div>
-          <div class="trust-metric-label">환자 치료 만족도</div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-metric-num">100<span>%</span></div>
-          <div class="trust-metric-label">식약처 인증 정품 약재</div>
-        </div>
-        <div class="trust-item">
-          <div class="trust-metric-num">1:1<span>케어</span></div>
-          <div class="trust-metric-label">감량 후 요요방지 코칭</div>
-        </div>
+
       </div>
 
     </div>
