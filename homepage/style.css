@@ -923,22 +923,22 @@ html, body {
 
 /* Gongjindan Card Custom Fit Styling */
 .gongjindan-card {
-  background-color: #2E1911 !important;
+  background-color: #FAF8F5 !important;
   border-color: rgba(192, 154, 103, 0.45) !important;
 }
 
 .gongjindan-wrap {
-  background: #2E1911 !important;
+  background: #FAF8F5 !important;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .gongjindan-img {
-  object-fit: contain !important;
+  object-fit: cover !important;
   width: 100% !important;
   height: 100% !important;
-  padding: 6px 0;
+  padding: 0 !important;
   transition: transform 0.6s var(--transition-smooth);
 }
 
@@ -946,16 +946,11 @@ html, body {
   transform: scale(1.05);
 }
 
-/* Hide duplicate title in card overlay since gongjindan artwork already has the title text */
-.gongjindan-card .card-meta-bottom .card-title {
-  display: none;
-}
 .gongjindan-card .card-meta-bottom .card-subtitle {
-  color: #C09A67 !important;
+  color: #E2C2A4 !important;
   font-weight: 600;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
+  font-size: 12px;
+  letter-spacing: 0.02em;
 }
 
 .card-overlay {

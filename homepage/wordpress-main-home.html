@@ -950,22 +950,22 @@ html, body {
 
 /* Gongjindan Card Custom Fit Styling */
 .gongjindan-card {
-  background-color: #2E1911 !important;
+  background-color: #FAF8F5 !important;
   border-color: rgba(192, 154, 103, 0.45) !important;
 }
 
 .gongjindan-wrap {
-  background: #2E1911 !important;
+  background: #FAF8F5 !important;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .gongjindan-img {
-  object-fit: contain !important;
+  object-fit: cover !important;
   width: 100% !important;
   height: 100% !important;
-  padding: 6px 0;
+  padding: 0 !important;
   transition: transform 0.6s var(--transition-smooth);
 }
 
@@ -973,16 +973,11 @@ html, body {
   transform: scale(1.05);
 }
 
-/* Hide duplicate title in card overlay since gongjindan artwork already has the title text */
-.gongjindan-card .card-meta-bottom .card-title {
-  display: none;
-}
 .gongjindan-card .card-meta-bottom .card-subtitle {
-  color: #C09A67 !important;
+  color: #E2C2A4 !important;
   font-weight: 600;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
+  font-size: 12px;
+  letter-spacing: 0.02em;
 }
 
 .card-overlay {
@@ -2373,7 +2368,7 @@ const CLINIC_PROGRAMS = [
     year: "MASTERPIECE",
     awards: "황제를 위한 특허받은 공진단 · 식약처 CITES 정품 사향 100% · 99.9% 순금박 수제 제환",
     description: "장인의 손끝에서 피어나는 천년의 건강. 엄격한 CITES 정품 사향 인증을 거친 최고급 약재만을 선별하여 대전본점 원장이 직접 한 알 한 알 정성으로 빚어내는 궁극의 명작입니다.",
-    image: "gongjindan.png",
+    image: "http://bareunhaniwon.com/wp-content/uploads/2026/09/image.png_20260921230913.jpeg",
     details: [
       "✓ 식약처 CITES 공인 정품 천연 사향 시험성적서 및 품질 보증서 동봉",
       "✓ 최상급 러시아산 원용 분골(녹용 최고 부위) 황금 비율 배합",
@@ -3045,7 +3040,7 @@ class BareunClinicApp {
       heroBg = 'linear-gradient(180deg, #EBE5DF 0%, #D8CFC7 100%)';
       heroImgStyle = 'object-fit: contain; max-height: 380px; width: auto;';
     } else if (isGongjindan) {
-      heroBg = '#2E1911';
+      heroBg = '#FAF8F5';
       heroImgStyle = 'object-fit: contain; max-height: 380px; width: auto; padding: 12px 0;';
     }
 

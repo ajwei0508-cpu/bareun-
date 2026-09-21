@@ -43,7 +43,7 @@ const CLINIC_PROGRAMS = [
     year: "MASTERPIECE",
     awards: "황제를 위한 특허받은 공진단 · 식약처 CITES 정품 사향 100% · 99.9% 순금박 수제 제환",
     description: "장인의 손끝에서 피어나는 천년의 건강. 엄격한 CITES 정품 사향 인증을 거친 최고급 약재만을 선별하여 대전본점 원장이 직접 한 알 한 알 정성으로 빚어내는 궁극의 명작입니다.",
-    image: "gongjindan.png",
+    image: "http://bareunhaniwon.com/wp-content/uploads/2026/09/image.png_20260921230913.jpeg",
     details: [
       "✓ 식약처 CITES 공인 정품 천연 사향 시험성적서 및 품질 보증서 동봉",
       "✓ 최상급 러시아산 원용 분골(녹용 최고 부위) 황금 비율 배합",
@@ -734,7 +734,7 @@ class BareunClinicApp {
       heroBg = 'linear-gradient(180deg, #EBE5DF 0%, #D8CFC7 100%)';
       heroImgStyle = 'object-fit: contain; max-height: 380px; width: auto;';
     } else if (isGongjindan) {
-      heroBg = '#2E1911';
+      heroBg = '#FAF8F5';
       heroImgStyle = 'object-fit: contain; max-height: 380px; width: auto; padding: 12px 0;';
     }
 
