@@ -21,6 +21,8 @@ const server = http.createServer((req, res) => {
     reqPath = '/index.html';
   } else if (reqPath === '/diet-zero' || reqPath === '/diet-zero/') {
     reqPath = '/diet-zero.html';
+  } else if (reqPath === '/gongjindan' || reqPath === '/gongjindan/') {
+    reqPath = '/gongjindan.html';
   }
   let filePath = path.join(__dirname, reqPath);
   const ext = path.extname(filePath).toLowerCase();

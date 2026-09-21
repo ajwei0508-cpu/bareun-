@@ -951,7 +951,7 @@ html, body {
 /* Gongjindan Card Custom Fit Styling */
 .gongjindan-card {
   background-color: #FAF8F5 !important;
-  border-color: rgba(192, 154, 103, 0.45) !important;
+  border-color: rgba(192, 154, 103, 0.5) !important;
 }
 
 .gongjindan-wrap {
@@ -959,18 +959,23 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  position: relative;
 }
 
+/* 황제공진단 카드 이미지: 카드보다 크기 때문에 30% 축소하여 100% 온전하게 여백 배치 */
 .gongjindan-img {
-  object-fit: cover !important;
+  object-fit: contain !important;
   width: 100% !important;
   height: 100% !important;
   padding: 0 !important;
-  transition: transform 0.6s var(--transition-smooth);
+  transform: scale(0.7) !important;
+  transform-origin: center center;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .project-card:hover .gongjindan-img {
-  transform: scale(1.05);
+  transform: scale(0.74) !important;
 }
 
 .gongjindan-card .card-meta-bottom .card-subtitle {
@@ -978,6 +983,262 @@ html, body {
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 0.02em;
+}
+
+/* 카드 상단 전통 진품(眞品) 한자 붉은 낙관 도장 */
+.gongjin-seal-stamp {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 12px rgba(184, 46, 36, 0.35));
+  transform: rotate(-3deg);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
+}
+
+.project-card:hover .gongjin-seal-stamp {
+  transform: rotate(0deg) scale(1.08);
+  filter: drop-shadow(0 6px 18px rgba(184, 46, 36, 0.55));
+}
+
+.seal-box {
+  width: 44px;
+  height: 52px;
+  background: linear-gradient(135deg, #B82E24 0%, #8C1C14 100%);
+  border: 2px solid #E5C378;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.seal-box::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1px dashed rgba(229, 195, 120, 0.5);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.seal-char {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1.15;
+  color: #FFF8EE;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.05em;
+}
+
+.seal-ribbon {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #E5C378;
+  background: rgba(28, 19, 14, 0.88);
+  backdrop-filter: blur(8px);
+  padding: 2px 6px;
+  border-radius: 10px;
+  border: 1px solid rgba(229, 195, 120, 0.4);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* 황제공진단 예약 즉시 조제 시네마틱 애니메이션 오버레이 */
+.craft-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(circle at center, rgba(32, 20, 14, 0.96) 0%, rgba(14, 9, 6, 0.98) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.4s;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.craft-transition-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.craft-center-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 520px;
+  padding: 0 24px;
+}
+
+.craft-seal-wrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 24px;
+}
+
+.craft-giant-seal {
+  width: 96px;
+  height: 96px;
+  background: linear-gradient(135deg, #B82E24 0%, #7D120B 100%);
+  border: 3px solid #E5C378;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16px 40px rgba(184, 46, 36, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.4);
+  transform: scale(2.5) rotate(-15deg);
+  opacity: 0;
+}
+
+.craft-transition-overlay.is-active .craft-giant-seal {
+  animation: craftStampDrop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.15s forwards;
+}
+
+@keyframes craftStampDrop {
+  0% {
+    transform: scale(2.5) rotate(-15deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(0.95) rotate(2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.craft-giant-seal .seal-char {
+  font-size: 32px;
+  line-height: 1.1;
+  color: #FFF9F2;
+}
+
+.craft-seal-shockwave {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 2px solid rgba(229, 195, 120, 0.8);
+  opacity: 0;
+}
+
+.craft-transition-overlay.is-active .craft-seal-shockwave {
+  animation: craftShockwave 0.8s ease-out 0.45s forwards;
+}
+
+@keyframes craftShockwave {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.craft-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(229, 195, 120, 0.12);
+  border: 1px solid rgba(229, 195, 120, 0.35);
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: #E5C378;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.craft-main-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: #FFF5EC;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.craft-main-desc {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #D6C7BC;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.craft-progress-track {
+  width: 240px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  opacity: 0;
+}
+
+.craft-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #E5C378, #B82E24);
+  transition: width 1s linear;
+}
+
+.craft-skip-cue {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-mono);
+  letter-spacing: 0.03em;
+  opacity: 0;
+}
+
+.craft-transition-overlay.is-active .craft-meta-badge {
+  animation: craftFadeUp 0.5s ease-out 0.35s forwards;
+}
+.craft-transition-overlay.is-active .craft-main-title {
+  animation: craftFadeUp 0.5s ease-out 0.45s forwards;
+}
+.craft-transition-overlay.is-active .craft-main-desc {
+  animation: craftFadeUp 0.5s ease-out 0.55s forwards;
+}
+.craft-transition-overlay.is-active .craft-progress-track,
+.craft-transition-overlay.is-active .craft-skip-cue {
+  animation: craftFadeUp 0.5s ease-out 0.65s forwards;
+}
+
+@keyframes craftFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card-overlay {
@@ -2334,6 +2595,12 @@ const GET_DIET_ZERO_URL = () => {
     : '/diet-zero/';
 };
 
+const GET_GONGJINDAN_URL = () => {
+  return (window.location.protocol === 'file:' || window.location.pathname.endsWith('.html'))
+    ? 'gongjindan.html'
+    : '/gongjindan/';
+};
+
 const CLINIC_PROGRAMS = [
   {
     id: "00",
@@ -2362,6 +2629,7 @@ const CLINIC_PROGRAMS = [
     id: "01",
     slug: "gongjindan",
     title: "황제 공진단",
+    badge: "특허 제10-1744704호",
     subtitle: "식약처 정품 사향 100% 인증 · 원내 직접 제환",
     client: "원기 회복 & 면역력 강화 명약",
     role: "황실 전통 비방 · 최고급 원방 사향 공진단",
@@ -2750,17 +3018,34 @@ class BareunClinicApp {
         </div>
       ` : '';
 
+      const sealHtml = isGongjindan ? `
+        <div class="gongjin-seal-stamp" title="식약처 CITES 공인 정품 사향 眞品 인증">
+          <div class="seal-box">
+            <span class="seal-char">眞</span>
+            <span class="seal-char">品</span>
+          </div>
+          <span class="seal-ribbon">特許 10-1744704</span>
+        </div>
+      ` : '';
+
       const hoverCueHtml = item.slug === 'appetite-zero' ? `
         <div class="card-hover-cue" aria-label="식욕 폭주 클릭">
           <span class="cue-sparkle">✦</span>
           <span class="cue-text">식욕 폭주 클릭</span>
           <span class="cue-arrow">➔</span>
         </div>
-      ` : '';
+      ` : (item.slug === 'gongjindan' ? `
+        <div class="card-hover-cue gongjin-cue" aria-label="황제공진단 상세">
+          <span class="cue-sparkle">✦</span>
+          <span class="cue-text">황제공진단 상세</span>
+          <span class="cue-arrow">➔</span>
+        </div>
+      ` : '');
 
       card.innerHTML = `
         <div class="${wrapClass}">
           <img class="${imgClass}" src="${item.image}" alt="${item.title}" loading="lazy" />
+          ${sealHtml}
           <div class="card-overlay">
             ${badgeHtml}
             <div class="card-meta-bottom">
@@ -2779,6 +3064,14 @@ class BareunClinicApp {
           if (e.target.closest('.card-hover-cue') || this.currentIndex === index) {
             this.playClick();
             window.location.href = GET_DIET_ZERO_URL();
+            return;
+          }
+        } else if (item.slug === 'gongjindan') {
+          if (e.target.closest('.card-hover-cue') || this.currentIndex === index) {
+            this.playClick();
+            this.triggerGongjindanCraftAnimation(() => {
+              window.location.href = GET_GONGJINDAN_URL();
+            });
             return;
           }
         }
@@ -3045,12 +3338,18 @@ class BareunClinicApp {
     }
 
     const isZero = item.slug === 'appetite-zero';
-    const zeroLandingBtnHtml = isZero ? `
+    const isGongjin = item.slug === 'gongjindan';
+    const landingBtnHtml = isZero ? `
       <a href="${GET_DIET_ZERO_URL()}" class="modal-cta-btn modal-cta-accent" style="background: linear-gradient(135deg, #1C1917 0%, #382A24 100%); color: #F5EFEB; font-weight: 700; border: 1px solid rgba(197, 160, 89, 0.4); box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; text-decoration: none; width: 100%;">
         <span>✨ 식욕 ZERO 시네마틱 상세페이지 & 결제창 바로가기</span>
         <span style="color: var(--accent-gold);">➔</span>
       </a>
-    ` : '';
+    ` : (isGongjin ? `
+      <a href="${GET_GONGJINDAN_URL()}" class="modal-cta-btn modal-cta-accent" style="background: linear-gradient(135deg, #1C130E 0%, #382A24 100%); color: #F5EFEB; font-weight: 700; border: 1px solid rgba(197, 160, 89, 0.4); box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; text-decoration: none; width: 100%;">
+        <span>👑 황제공진단 10대 특허 브로셔 & 1:1 수제 제환 상세페이지</span>
+        <span style="color: var(--accent-gold);">➔</span>
+      </a>
+    ` : '');
 
     this.modalContent.innerHTML = `
       <div style="background: ${heroBg}; display: flex; justify-content: center; align-items: center; overflow: hidden; height: 380px;">
@@ -3075,8 +3374,8 @@ class BareunClinicApp {
           </ul>
         </div>
 
-        <div class="modal-cta-group" style="${isZero ? 'flex-direction: column; gap: 10px;' : ''}">
-          ${zeroLandingBtnHtml}
+        <div class="modal-cta-group" style="${(isZero || isGongjin) ? 'flex-direction: column; gap: 10px;' : ''}">
+          ${landingBtnHtml}
           <div style="display: flex; gap: 12px; width: 100%;">
             <a href="${item.primaryLink}" target="_blank" rel="noopener noreferrer" class="modal-cta-btn modal-cta-primary" style="flex: 1;">
               ${item.primaryText} ↗
@@ -3090,6 +3389,56 @@ class BareunClinicApp {
     `;
     this.projectModal.classList.add('open');
     this.projectModal.setAttribute('aria-hidden', 'false');
+  }
+
+  /* --------------------------------------------------------------------------
+     GONGJINDAN "예약 즉시 조제" 시네마틱 트랜지션 애니메이션
+     -------------------------------------------------------------------------- */
+  triggerGongjindanCraftAnimation(onComplete) {
+    let overlay = document.getElementById('gongjin-craft-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'gongjin-craft-overlay';
+      overlay.className = 'craft-transition-overlay';
+      overlay.innerHTML = `
+        <div class="craft-center-stage">
+          <div class="craft-seal-wrapper">
+            <div class="craft-giant-seal">
+              <span class="seal-char">眞</span>
+              <span class="seal-char">品</span>
+            </div>
+            <div class="craft-seal-shockwave"></div>
+          </div>
+          <div class="craft-meta-badge">✦ 大韓民國 特許 第10-1744704號 · 1:1 수제 조제</div>
+          <h2 class="craft-main-title">예약 즉시 조제 (豫約 即時 調製)</h2>
+          <p class="craft-desc">천연 사향의 향손실을 막기 위해, 사전 예약된 수량에 한하여 원장이 직접 한 알 한 알 정성으로 빚어냅니다.</p>
+          <div class="craft-progress-track">
+            <div class="craft-progress-bar"></div>
+          </div>
+          <span class="craft-skip-cue">황제공진단 시네마틱 아카이브로 이동합니다 (화면 터치 시 즉시 이동)</span>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    let navigated = false;
+    const doNav = () => {
+      if (navigated) return;
+      navigated = true;
+      if (typeof onComplete === 'function') onComplete();
+    };
+
+    overlay.onclick = doNav;
+    overlay.classList.add('is-active');
+
+    const pBar = overlay.querySelector('.craft-progress-bar');
+    if (pBar) {
+      pBar.style.width = '0%';
+      setTimeout(() => { pBar.style.width = '100%'; }, 50);
+    }
+
+    this.playClick();
+    setTimeout(doNav, 1100);
   }
 
   closeProjectModal() {

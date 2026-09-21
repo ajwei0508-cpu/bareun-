@@ -924,7 +924,7 @@ html, body {
 /* Gongjindan Card Custom Fit Styling */
 .gongjindan-card {
   background-color: #FAF8F5 !important;
-  border-color: rgba(192, 154, 103, 0.45) !important;
+  border-color: rgba(192, 154, 103, 0.5) !important;
 }
 
 .gongjindan-wrap {
@@ -932,18 +932,23 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  position: relative;
 }
 
+/* 황제공진단 카드 이미지: 카드보다 크기 때문에 30% 축소하여 100% 온전하게 여백 배치 */
 .gongjindan-img {
-  object-fit: cover !important;
+  object-fit: contain !important;
   width: 100% !important;
   height: 100% !important;
   padding: 0 !important;
-  transition: transform 0.6s var(--transition-smooth);
+  transform: scale(0.7) !important;
+  transform-origin: center center;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .project-card:hover .gongjindan-img {
-  transform: scale(1.05);
+  transform: scale(0.74) !important;
 }
 
 .gongjindan-card .card-meta-bottom .card-subtitle {
@@ -951,6 +956,262 @@ html, body {
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 0.02em;
+}
+
+/* 카드 상단 전통 진품(眞品) 한자 붉은 낙관 도장 */
+.gongjin-seal-stamp {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 12px rgba(184, 46, 36, 0.35));
+  transform: rotate(-3deg);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
+}
+
+.project-card:hover .gongjin-seal-stamp {
+  transform: rotate(0deg) scale(1.08);
+  filter: drop-shadow(0 6px 18px rgba(184, 46, 36, 0.55));
+}
+
+.seal-box {
+  width: 44px;
+  height: 52px;
+  background: linear-gradient(135deg, #B82E24 0%, #8C1C14 100%);
+  border: 2px solid #E5C378;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.seal-box::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1px dashed rgba(229, 195, 120, 0.5);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.seal-char {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1.15;
+  color: #FFF8EE;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.05em;
+}
+
+.seal-ribbon {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #E5C378;
+  background: rgba(28, 19, 14, 0.88);
+  backdrop-filter: blur(8px);
+  padding: 2px 6px;
+  border-radius: 10px;
+  border: 1px solid rgba(229, 195, 120, 0.4);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* 황제공진단 예약 즉시 조제 시네마틱 애니메이션 오버레이 */
+.craft-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(circle at center, rgba(32, 20, 14, 0.96) 0%, rgba(14, 9, 6, 0.98) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.4s;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.craft-transition-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.craft-center-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 520px;
+  padding: 0 24px;
+}
+
+.craft-seal-wrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 24px;
+}
+
+.craft-giant-seal {
+  width: 96px;
+  height: 96px;
+  background: linear-gradient(135deg, #B82E24 0%, #7D120B 100%);
+  border: 3px solid #E5C378;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16px 40px rgba(184, 46, 36, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.4);
+  transform: scale(2.5) rotate(-15deg);
+  opacity: 0;
+}
+
+.craft-transition-overlay.is-active .craft-giant-seal {
+  animation: craftStampDrop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.15s forwards;
+}
+
+@keyframes craftStampDrop {
+  0% {
+    transform: scale(2.5) rotate(-15deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(0.95) rotate(2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.craft-giant-seal .seal-char {
+  font-size: 32px;
+  line-height: 1.1;
+  color: #FFF9F2;
+}
+
+.craft-seal-shockwave {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 2px solid rgba(229, 195, 120, 0.8);
+  opacity: 0;
+}
+
+.craft-transition-overlay.is-active .craft-seal-shockwave {
+  animation: craftShockwave 0.8s ease-out 0.45s forwards;
+}
+
+@keyframes craftShockwave {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.craft-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(229, 195, 120, 0.12);
+  border: 1px solid rgba(229, 195, 120, 0.35);
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: #E5C378;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.craft-main-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: #FFF5EC;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.craft-main-desc {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: #D6C7BC;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.craft-progress-track {
+  width: 240px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  opacity: 0;
+}
+
+.craft-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #E5C378, #B82E24);
+  transition: width 1s linear;
+}
+
+.craft-skip-cue {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-mono);
+  letter-spacing: 0.03em;
+  opacity: 0;
+}
+
+.craft-transition-overlay.is-active .craft-meta-badge {
+  animation: craftFadeUp 0.5s ease-out 0.35s forwards;
+}
+.craft-transition-overlay.is-active .craft-main-title {
+  animation: craftFadeUp 0.5s ease-out 0.45s forwards;
+}
+.craft-transition-overlay.is-active .craft-main-desc {
+  animation: craftFadeUp 0.5s ease-out 0.55s forwards;
+}
+.craft-transition-overlay.is-active .craft-progress-track,
+.craft-transition-overlay.is-active .craft-skip-cue {
+  animation: craftFadeUp 0.5s ease-out 0.65s forwards;
+}
+
+@keyframes craftFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card-overlay {

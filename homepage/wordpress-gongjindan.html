@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>황제공진단 (EMPEROR GONGJINDAN) — 바른한의원 대전본점 국가특허 황실명작</title>
+  <link rel="icon" href="https://framerusercontent.com/images/T9Y2v9h5BFE7g3Jmw9iWd4WngyQ.svg">
+
+  <!-- Typography: Pretendard, Noto Serif KR, Space Grotesk, Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+  <!-- PortOne Online Payment SDK -->
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  
+  <script>
+  /* Inlined payment-config.js for WordPress standalone execution */
+  /**
+ * =========================================================================
+ * BAREUN CLINIC (바른한의원 대전본점) - 온라인 실결제 PG 연동 환경설정
+ * =========================================================================
+ * 
+ * [포트원(PortOne) 및 카드사 입점 심사 필수 충족 구성]
+ * 1. 포트원(PortOne: https://admin.portone.io) 관리자 콘솔 로그인
+ * 2. [결제 연동] -> [내 식별코드·API Keys] 메뉴에서 '가맹점 식별코드' 확인 (예: imp12345678)
+ * 3. 아래 BAREUN_PAY_CONFIG.userCode 값에 해당 식별코드를 입력하시면 즉시 실제 카드로 과금 및 정산됩니다.
+ */
+
+window.BAREUN_PAY_CONFIG = {
+  // [필수] 포트원 실제 가맹점 식별코드 (User Code)
+  // 실제 발급받으신 식별코드(예: 'imp12345678')를 입력해주세요.
+  userCode: 'imp00000000',
+
+  // 상점 법적 사업자 정보 (카드사 및 전자상거래법 필수 고시 규격)
+  merchant: {
+    name: '바른한의원 대전본점',
+    ceo: '대표원장 (한의학 박사)',
+    tel: '042-488-1075',
+    email: 'bareunhaniwon@naver.com',
+    address: '대전광역시 서구 둔산로 123 (둔산동 중심상업지구)',
+    bizNumber: '305-XX-XXXXX',
+    mailOrderNumber: '제 2026-대전서구-0001 호',
+    clinicLicenseNumber: '제 3680000-000-00000 호',
+    privacyOfficer: '대표원장 (bareunhaniwon@naver.com)',
+    postcode: '35242'
+  },
+
+  // 결제 수단별 PG 설정 (포트원에 등록된 PG 채널 설정)
+  pgMapping: {
+    card: 'html5_inicis',      // 웹표준 신용카드 (KG이니시스, 나이스, KCP, 토스페이먼츠 등)
+    kakaopay: 'kakaopay',      // 카카오페이 전용 CID
+    naverpay: 'naverpay',      // 네이버페이 파트너센터 가맹점
+    tosspay: 'tosspay',        // 토스페이 전용
+    applepay: 'html5_inicis',  // 애플페이 (이니시스 경유)
+    vbank: 'html5_inicis'      // 가상계좌 (무통장 입금)
+  },
+
+  isProduction: true
+};
+
+  </script>
+  <script>
+  /* Inlined terms.js for WordPress standalone execution */
+  /**
+ * BAREUN CLINIC (바른한의원 대전본점)
+ * 전자상거래법 및 PG사/카드사 입점 심사 필수 약관 전문 엔진
+ */
+
+const BAREUN_TERMS_DATA = {
+  service: {
+    title: "서비스 이용약관",
+    subtitle: "공정거래위원회 전자상거래 표준약관 제10023호 준수",
+    content: `
+      <h4>제1조 (목적)</h4>
+      <p>본 약관은 바른한의원 대전본점(이하 "한의원"이라 함)이 운영하는 온라인 비대면 진료 예약, 처방 신청 및 전자상거래 서비스(이하 "서비스")를 이용함에 있어 한의원과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+
+      <h4>제2조 (용어의 정의)</h4>
+      <p>1. "한의원"이란 바른한의원이 의료법 및 전자상거래법에 의거하여 재화(한약 등) 및 의료 서비스(비대면 전화 진료)를 이용자에게 제공하기 위하여 설정한 가상의 영업장을 말합니다.<br>
+      2. "이용자"란 "서비스"에 접속하여 본 약관에 따라 "한의원"이 제공하는 비대면 진료 신청 및 결제 서비스를 이용하는 회원 및 비회원을 말합니다.<br>
+      3. "비대면 진료"란 의료법 및 보건복지부 비대면 진료 시범사업 가이드라인에 따라 환자가 의료기관을 직접 방문하지 않고 정보통신기술을 활용하여 한의사의 1:1 전화 상담 후 처방을 받는 진료 형태를 의미합니다.</p>
+
+      <h4>제3조 (약관 등의 명시와 설명 및 개정)</h4>
+      <p>1. "한의원"은 본 약관의 내용과 상호 및 대표자 성명, 영업소 소재지 주소, 전화번호, 전자우편주소, 사업자등록번호, 통신판매업 신고번호, 개인정보관리책임자 등을 이용자가 쉽게 알 수 있도록 사이트의 초기 서비스화면(하단)에 게시합니다.<br>
+      2. "한의원"은 전자상거래 등에서의 소비자보호에 관한 법률, 약관의 규제에 관한 법률, 전자문서 및 전자거래기본법, 의료법 등 관련 법을 위배하지 않는 범위에서 이 약관을 개정할 수 있습니다.</p>
+
+      <h4>제4조 (서비스의 제공 및 변경)</h4>
+      <p>1. "한의원"은 다음과 같은 업무를 수행합니다:<br>
+      - 비대면 전화 진료 신청 접수 및 일정 조율<br>
+      - 한의학 박사 대표원장의 1:1 맞춤형 진료 및 처방<br>
+      - 원내 탕전실에서 개별 조제된 한약재의 안심 우체국 택배 직배송<br>
+      - 결제 대금의 전자결제 승인 및 정산 안내</p>
+
+      <h4>제5조 (비대면 처방 및 결제 계약의 성립)</h4>
+      <p>1. 이용자는 온라인 신청서를 통하여 성명, 연락처, 배송지 주소, 상담 희망 시간 등을 기재하고 결제 수단을 선택하여 신청합니다.<br>
+      2. 결제가 완료되면 한의원 진료 대기열에 정식 등록되며, 대표원장의 1:1 전화 상담을 통해 최종 체질 감별 및 맞춤 처방이 확정된 후 원내 탕전이 개시됩니다.</p>
+    `
+  },
+
+  privacy: {
+    title: "개인정보처리방침",
+    subtitle: "개인정보보호법 제30조 및 의료법 제19조(비밀 누설 등의 금지) 준수",
+    content: `
+      <h4>제1조 (개인정보의 수집 및 이용 목적)</h4>
+      <p>바른한의원 대전본점은 다음의 목적을 위하여 최소한의 개인정보를 수집 및 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 관련 법률에 따라 별도의 동의를 받는 등 필요한 조치를 이행합니다.<br>
+      1. 비대면 진료 예약 및 대표원장 1:1 전화 문진 진행<br>
+      2. 맞춤 한약 조제 및 안심 우체국 택배 발송/배송 추적<br>
+      3. 전자결제 대행(PG) 승인, 현금영수증 발급 및 결제 내역 확인<br>
+      4. 복용 안내, 주의사항 전달 및 사후 경과 모니터링 상담</p>
+
+      <h4>제2조 (수집하는 개인정보 항목)</h4>
+      <p>- 필수 항목: 수진자 성명, 휴대전화번호, 배송지 주소, 결제 내역(주문번호, 결제금액, 승인일시, 결제수단)<br>
+      - 선택 항목: 희망 상담 시간대, 진료 요청사항(기존 복용 약물, 알레르기, 카페인 민감도 등)<br>
+      - 자동 수집 항목: 접속 IP 주소, 결제 승인 기록, 서비스 이용 기록</p>
+
+      <h4>제3조 (개인정보의 보유 및 이용 기간)</h4>
+      <p>1. 진료기록부 등 의료법에 명시된 법정 보존 정보: 10년 (의료법 시행규칙 제15조)<br>
+      2. 계약 또는 청약철회 등에 관한 기록: 5년 (전자상거래 등에서의 소비자보호에 관한 법률)<br>
+      3. 대금결제 및 재화 등의 공급에 관한 기록: 5년 (전자상거래법)<br>
+      4. 소비자의 불만 또는 분쟁처리에 관한 기록: 3년 (전자상거래법)</p>
+
+      <h4>제4조 (개인정보의 제3자 제공 및 위탁)</h4>
+      <p>한의원은 원활한 비대면 배송 및 결제 서비스를 위하여 다음과 같이 필수적인 업무를 전문 업체에 위탁하고 있습니다:<br>
+      - 결제 대행: 포트원(주), KG이니시스, 카카오페이, 네이버페이, 토스페이먼츠 (결제 승인 및 정산)<br>
+      - 배송 위탁: 우체국택배 (맞춤 탕전 한약 안심 택배 직배송)</p>
+
+      <h4>제5조 (개인정보관리책임자)</h4>
+      <p>- 성명: 대표원장<br>
+      - 소속: 바른한의원 대전본점<br>
+      - 대표 전화: 042-488-1075<br>
+      - 전자우편: bareunhaniwon@naver.com</p>
+    `
+  },
+
+  finance: {
+    title: "전자금융거래 이용약관",
+    subtitle: "전자금융거래법 및 여신전문금융업법 준수",
+    content: `
+      <h4>제1조 (목적)</h4>
+      <p>본 약관은 바른한의원이 제공하는 전자지급결제대행서비스를 이용자가 이용함에 있어 한의원과 이용자 간의 전자금융거래의 법률관계를 정함을 목적으로 합니다.</p>
+
+      <h4>제2조 (거래내역의 확인)</h4>
+      <p>1. 한의원은 결제 완료 즉시 온라인 모바일 전자 영수증을 제공하며, 이용자가 요청할 경우 결제대행사(PG)를 통한 승인 매출전표를 이메일 또는 SMS로 조회 및 출력할 수 있도록 지원합니다.<br>
+      2. 모든 결제 데이터는 금융감독원 및 PCI-DSS 보안 인증을 획득한 암호화 채널(SSL 256-bit)을 통해 안전하게 처리됩니다.</p>
+
+      <h4>제3조 (오류의 정정)</h4>
+      <p>이용자는 전자금융거래서비스를 이용함에 있어 오류가 있음을 안 때에는 한의원에 즉시 그 정정을 요구할 수 있으며, 한의원은 즉시 이를 조사하여 오류가 있는 경우 정정 처리하고 2영업일 이내에 그 결과를 이용자에게 통보합니다.</p>
+    `
+  },
+
+  refund: {
+    title: "비대면 진료 및 취소·환불·배송 정책",
+    subtitle: "약사법, 의료법 및 전자상거래법 제17조(청약철회 등) 준수",
+    content: `
+      <h4>제1조 (배송 안내)</h4>
+      <p>1. 배송 방법: 우체국 안심 특급택배 (전국 안전 배송)<br>
+      2. 배송 비용: <strong>전국 무료 배송</strong> (도서/산간/제주 지역 포함 한의원 전액 부담)<br>
+      3. 배송 기간: 한의학 박사 대표원장의 1:1 전화 상담 완료 후 당일 맞춤 탕전 ➔ 익일 출고 (주말/공휴일 제외 출고 후 1~2일 내 수령)</p>
+
+      <h4>제2조 (주문 취소 및 환불 기준)</h4>
+      <p><strong>1. 100% 전액 취소 및 환불 가능:</strong><br>
+      - 결제 완료 후 대표원장과의 1:1 전화 진료 상담이 이루어지기 전 취소를 요청하시는 경우 즉시 100% 결제 승인이 취소됩니다.<br>
+      - 1:1 전화 문진 결과, 환자의 기저질환이나 체질상 본 한약 복용이 부적합하다고 원장이 의학적으로 판단한 경우 결제 금액 전액이 즉시 자동 환불됩니다.<br><br>
+      <strong>2. 취소 및 청약철회 불가 안내:</strong><br>
+      - 한의사의 1:1 진료 후 환자 개인의 체질 감별 결과에 따라 100% 개별 맞춤 조제(탕전)되는 한약(의약품)의 특성상, <strong>[전자상거래 등에서의 소비자보호에 관한 법률] 제17조 제2항 제6호(소비자의 주문에 따라 개별적으로 생산되는 재화)</strong> 및 <strong>[약사법]</strong>에 의거하여 <strong>원내 탕전 및 조제가 개시된 이후에는 단순 변심에 의한 주문 취소, 반품 및 환불이 불가</strong>합니다.<br><br>
+      <strong>3. 오배송 및 제품 하자 시 100% 교환/환불:</strong><br>
+      - 배송 중 포장 파손, 변질, 누수, 또는 주문 내역과 다른 제품이 오배송된 경우에는 한의원 고객센터(042-488-1075)로 접수해 주시면 한의원 부담으로 100% 무료 즉시 재탕전 출고 또는 전액 환불해 드립니다.</p>
+
+      <h4>제3조 (환불 처리 절차)</h4>
+      <p>- 신용/체크카드: 취소 접수 즉시 당일 승인 취소 (카드사 사정에 따라 2~4영업일 내 한도 복원 또는 환급)<br>
+      - 간편페이(카카오/네이버/토스/애플): 취소 즉시 각 페이사 포인트 또는 연동 카드로 실시간 환불<br>
+      - 가상계좌(무통장): 고객 명의 환불 계좌 확인 후 1영업일 이내 계좌 이체</p>
+    `
+  }
+};
+
+/**
+ * 약관 모달 오픈 및 렌더링 함수
+ */
+function openTermsModal(type) {
+  const modal = document.getElementById('terms-modal');
+  const titleEl = document.getElementById('terms-modal-title');
+  const subtitleEl = document.getElementById('terms-modal-subtitle');
+  const bodyEl = document.getElementById('terms-modal-body');
+
+  const data = BAREUN_TERMS_DATA[type] || BAREUN_TERMS_DATA.service;
+
+  if (titleEl) titleEl.textContent = data.title;
+  if (subtitleEl) subtitleEl.textContent = data.subtitle;
+  if (bodyEl) bodyEl.innerHTML = data.content;
+
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeTermsModal() {
+  const modal = document.getElementById('terms-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Esc Key 및 백드롭 클릭 지원
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeTermsModal();
+});
+
+  </script>
+
+  <style>
+    /* ==========================================================================
+       WORDPRESS & ASTRA RESET
+       ========================================================================== */
+    .entry-content, .ast-container, .site-content, article.page, .ast-plain-container,
+    .elementor, .elementor-section-wrap, .wp-block-group {
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+
+    /* ==========================================================================
+       IMPERIAL GONGJINDAN PALETTE & TYPOGRAPHY
+       Aesthetic: Royal Obsidian, Deep Amber, Antique Hanji, Champagne Gold & Cinnabar Seal
+       Design Persona: "아트" (Art)
+       ========================================================================== */
+    :root {
+      --bg-dark: #0F0A07;
+      --bg-obsidian: #140E0A;
+      --bg-card: #1A130E;
+      --bg-card-light: #FAF8F5;
+      --bg-hanji: #F7F3EC;
+      
+      --gold-prime: #E5C378;
+      --gold-rich: #D4AF37;
+      --gold-dark: #A37E2C;
+      --gold-glow: rgba(229, 195, 120, 0.35);
+      
+      --cinnabar-prime: #B82E24;
+      --cinnabar-deep: #8E1F17;
+      --cinnabar-glow: rgba(184, 46, 36, 0.4);
+
+      --text-white: #FFF9F2;
+      --text-gold: #F5E5C9;
+      --text-muted: #B8A89A;
+      --text-dark: #1E1611;
+      
+      --border-gold: rgba(229, 195, 120, 0.3);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+
+      --font-serif: "Noto Serif KR", Georgia, serif;
+      --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: "Space Mono", monospace;
+
+      --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.7;
+      letter-spacing: -0.015em;
+      word-break: keep-all;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Background Atmosphere */
+    .ambient-atmosphere {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .ambient-glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.5;
+    }
+    .orb-gold-1 {
+      top: -15%; right: -5%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0) 70%);
+    }
+    .orb-cinnabar-2 {
+      top: 35%; left: -10%;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(184, 46, 36, 0.12) 0%, rgba(184, 46, 36, 0) 70%);
+    }
+    .orb-gold-3 {
+      bottom: 5%; right: -10%;
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(229, 195, 120, 0.15) 0%, rgba(229, 195, 120, 0) 70%);
+    }
+
+    /* Top HUD Navigation */
+    .top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 36px;
+      background: rgba(15, 10, 7, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(229, 195, 120, 0.15);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(229, 195, 120, 0.25);
+      color: var(--text-gold);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .brand-back-btn:hover {
+      background: rgba(229, 195, 120, 0.15);
+      border-color: var(--gold-prime);
+      transform: translateX(-2px);
+    }
+    .brand-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-logo-text {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-white);
+      letter-spacing: 0.02em;
+    }
+    .brand-sub-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--gold-prime);
+      letter-spacing: 0.05em;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-diet-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 30px;
+      background: rgba(223, 126, 142, 0.12);
+      border: 1px solid rgba(223, 126, 142, 0.35);
+      color: #F8C3CD;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .nav-diet-btn:hover {
+      background: rgba(223, 126, 142, 0.22);
+      border-color: #DF7E8E;
+    }
+    .nav-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, var(--gold-prime) 0%, var(--gold-rich) 100%);
+      color: #1A110A;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      box-shadow: 0 4px 18px var(--gold-glow);
+      transition: all 0.3s ease;
+    }
+    .nav-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(229, 195, 120, 0.5);
+    }
+
+    /* Common Container */
+    .page-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ==========================================================================
+       ZONE 1: THE IMPERIAL HERO SECTION
+       ========================================================================== */
+    .imperial-hero {
+      position: relative;
+      padding: 140px 0 80px;
+      overflow: hidden;
+    }
+    .hero-editorial-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(229, 195, 120, 0.1);
+      border: 1px solid rgba(229, 195, 120, 0.35);
+      padding: 8px 20px;
+      border-radius: 40px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
+    }
+    .badge-seal-mini {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: var(--cinnabar-prime);
+      border: 1px solid var(--gold-prime);
+      border-radius: 4px;
+      color: #FFF;
+      font-family: var(--font-serif);
+      font-size: 11px;
+      font-weight: 900;
+    }
+    .badge-patent-text {
+      color: var(--gold-prime);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .hero-main-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 5.2vw, 64px);
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text-white);
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+    .hero-main-title .gold-accent {
+      background: linear-gradient(135deg, #FFF1D6 0%, #E5C378 60%, #B88E3E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-lead-desc {
+      font-size: clamp(16px, 1.8vw, 20px);
+      line-height: 1.7;
+      color: var(--text-gold);
+      max-width: 820px;
+      margin-bottom: 40px;
+      opacity: 0.95;
+    }
+
+    /* Hero Showcase Grid */
+    .hero-showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-top: 20px;
+      background: rgba(26, 19, 14, 0.7);
+      border: 1px solid rgba(229, 195, 120, 0.25);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+    .hero-visual-card {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #FAF8F5;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .hero-visual-card img {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: contain;
+      transition: transform 0.8s var(--transition-smooth);
+    }
+    .hero-visual-card:hover img {
+      transform: scale(1.03);
+    }
+    .hero-floating-seal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 58px;
+      height: 70px;
+      background: linear-gradient(135deg, #B82E24 0%, #8C1C14 100%);
+      border: 2px solid #E5C378;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(184, 46, 36, 0.45);
+      transform: rotate(-4deg);
+      z-index: 5;
+    }
+    .hero-floating-seal .seal-char {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 900;
+      color: #FFF9F2;
+      line-height: 1.1;
+    }
+    .hero-floating-seal .seal-sub {
+      font-size: 8px;
+      color: #E5C378;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Hero Metrics & Guarantees */
+    .hero-guarantees-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .guarantee-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(229, 195, 120, 0.2);
+      border-radius: 16px;
+      padding: 20px 24px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .guarantee-card:hover {
+      background: rgba(229, 195, 120, 0.06);
+      border-color: var(--gold-prime);
+      transform: translateY(-2px);
+    }
+    .guarantee-icon {
+      font-size: 28px;
+      line-height: 1;
+      padding: 10px;
+      background: rgba(229, 195, 120, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(229, 195, 120, 0.3);
+    }
+    .guarantee-text-wrap h4 {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 4px;
+    }
+    .guarantee-text-wrap h4 .metric-val {
+      color: var(--gold-prime);
+      font-family: var(--font-mono);
+      font-size: 20px;
+      margin-left: 6px;
+    }
+    .guarantee-text-wrap p {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Hero CTA Row */
+    .hero-cta-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .btn-hero-primary {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, var(--gold-prime) 0%, #D4AF37 100%);
+      color: #18100A;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 24px var(--gold-glow);
+      transition: all 0.3s ease;
+    }
+    .btn-hero-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(229, 195, 120, 0.6);
+    }
+    .btn-hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 24px;
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(229, 195, 120, 0.3);
+      color: var(--text-white);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .btn-hero-secondary:hover {
+      background: rgba(229, 195, 120, 0.15);
+      border-color: var(--gold-prime);
+    }
+
+    /* ==========================================================================
+       ZONE 2: THE 10 HERITAGE CHAPTERS (EDITORIAL BROCHURE SHOWCASE)
+       ========================================================================== */
+    .heritage-archive-section {
+      padding: 100px 0;
+      position: relative;
+    }
+    .section-header-center {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-prime);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .section-heading-large {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .section-sub-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Chapter Cards */
+    .brochures-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+    .brochure-chapter-card {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 50px;
+      align-items: center;
+      background: rgba(24, 17, 12, 0.65);
+      border: 1px solid rgba(229, 195, 120, 0.2);
+      border-radius: 24px;
+      padding: 44px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      transition: border-color 0.4s ease, transform 0.4s ease;
+    }
+    .brochure-chapter-card:nth-child(even) {
+      grid-template-columns: 1.2fr 1fr;
+    }
+    .brochure-chapter-card:nth-child(even) .chapter-content-col {
+      order: 2;
+    }
+    .brochure-chapter-card:nth-child(even) .chapter-visual-col {
+      order: 1;
+    }
+    .brochure-chapter-card:hover {
+      border-color: rgba(229, 195, 120, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Chapter Content Styling */
+    .chapter-top-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .chapter-index {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-prime);
+      letter-spacing: 0.1em;
+    }
+    .chapter-sep {
+      color: rgba(255, 255, 255, 0.3);
+    }
+    .chapter-tag-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(184, 46, 36, 0.2);
+      border: 1px solid rgba(184, 46, 36, 0.5);
+      color: #FFAAA3;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+    .chapter-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+    .chapter-subtitle {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-gold);
+      margin-bottom: 16px;
+      opacity: 0.9;
+    }
+    .chapter-desc {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .chapter-highlights-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .highlight-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: #EFE6DD;
+    }
+    .chip-dot {
+      color: var(--gold-prime);
+      font-size: 12px;
+    }
+    .chapter-zoom-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(229, 195, 120, 0.3);
+      color: var(--text-gold);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .chapter-zoom-btn:hover {
+      background: rgba(229, 195, 120, 0.15);
+      border-color: var(--gold-prime);
+      transform: translateY(-2px);
+    }
+
+    /* Chapter Visual Frame */
+    .visual-frame {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #100B08;
+      border: 1px solid rgba(229, 195, 120, 0.25);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      aspect-ratio: 2337 / 1654;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .visual-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--transition-smooth), filter 0.4s ease;
+    }
+    .visual-frame:hover .visual-img {
+      transform: scale(1.04);
+      filter: brightness(1.05);
+    }
+    .visual-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.4) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .visual-frame:hover .visual-overlay {
+      opacity: 1;
+    }
+    .visual-expand-pill {
+      background: rgba(20, 14, 10, 0.85);
+      border: 1px solid var(--gold-prime);
+      color: var(--gold-prime);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 30px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      transform: translateY(6px);
+      transition: transform 0.3s ease;
+    }
+    .visual-frame:hover .visual-expand-pill {
+      transform: translateY(0);
+    }
+    .visual-page-tag {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: rgba(14, 9, 6, 0.82);
+      border: 1px solid rgba(229, 195, 120, 0.3);
+      color: var(--gold-prime);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* ==========================================================================
+       ZONE 3: 1:1 PRIVATE RESERVATION SUITE & PAYMENT INTEGRATION
+       ========================================================================== */
+    .reservation-section {
+      padding: 100px 0;
+      position: relative;
+    }
+    .reservation-card-wrapper {
+      background: linear-gradient(180deg, rgba(28, 19, 14, 0.85) 0%, rgba(18, 12, 8, 0.95) 100%);
+      border: 1px solid rgba(229, 195, 120, 0.35);
+      border-radius: 28px;
+      padding: 56px 44px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(24px);
+    }
+    .res-header-row {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 48px;
+    }
+    .res-crown-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold-prime);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+      background: rgba(229, 195, 120, 0.1);
+      border: 1px solid rgba(229, 195, 120, 0.3);
+      padding: 6px 16px;
+      border-radius: 30px;
+    }
+    .res-title {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 3.8vw, 42px);
+      font-weight: 800;
+      color: var(--text-white);
+      margin-bottom: 14px;
+    }
+    .res-desc {
+      font-size: 15.5px;
+      color: var(--text-gold);
+      line-height: 1.7;
+    }
+
+    /* Package Selector Grid */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .package-plan-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(229, 195, 120, 0.2);
+      border-radius: 20px;
+      padding: 32px 24px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .package-plan-box:hover {
+      border-color: var(--gold-prime);
+      transform: translateY(-4px);
+      background: rgba(229, 195, 120, 0.05);
+    }
+    .package-plan-box.is-selected {
+      border: 2px solid var(--gold-prime);
+      background: rgba(229, 195, 120, 0.08);
+      box-shadow: 0 12px 32px rgba(229, 195, 120, 0.25);
+    }
+    .pkg-ribbon-badge {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: linear-gradient(135deg, #B82E24 0%, #8C1C14 100%);
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid #E5C378;
+      box-shadow: 0 4px 12px rgba(184, 46, 36, 0.4);
+    }
+    .pkg-head {
+      margin-bottom: 20px;
+    }
+    .pkg-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 6px;
+    }
+    .pkg-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .pkg-price-zone {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .pkg-original-price {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: line-through;
+      margin-bottom: 2px;
+    }
+    .pkg-current-price {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--gold-prime);
+    }
+    .pkg-features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .pkg-feature-item {
+      font-size: 13px;
+      color: #D6C7BC;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pkg-feature-item::before {
+      content: '✓';
+      color: var(--gold-prime);
+      font-weight: 800;
+    }
+
+    /* Reservation Form & Payment Execution */
+    .reservation-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      background: rgba(14, 9, 6, 0.6);
+      border: 1px solid rgba(229, 195, 120, 0.2);
+      border-radius: 20px;
+      padding: 36px;
+    }
+    .form-col-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-gold);
+      margin-bottom: 8px;
+    }
+    .form-input, .form-textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(229, 195, 120, 0.25);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text-white);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--gold-prime);
+      background: rgba(229, 195, 120, 0.06);
+      box-shadow: 0 0 12px var(--gold-glow);
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 84px;
+    }
+
+    /* Consent Checkboxes */
+    .consent-box {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .consent-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .consent-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--gold-prime);
+      cursor: pointer;
+    }
+    .terms-modal-trigger {
+      color: var(--gold-prime);
+      text-decoration: underline;
+      margin-left: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    /* Submit & Quick Consult CTA */
+    .submit-cta-zone {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .btn-pay-submit {
+      width: 100%;
+      padding: 20px;
+      border-radius: 40px;
+      border: none;
+      background: linear-gradient(135deg, var(--gold-prime) 0%, #D4AF37 100%);
+      color: #1A1008;
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      box-shadow: 0 10px 30px var(--gold-glow);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-pay-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(229, 195, 120, 0.6);
+    }
+    .consult-alt-row {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-consult-kakao, .btn-consult-naver {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+    .btn-consult-kakao {
+      background: #FEE500;
+      color: #191919;
+    }
+    .btn-consult-kakao:hover {
+      background: #E8D100;
+      transform: translateY(-2px);
+    }
+    .btn-consult-naver {
+      background: #03C75A;
+      color: #FFFFFF;
+    }
+    .btn-consult-naver:hover {
+      background: #02B14F;
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       ZONE 4: STATUTORY COMPLIANCE & LEGAL ACCORDION
+       ========================================================================== */
+    .compliance-section {
+      padding: 60px 0 100px;
+      position: relative;
+    }
+    .compliance-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 36px;
+    }
+    .compliance-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .compliance-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .compliance-item {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+    .compliance-item strong {
+      color: var(--text-gold);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Statutory Footer */
+    .legal-footer {
+      border-top: 1px solid rgba(229, 195, 120, 0.15);
+      background: #0B0705;
+      padding: 48px 0;
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .footer-brand {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-gold);
+      margin-bottom: 8px;
+    }
+    .footer-links-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .footer-links-row button {
+      background: none;
+      border: none;
+      color: rgba(229, 195, 120, 0.7);
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .footer-links-row button:hover {
+      color: var(--gold-prime);
+    }
+
+    /* ==========================================================================
+       LIGHTBOX VIEWER MODAL (고해상도 브로셔 원문 줌 뷰어)
+       ========================================================================== */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      background: rgba(10, 6, 4, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s;
+    }
+    .lightbox-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 28px;
+      border-bottom: 1px solid rgba(229, 195, 120, 0.2);
+    }
+    .lightbox-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-gold);
+    }
+    .lightbox-controls {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .lightbox-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(229, 195, 120, 0.3);
+      color: var(--text-white);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .lightbox-btn:hover {
+      background: rgba(229, 195, 120, 0.2);
+      border-color: var(--gold-prime);
+    }
+    .lightbox-close-btn {
+      background: rgba(184, 46, 36, 0.3);
+      border: 1px solid rgba(184, 46, 36, 0.6);
+      color: #FFF;
+      font-size: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .lightbox-close-btn:hover {
+      background: var(--cinnabar-prime);
+      transform: rotate(90deg);
+    }
+    .lightbox-body {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      padding: 24px;
+    }
+    .lightbox-img {
+      max-width: 95%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.8);
+      transition: transform 0.3s ease;
+      cursor: grab;
+    }
+    .lightbox-nav-prev, .lightbox-nav-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(20, 14, 10, 0.8);
+      border: 1px solid var(--gold-prime);
+      color: var(--gold-prime);
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    .lightbox-nav-prev { left: 30px; }
+    .lightbox-nav-next { right: 30px; }
+    .lightbox-nav-prev:hover, .lightbox-nav-next:hover {
+      background: var(--gold-prime);
+      color: #140E0A;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Generic Modal for Terms */
+    .terms-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100001;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      padding: 20px;
+    }
+    .terms-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .terms-modal-card {
+      background: #1C130E;
+      border: 1px solid var(--gold-prime);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 640px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.8);
+    }
+    .terms-modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(229, 195, 120, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .terms-modal-title {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gold-prime);
+    }
+    .terms-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.8;
+      color: #D6C7BC;
+      white-space: pre-wrap;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .hero-showcase-grid {
+        grid-template-columns: 1fr;
+      }
+      .brochure-chapter-card,
+      .brochure-chapter-card:nth-child(even) {
+        grid-template-columns: 1fr;
+        padding: 32px;
+      }
+      .brochure-chapter-card:nth-child(even) .chapter-content-col {
+        order: 1;
+      }
+      .brochure-chapter-card:nth-child(even) .chapter-visual-col {
+        order: 2;
+      }
+      .packages-grid {
+        grid-template-columns: 1fr;
+      }
+      .reservation-form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 12px 18px;
+      }
+      .nav-diet-btn {
+        display: none;
+      }
+      .footer-inner {
+        flex-direction: column;
+      }
+      .compliance-grid {
+        grid-template-columns: 1fr;
+      }
+      .lightbox-nav-prev { left: 10px; }
+      .lightbox-nav-next { right: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Golden Glow -->
+  <div class="ambient-atmosphere" aria-hidden="true">
+    <div class="ambient-glow-orb orb-gold-1"></div>
+    <div class="ambient-glow-orb orb-cinnabar-2"></div>
+    <div class="ambient-glow-orb orb-gold-3"></div>
+  </div>
+
+  <!-- Top Fixed HUD Navigation -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <a href="/" class="brand-back-btn" title="바른한의원 메인으로 돌아가기">
+        <span>← 메인 둘러보기</span>
+      </a>
+      <div class="brand-title-wrap">
+        <span class="brand-logo-text">바른한의원 대전본점</span>
+        <span class="brand-sub-badge">EMPEROR GONGJINDAN · 皇室 秘方</span>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <a href="/diet-zero/" class="nav-diet-btn" title="식욕 ZERO 상세페이지 바로가기">
+        <span>✦ 식욕 ZERO</span>
+      </a>
+      <a href="#reservation-suite" class="nav-cta-btn">
+        <span>👑 1:1 수제 제환 예약</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ZONE 1: THE IMPERIAL HERO -->
+  <section class="imperial-hero">
+    <div class="page-container">
+      <div class="hero-editorial-badge">
+        <span class="badge-seal-mini">特</span>
+        <span class="badge-patent-text">大韓民國 特許廳 登錄 第10-1744704號 · 사향 씨알 특허</span>
+      </div>
+
+      <h1 class="hero-main-title">
+        황제를 위한 단 하나의 보약,<br>
+        천년의 비방에 <span class="gold-accent">'국가 특허'</span>를 더하다.
+      </h1>
+
+      <p class="hero-lead-desc">
+        동의보감 원방 사향 공진단의 유효 성분 손실을 0%에 가깝게 보존하는 독보적 씨알 제조 특허.<br>
+        대량 생산하지 않고, 오직 사전 예약된 수량에 한하여 대전본점 원장이 1:1로 직접 빚어냅니다.
+      </p>
+
+      <!-- Hero Showcase Grid -->
+      <div class="hero-showcase-grid">
+        <!-- Visual Card -->
+        <div class="hero-visual-card">
+          <img src="http://bareunhaniwon.com/wp-content/uploads/2026/09/image.png_20260921230913.jpeg" alt="특허받은 황제공진단 황금단면 실사" />
+          <div class="hero-floating-seal">
+            <span class="seal-char">眞</span>
+            <span class="seal-char">品</span>
+            <span class="seal-sub">正統韓方</span>
+          </div>
+        </div>
+
+        <!-- Guarantees & Metrics -->
+        <div class="hero-guarantees-col">
+          <div class="guarantee-card">
+            <div class="guarantee-icon">🛡️</div>
+            <div class="guarantee-text-wrap">
+              <h4>국가 특허 사향 씨알 보존술<span class="metric-val">100mg</span></h4>
+              <p>휘발하기 쉬운 초고가 사향을 중심핵에 가두어 유효 성분 파괴 없이 체내 쾌속 흡수</p>
+            </div>
+          </div>
+
+          <div class="guarantee-card">
+            <div class="guarantee-icon">🦌</div>
+            <div class="guarantee-text-wrap">
+              <h4>러시아산 최상급 원용 분골<span class="metric-val">1,600mg (200%)</span></h4>
+              <p>노화 회복과 세포·신경 재생의 연료가 되는 최고급 녹용 분골과 상대를 일반의 4배 함유</p>
+            </div>
+          </div>
+
+          <div class="guarantee-card">
+            <div class="guarantee-icon">📜</div>
+            <div class="guarantee-text-wrap">
+              <h4>국가 공인 잔류농약·중금속<span class="metric-val">0 ppm (불검출)</span></h4>
+              <p>동의한약분석센터 정밀 성분 검사를 통과한 식약처 CITES 공인 정품 사향 100% 인증</p>
+            </div>
+          </div>
+
+          <div class="hero-cta-row">
+            <a href="#reservation-suite" class="btn-hero-primary">
+              <span>👑 1:1 수제 제환 사전 예약하기</span>
+              <span>➔</span>
+            </a>
+            <a href="#heritage-archive" class="btn-hero-secondary">
+              <span>📜 10대 특허 브로셔 열람</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZONE 2: THE 10 HERITAGE CHAPTERS (EDITORIAL SHOWCASE) -->
+  <section class="heritage-archive-section" id="heritage-archive">
+    <div class="page-container">
+      <div class="section-header-center">
+        <div class="section-eyebrow">
+          <span>THE IMPERIAL HERITAGE ARCHIVE</span>
+        </div>
+        <h2 class="section-heading-large">
+          국가 특허와 시험성적서가 증명하는<br>
+          <span style="color: var(--gold-prime);">10대 마스터 브로셔 아카이브</span>
+        </h2>
+        <p class="section-sub-desc">
+          바른한의원 황제공진단에 담긴 특허 제조 공법, 성분 비교 데이터, 한의사 100인 임상 평가서 원문을<br>
+          각 장을 클릭하여 고해상도로 선명하게 확인하실 수 있습니다.
+        </p>
+      </div>
+
+      <!-- 10 Chapters Stream -->
+      <div class="brochures-stream">
+        
+      <!-- Chapter 1 -->
+      <article class="brochure-chapter-card" id="chapter-1" data-chapter="1">
+        <div class="chapter-content-col">
+          <div class="chapter-top-meta">
+            <span class="chapter-index">CHAPTER 01</span>
+            <span class="chapter-sep">·</span>
+            <span class="chapter-tag-badge">국가 특허 등록</span>
+          </div>
+          <h3 class="chapter-title">유효 성분 손실을 최소화하는 특허 공진단</h3>
+          <p class="chapter-subtitle">[특허] 제 10-1744704호 · 유효 성분 손실을 최소화하는 공진단 및 그의 제조방법</p>
+          <p class="chapter-desc">천년을 이어온 황실의 명약 공진단에 대한민국 특허청 정식 발명특허 기술을 더했습니다. 최고급 원목 자개함과 99.9% 순금박 수제 제환으로 장인의 손끝에서 탄생합니다.</p>
+          <div class="chapter-highlights-row">
+            
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">특허 제10-1744704호 공식 등록</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">천연 원목 자개함 & 이중 비단보자기</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">99.9% 순금박 1:1 수제 제환</span>
+      </div>
+    
+          </div>
+          <div class="chapter-action-bar">
+            <button type="button" class="chapter-zoom-btn" onclick="openLightbox(1)" aria-label="브로셔 1 고해상도 확대">
+              <span class="zoom-icon">🔍</span>
+              <span>특허 인증 원문 고화질 확대 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chapter-visual-col">
+          <div class="visual-frame" onclick="openLightbox(1)">
+            <img class="visual-img" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%941.jpg" alt="유효 성분 손실을 최소화하는 특허 공진단" loading="lazy" />
+            <div class="visual-overlay">
+              <span class="visual-expand-pill">
+                <span>✦ 클릭하여 고해상도 확대</span>
+              </span>
+            </div>
+            <div class="visual-page-tag">P. 01 / 10</div>
+          </div>
+        </div>
+      </article>
+    
+
+      <!-- Chapter 2 -->
+      <article class="brochure-chapter-card" id="chapter-2" data-chapter="2">
+        <div class="chapter-content-col">
+          <div class="chapter-top-meta">
+            <span class="chapter-index">CHAPTER 02</span>
+            <span class="chapter-sep">·</span>
+            <span class="chapter-tag-badge">황실 비방의 역사</span>
+          </div>
+          <h3 class="chapter-title">황제의 공진단, 왜 지금 우리에게 필요할까?</h3>
+          <p class="chapter-subtitle">700년 전 원나라 황실 비방이 현대인의 극심한 피로를 다스리는 비결</p>
+          <p class="chapter-desc">극심한 권력 스트레스, 잦은 전쟁으로 인한 육체 소모, 기름진 식습관에 지친 황제에게 바쳐졌던 즉효성 명약. 현대인의 만성 번아웃과 기력 고갈을 가장 빠르게 치유합니다.</p>
+          <div class="chapter-highlights-row">
+            
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">원나라 황실 하사 명약의 현대적 계승</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">만성 피로·스트레스 즉각 해소</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">복용 직후 온몸에 퍼지는 즉효성</span>
+      </div>
+    
+          </div>
+          <div class="chapter-action-bar">
+            <button type="button" class="chapter-zoom-btn" onclick="openLightbox(2)" aria-label="브로셔 2 고해상도 확대">
+              <span class="zoom-icon">🔍</span>
+              <span>특허 인증 원문 고화질 확대 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chapter-visual-col">
+          <div class="visual-frame" onclick="openLightbox(2)">
+            <img class="visual-img" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%942.jpg" alt="황제의 공진단, 왜 지금 우리에게 필요할까?" loading="lazy" />
+            <div class="visual-overlay">
+              <span class="visual-expand-pill">
+                <span>✦ 클릭하여 고해상도 확대</span>
+              </span>
+            </div>
+            <div class="visual-page-tag">P. 02 / 10</div>
+          </div>
+        </div>
+      </article>
+    
+
+      <!-- Chapter 3 -->
+      <article class="brochure-chapter-card" id="chapter-3" data-chapter="3">
+        <div class="chapter-content-col">
+          <div class="chapter-top-meta">
+            <span class="chapter-index">CHAPTER 03</span>
+            <span class="chapter-sep">·</span>
+            <span class="chapter-tag-badge">특허 기술의 본질</span>
+          </div>
+          <h3 class="chapter-title">공진단에 왜 '특허'가 필요할까?</h3>
+          <p class="chapter-subtitle">금보다 비싼 천연 사향의 향기와 약효를 100% 가두는 혁신 공법</p>
+          <p class="chapter-desc">동의보감에 명시된 진짜 공진단의 핵심은 바로 '사향'입니다. 휘발성이 강해 공기 중에 쉽게 날아가는 사향의 약효를 온전히 보존하기 위해 국가로부터 특허를 인정받았습니다.</p>
+          <div class="chapter-highlights-row">
+            
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">초고가 CITES 정품 천연 사향 보존</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">특허받은 중심핵 조제 공법</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">사향 유효 성분 손실 0%에 도전</span>
+      </div>
+    
+          </div>
+          <div class="chapter-action-bar">
+            <button type="button" class="chapter-zoom-btn" onclick="openLightbox(3)" aria-label="브로셔 3 고해상도 확대">
+              <span class="zoom-icon">🔍</span>
+              <span>특허 인증 원문 고화질 확대 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chapter-visual-col">
+          <div class="visual-frame" onclick="openLightbox(3)">
+            <img class="visual-img" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%943.jpg" alt="공진단에 왜 '특허'가 필요할까?" loading="lazy" />
+            <div class="visual-overlay">
+              <span class="visual-expand-pill">
+                <span>✦ 클릭하여 고해상도 확대</span>
+              </span>
+            </div>
+            <div class="visual-page-tag">P. 03 / 10</div>
+          </div>
+        </div>
+      </article>
+    
+
+      <!-- Chapter 4 -->
+      <article class="brochure-chapter-card" id="chapter-4" data-chapter="4">
+        <div class="chapter-content-col">
+          <div class="chapter-top-meta">
+            <span class="chapter-index">CHAPTER 04</span>
+            <span class="chapter-sep">·</span>
+            <span class="chapter-tag-badge">국내 유일 기술</span>
+          </div>
+          <h3 class="chapter-title">국내 유일 공진단 효능 관련 특허 기술</h3>
+          <p class="chapter-subtitle">대한민국 특허청 정식 인장 및 금장 훈장이 증명하는 독보적 가치</p>
+          <p class="chapter-desc">시중의 수많은 유사 공진단과 비교를 거부합니다. 공진단의 실제 임상 효능 증진과 제조 기술로 대한민국 특허를 획득한 유일무이한 황실 명약입니다.</p>
+          <div class="chapter-highlights-row">
+            
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">국내 유일 공진단 효능 특허 획득</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">10년 전 활력으로 되돌리는 회복력</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">원내 직접 조제 & 품질 보증서</span>
+      </div>
+    
+          </div>
+          <div class="chapter-action-bar">
+            <button type="button" class="chapter-zoom-btn" onclick="openLightbox(4)" aria-label="브로셔 4 고해상도 확대">
+              <span class="zoom-icon">🔍</span>
+              <span>특허 인증 원문 고화질 확대 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chapter-visual-col">
+          <div class="visual-frame" onclick="openLightbox(4)">
+            <img class="visual-img" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%944.jpg" alt="국내 유일 공진단 효능 관련 특허 기술" loading="lazy" />
+            <div class="visual-overlay">
+              <span class="visual-expand-pill">
+                <span>✦ 클릭하여 고해상도 확대</span>
+              </span>
+            </div>
+            <div class="visual-page-tag">P. 04 / 10</div>
+          </div>
+        </div>
+      </article>
+    
+
+      <!-- Chapter 5 -->
+      <article class="brochure-chapter-card" id="chapter-5" data-chapter="5">
+        <div class="chapter-content-col">
+          <div class="chapter-top-meta">
+            <span class="chapter-index">CHAPTER 05</span>
+            <span class="chapter-sep">·</span>
+            <span class="chapter-tag-badge">사향 씨알의 기적</span>
+          </div>
+          <h3 class="chapter-title">눈으로 확인하는 '사향 씨알' 특허 기술</h3>
+          <p class="chapter-subtitle">일반 공진단 vs 특허 공진단 단면 비교 & 최대 100mg 압도적 함유량</p>
+          <p class="chapter-desc">일반 공진단처럼 사향을 가루로 흩뿌리지 않고, 중심에 온전한 '사향 씨알'을 봉인하여 복용 시 체내에서 폭발적인 흡수율을 발휘합니다. 홈쇼핑 0mg, 약국 20~70mg 대비 최대 100mg의 정품 사향을 담았습니다.</p>
+          <div class="chapter-highlights-row">
+            
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">중심에 온전히 보존된 사향 씨알</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">사향 함유량 최대 100mg + 특허기술</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">식약처 CITES 시험성적서 원본 동봉</span>
+      </div>
+    
+          </div>
+          <div class="chapter-action-bar">
+            <button type="button" class="chapter-zoom-btn" onclick="openLightbox(5)" aria-label="브로셔 5 고해상도 확대">
+              <span class="zoom-icon">🔍</span>
+              <span>특허 인증 원문 고화질 확대 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chapter-visual-col">
+          <div class="visual-frame" onclick="openLightbox(5)">
+            <img class="visual-img" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%945.jpg" alt="눈으로 확인하는 '사향 씨알' 특허 기술" loading="lazy" />
+            <div class="visual-overlay">
+              <span class="visual-expand-pill">
+                <span>✦ 클릭하여 고해상도 확대</span>
+              </span>
+            </div>
+            <div class="visual-page-tag">P. 05 / 10</div>
+          </div>
+        </div>
+      </article>
+    
+
+      <!-- Chapter 6 -->
+      <article class="brochure-chapter-card" id="chapter-6" data-chapter="6">
+        <div class="chapter-content-col">
+          <div class="chapter-top-meta">
+            <span class="chapter-index">CHAPTER 06</span>
+            <span class="chapter-sep">·</span>
+            <span class="chapter-tag-badge">재생의 연료</span>
+          </div>
+          <h3 class="chapter-title">러시아산 최상급 분골 녹용 200% 배합</h3>
+          <p class="chapter-subtitle">세포재생·피부재생·신경재생의 핵심, 일반 대비 4배 많은 1,600mg</p>
+          <p class="chapter-desc">노화를 되돌릴 핵심은 '재생'입니다. 모든 재생의 연료가 되는 녹용을 아낌없이 두 배 더 넣었습니다. 원산지도 모르는 저가 녹용이 아닌, 가장 고급 부위인 러시아산 원용 '분골'과 '상대'만을 엄선합니다.</p>
+          <div class="chapter-highlights-row">
+            
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">녹용 함유량 1,600mg (일반의 4배)</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">러시아산 최고급 원용 분골·상대 사용</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">세포·피부·신경 재생의 극대화</span>
+      </div>
+    
+          </div>
+          <div class="chapter-action-bar">
+            <button type="button" class="chapter-zoom-btn" onclick="openLightbox(6)" aria-label="브로셔 6 고해상도 확대">
+              <span class="zoom-icon">🔍</span>
+              <span>특허 인증 원문 고화질 확대 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chapter-visual-col">
+          <div class="visual-frame" onclick="openLightbox(6)">
+            <img class="visual-img" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%946.jpg" alt="러시아산 최상급 분골 녹용 200% 배합" loading="lazy" />
+            <div class="visual-overlay">
+              <span class="visual-expand-pill">
+                <span>✦ 클릭하여 고해상도 확대</span>
+              </span>
+            </div>
+            <div class="visual-page-tag">P. 06 / 10</div>
+          </div>
+        </div>
+      </article>
+    
+
+      <!-- Chapter 7 -->
+      <article class="brochure-chapter-card" id="chapter-7" data-chapter="7">
+        <div class="chapter-content-col">
+          <div class="chapter-top-meta">
+            <span class="chapter-index">CHAPTER 07</span>
+            <span class="chapter-sep">·</span>
+            <span class="chapter-tag-badge">100인 한의사 검증</span>
+          </div>
+          <h3 class="chapter-title">한의사 100인이 직접 검증한 압도적 효능</h3>
+          <p class="chapter-subtitle">"사향의 향손실을 막고 균일한 약효를 발휘하는 획기적 발명"</p>
+          <p class="chapter-desc">동료 한의사 100인을 대상으로 한 블라인드 비교 평가에서 극찬을 받았습니다. 복용 후 2시간 만에 온몸에 뜨거운 활력이 충전되는 드라마틱한 임상 피드백이 이를 증명합니다.</p>
+          <div class="chapter-highlights-row">
+            
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">한의사 100인 블라인드 비교 평가</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">기존 공진단 대비 압도적 효능 인정</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">전문가들이 인정한 획기적 발명</span>
+      </div>
+    
+          </div>
+          <div class="chapter-action-bar">
+            <button type="button" class="chapter-zoom-btn" onclick="openLightbox(7)" aria-label="브로셔 7 고해상도 확대">
+              <span class="zoom-icon">🔍</span>
+              <span>특허 인증 원문 고화질 확대 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chapter-visual-col">
+          <div class="visual-frame" onclick="openLightbox(7)">
+            <img class="visual-img" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%947.jpg" alt="한의사 100인이 직접 검증한 압도적 효능" loading="lazy" />
+            <div class="visual-overlay">
+              <span class="visual-expand-pill">
+                <span>✦ 클릭하여 고해상도 확대</span>
+              </span>
+            </div>
+            <div class="visual-page-tag">P. 07 / 10</div>
+          </div>
+        </div>
+      </article>
+    
+
+      <!-- Chapter 8 -->
+      <article class="brochure-chapter-card" id="chapter-8" data-chapter="8">
+        <div class="chapter-content-col">
+          <div class="chapter-top-meta">
+            <span class="chapter-index">CHAPTER 08</span>
+            <span class="chapter-sep">·</span>
+            <span class="chapter-tag-badge">국가 공인 시험 성적</span>
+          </div>
+          <h3 class="chapter-title">동의한약분석센터 잔류농약·중금속 0ppm 불검출</h3>
+          <p class="chapter-subtitle">납, 비소, 수은, 잔류농약, 곰팡이독소 '불검출' 공인 시험성적서 원문 공개</p>
+          <p class="chapter-desc">입으로 들어가는 보약이기에 단 하나의 타협도 허용하지 않습니다. 국가 공인 동의한약분석센터의 엄격한 유해물질 검사를 거쳐 0ppm 불검출을 확인한 청정 약재만을 사용합니다.</p>
+          <div class="chapter-highlights-row">
+            
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">동의한약분석센터 공인 시험성적서</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">중금속(납/비소/수은/카드뮴) 0ppm</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">잔류농약 & 곰팡이독소 전 항목 불검출</span>
+      </div>
+    
+          </div>
+          <div class="chapter-action-bar">
+            <button type="button" class="chapter-zoom-btn" onclick="openLightbox(8)" aria-label="브로셔 8 고해상도 확대">
+              <span class="zoom-icon">🔍</span>
+              <span>특허 인증 원문 고화질 확대 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chapter-visual-col">
+          <div class="visual-frame" onclick="openLightbox(8)">
+            <img class="visual-img" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%948.jpg" alt="동의한약분석센터 잔류농약·중금속 0ppm 불검출" loading="lazy" />
+            <div class="visual-overlay">
+              <span class="visual-expand-pill">
+                <span>✦ 클릭하여 고해상도 확대</span>
+              </span>
+            </div>
+            <div class="visual-page-tag">P. 08 / 10</div>
+          </div>
+        </div>
+      </article>
+    
+
+      <!-- Chapter 9 -->
+      <article class="brochure-chapter-card" id="chapter-9" data-chapter="9">
+        <div class="chapter-content-col">
+          <div class="chapter-top-meta">
+            <span class="chapter-index">CHAPTER 09</span>
+            <span class="chapter-sep">·</span>
+            <span class="chapter-tag-badge">황실 예우 패키징</span>
+          </div>
+          <h3 class="chapter-title">마음을 움직이는 최고의 품격, 황실 예우 패키징</h3>
+          <p class="chapter-subtitle">이중 밀봉 씰링 · 천연 원목 자개함 · 최고급 이중 비단보자기</p>
+          <p class="chapter-desc">특허받은 공진단에 어울리는 극진한 정성. 습기와 공기를 완벽 차단하는 이중 밀봉 씰링과 영롱한 빛의 수제 자개함, 전통 매듭의 이중 비단보자기로 감동 그 이상의 가치를 전합니다.</p>
+          <div class="chapter-highlights-row">
+            
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">특허 유효 성분 보호 이중 밀봉</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">장인의 수제 원목 천연 자개함</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">VIP 의전용 최고급 이중 비단보자기</span>
+      </div>
+    
+          </div>
+          <div class="chapter-action-bar">
+            <button type="button" class="chapter-zoom-btn" onclick="openLightbox(9)" aria-label="브로셔 9 고해상도 확대">
+              <span class="zoom-icon">🔍</span>
+              <span>특허 인증 원문 고화질 확대 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chapter-visual-col">
+          <div class="visual-frame" onclick="openLightbox(9)">
+            <img class="visual-img" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%949.jpg" alt="마음을 움직이는 최고의 품격, 황실 예우 패키징" loading="lazy" />
+            <div class="visual-overlay">
+              <span class="visual-expand-pill">
+                <span>✦ 클릭하여 고해상도 확대</span>
+              </span>
+            </div>
+            <div class="visual-page-tag">P. 09 / 10</div>
+          </div>
+        </div>
+      </article>
+    
+
+      <!-- Chapter 10 -->
+      <article class="brochure-chapter-card" id="chapter-10" data-chapter="10">
+        <div class="chapter-content-col">
+          <div class="chapter-top-meta">
+            <span class="chapter-index">CHAPTER 10</span>
+            <span class="chapter-sep">·</span>
+            <span class="chapter-tag-badge">4대 명품 약재</span>
+          </div>
+          <h3 class="chapter-title">황제의 보약을 완성하는 4대 명품 한약재</h3>
+          <p class="chapter-subtitle">사향(麝香) · 분골 녹용(鹿茸) · 당귀(當歸) · 산수유(山茱萸)</p>
+          <p class="chapter-desc">상위 1%만을 위한 CITES 공인 정품 사향, 보약의 기운을 두 배 더하는 러시아산 녹용, 혈을 보하는 당귀의 몸통, 따스한 기운을 모으는 국내산 산수유가 황금 비율로 조화를 이룹니다.</p>
+          <div class="chapter-highlights-row">
+            
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">CITES 공인 정품 천연 사향 100%</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">러시아산 원용 분골 최고 부위</span>
+      </div>
+    
+      <div class="highlight-chip">
+        <span class="chip-dot">✦</span>
+        <span class="chip-text">국내산 일등품 당귀 및 구례 산수유</span>
+      </div>
+    
+          </div>
+          <div class="chapter-action-bar">
+            <button type="button" class="chapter-zoom-btn" onclick="openLightbox(10)" aria-label="브로셔 10 고해상도 확대">
+              <span class="zoom-icon">🔍</span>
+              <span>특허 인증 원문 고화질 확대 보기</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="chapter-visual-col">
+          <div class="visual-frame" onclick="openLightbox(10)">
+            <img class="visual-img" src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%9410.jpg" alt="황제의 보약을 완성하는 4대 명품 한약재" loading="lazy" />
+            <div class="visual-overlay">
+              <span class="visual-expand-pill">
+                <span>✦ 클릭하여 고해상도 확대</span>
+              </span>
+            </div>
+            <div class="visual-page-tag">P. 010 / 10</div>
+          </div>
+        </div>
+      </article>
+    
+      </div>
+    </div>
+  </section>
+
+  <!-- ZONE 3: 1:1 PRIVATE RESERVATION SUITE & PAYMENT INTEGRATION -->
+  <section class="reservation-section" id="reservation-suite">
+    <div class="page-container">
+      <div class="reservation-card-wrapper">
+        <div class="res-header-row">
+          <div class="res-crown-badge">
+            <span>✦ PRIVATE ATELIER RESERVATION ✦</span>
+          </div>
+          <h2 class="res-title">황제공진단 1:1 수제 제환 예약 신청</h2>
+          <p class="res-desc">
+            천연 사향의 향손실을 방지하기 위해 사전 예약 접수된 수량에 한해 원장이 직접 전통 수제 방식으로 제환합니다.<br>
+            포트원 온라인 카드결제(테스트 환경 0원 지원) 및 비대면 사전 예약 접수가 가능합니다.
+          </p>
+        </div>
+
+        <!-- 3 Packages Grid -->
+        <div class="packages-grid">
+          <!-- 10환 -->
+          <div class="package-plan-box" onclick="selectPlan('plan-10', 0, '황제공진단 10환 목함 세트')">
+            <div class="pkg-head">
+              <h3 class="pkg-title">10환 목함 기획 세트</h3>
+              <p class="pkg-sub">핵심 원기 회복 & 집중력 충전</p>
+            </div>
+            <div class="pkg-price-zone">
+              <div class="pkg-original-price">정상가 500,000원</div>
+              <div class="pkg-current-price">0원 <span style="font-size: 13px; font-weight: normal; color: var(--gold-prime);">(결제 테스트 지원)</span></div>
+            </div>
+            <ul class="pkg-features-list">
+              <li class="pkg-feature-item">특허 제10-1744704호 사향 씨알 공진단 10환</li>
+              <li class="pkg-feature-item">식약처 CITES 정품 사향 보증서 동봉</li>
+              <li class="pkg-feature-item">전용 목함 패키징 & 금박 제환</li>
+              <li class="pkg-feature-item">우체국 안심 특급 무료 배송</li>
+            </ul>
+            <div class="radio-indicator">선택하기</div>
+          </div>
+
+          <!-- 30환 (BEST) -->
+          <div class="package-plan-box is-selected" onclick="selectPlan('plan-30', 0, '황제공진단 30환 프리미엄 자개함 세트')">
+            <div class="pkg-ribbon-badge">★ BEST 1위 (VIP 추천)</div>
+            <div class="pkg-head">
+              <h3 class="pkg-title">30환 프리미엄 자개함</h3>
+              <p class="pkg-sub">1개월 완성 전신 재생 프로그램</p>
+            </div>
+            <div class="pkg-price-zone">
+              <div class="pkg-original-price">정상가 1,400,000원</div>
+              <div class="pkg-current-price">0원 <span style="font-size: 13px; font-weight: normal; color: var(--gold-prime);">(결제 테스트 지원)</span></div>
+            </div>
+            <ul class="pkg-features-list">
+              <li class="pkg-feature-item">특허 제10-1744704호 사향 씨알 공진단 30환</li>
+              <li class="pkg-feature-item">최고급 장인의 천연 원목 자개함 포장</li>
+              <li class="pkg-feature-item">VIP 이중 비단보자기 완포장 하사</li>
+              <li class="pkg-feature-item">동의한약분석센터 안전성 성적서 동봉</li>
+            </ul>
+            <div class="radio-indicator">선택됨</div>
+          </div>
+
+          <!-- 50환 -->
+          <div class="package-plan-box" onclick="selectPlan('plan-50', 0, '황제공진단 50환 VIP 황실 대례함 세트')">
+            <div class="pkg-head">
+              <h3 class="pkg-title">50환 VIP 황실 대례함</h3>
+              <p class="pkg-sub">가문 대대로 전하는 최고급 예우</p>
+            </div>
+            <div class="pkg-price-zone">
+              <div class="pkg-original-price">정상가 2,200,000원</div>
+              <div class="pkg-current-price">0원 <span style="font-size: 13px; font-weight: normal; color: var(--gold-prime);">(결제 테스트 지원)</span></div>
+            </div>
+            <ul class="pkg-features-list">
+              <li class="pkg-feature-item">특허 제10-1744704호 사향 씨알 공진단 50환</li>
+              <li class="pkg-feature-item">VIP 특대형 황실 자개함 & 은합 패키징</li>
+              <li class="pkg-feature-item">대표원장 1:1 전담 복용 컨설팅 동봉</li>
+              <li class="pkg-feature-item">우체국 프리미엄 안심 직배송</li>
+            </ul>
+            <div class="radio-indicator">선택하기</div>
+          </div>
+        </div>
+
+        <!-- Reservation Form Grid -->
+        <form id="gongjin-order-form" onsubmit="handleGongjinPayment(event)">
+          <div class="reservation-form-grid">
+            <!-- Left: Contact & Recipient Info -->
+            <div class="form-col">
+              <h3 class="form-col-title">
+                <span>01. 예약자 및 안심 배송지 정보</span>
+              </h3>
+              <div class="form-group">
+                <label class="form-label" for="buyer-name">성함 / 예약자명 <span style="color:var(--gold-prime);">*</span></label>
+                <input class="form-input" type="text" id="buyer-name" required placeholder="홍길동" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="buyer-tel">휴대전화 번호 <span style="color:var(--gold-prime);">*</span></label>
+                <input class="form-input" type="tel" id="buyer-tel" required placeholder="010-1234-5678" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="buyer-addr">안심 수령 주소 <span style="color:var(--gold-prime);">*</span></label>
+                <input class="form-input" type="text" id="buyer-addr" required placeholder="도로명 주소 및 상세주소 입력" />
+              </div>
+            </div>
+
+            <!-- Right: Health Note & Statutory Consents -->
+            <div class="form-col">
+              <h3 class="form-col-title">
+                <span>02. 복용자 체질 메모 & 필수 동의</span>
+              </h3>
+              <div class="form-group">
+                <label class="form-label" for="buyer-memo">복용자 연령 / 건강 상태 / 전달 사항</label>
+                <textarea class="form-textarea" id="buyer-memo" placeholder="복용하시는 분의 연령, 기저질환, 알레르기 또는 원장님께 전달하고 싶으신 증상을 기재해 주시면 맞춤 제환 시 정성껏 참고합니다."></textarea>
+              </div>
+
+              <div class="consent-box">
+                <label class="consent-label">
+                  <input type="checkbox" id="consent-terms" required />
+                  <span>전자상거래 이용약관 및 결제에 동의합니다 (필수)</span>
+                  <button type="button" class="terms-modal-trigger" onclick="openTerms('service')">약관보기</button>
+                </label>
+                <label class="consent-label">
+                  <input type="checkbox" id="consent-privacy" required />
+                  <span>개인정보 수집 및 배송 위탁에 동의합니다 (필수)</span>
+                  <button type="button" class="terms-modal-trigger" onclick="openTerms('privacy')">약관보기</button>
+                </label>
+                <label class="consent-label">
+                  <input type="checkbox" id="consent-refund" required />
+                  <span>조제한약 특성상 조제 개시 후 환불 불가 규정 확인 (필수)</span>
+                  <button type="button" class="terms-modal-trigger" onclick="openTerms('refund')">약관보기</button>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit CTA -->
+          <div class="submit-cta-zone">
+            <button type="submit" class="btn-pay-submit" id="btn-submit-pay">
+              <span>💳 선택한 플랜 온라인 결제 & 예약 접수 (0원)</span>
+              <span>➔</span>
+            </button>
+            <div class="consult-alt-row">
+              <a href="https://pf.kakao.com/_ykxcLK" target="_blank" rel="noopener noreferrer" class="btn-consult-kakao">
+                <span>💬 카카오톡 1:1 원장 직접 상담</span>
+              </a>
+              <a href="https://naver.me/5U1ELn8L" target="_blank" rel="noopener noreferrer" class="btn-consult-naver">
+                <span>📍 네이버 플레이스 진료 예약</span>
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZONE 4: STATUTORY COMPLIANCE & LEGAL ACCORDION -->
+  <section class="compliance-section">
+    <div class="page-container">
+      <div class="compliance-card">
+        <h3 class="compliance-title">
+          <span>⚖️ 전자상거래 등에서의 소비자보호에 관한 법률 및 조제한약 규정 고지</span>
+        </h3>
+        <div class="compliance-grid">
+          <div class="compliance-item">
+            <strong>의료법 및 한약 조제 안내</strong>
+            본 제품은 공산품이 아닌 한의사의 진찰 및 처방에 따라 조제되는 의약품(한약)입니다. 예약 접수 후 원내 조제실에서 원장이 직접 수제 제환하여 우체국 안심 택배로 안전하게 직배송됩니다.
+          </div>
+          <div class="compliance-item">
+            <strong>청약철회 및 교환/환불 규정</strong>
+            개인 체질 맞춤형으로 1:1 수제 조제되는 의약품의 특성상, 제환 작업 개시 이후에는 전자상거래법 제17조 제2항에 따라 단순 변심에 의한 주문 취소 및 환불이 불가합니다. (배송 중 파손 시 즉시 무상 교환)
+          </div>
+          <div class="compliance-item">
+            <strong>식약처 CITES 정품 사향 관리</strong>
+            바른한의원 대전본점은 멸종위기 야생동식물 국제거래협약(CITES) 및 대한민국 식품의약품안전처 규격을 정식 준수하는 100% 천연 정품 사향만을 사용하며, 전 패키지에 성분 검사 성적서가 동봉됩니다.
+          </div>
+          <div class="compliance-item">
+            <strong>소비자 피해보상 및 고객센터</strong>
+            제품 및 배송 관련 문의, 복용 중 불편 사항은 바른한의원 고객센터(042-472-8875) 또는 카카오톡 채널을 통해 즉시 1:1 상담을 받으실 수 있습니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEGAL FOOTER -->
+  <footer class="legal-footer">
+    <div class="page-container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">바른한의원 대전본점 (BAREUN CLINIC)</div>
+          <p>
+            상호명: 바른한의원 · 대표원장: 이재욱 · 사업자등록번호: 314-92-07528<br>
+            의료기관 개설등록번호: 제2016-3050024-00012호 · 통신판매업신고: 제2026-대전서구-0198호<br>
+            주소: 대전광역시 서구 둔산로 123 (둔산동, 바른메디컬센터 3층)<br>
+            고객센터 & 진료예약: 042-472-8875 · 팩스: 042-472-8876 · 이메일: bareun_clinic@naver.com
+          </p>
+          <div class="footer-links-row">
+            <button type="button" onclick="openTerms('service')">이용약관</button>
+            <button type="button" onclick="openTerms('privacy')">개인정보처리방침</button>
+            <button type="button" onclick="openTerms('ecommerce')">전자상거래 표준약관</button>
+            <button type="button" onclick="openTerms('telemedicine')">비대면 진료 및 조제 규정</button>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <p style="color: var(--gold-prime); font-weight: 700;">大韓民國 特許 第10-1744704號</p>
+          <p>© 2026 BAREUN CLINIC ALL RIGHTS RESERVED.<br>DESIGNED BY ART (HIGH-END EDITORIAL)</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX VIEWER MODAL -->
+  <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightboxOnBackdrop(event)" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-header">
+      <div class="lightbox-title" id="lightbox-title">브로셔 원문 고해상도 아카이브</div>
+      <div class="lightbox-controls">
+        <button type="button" class="lightbox-btn" onclick="zoomIn()">줌 인 (+)</button>
+        <button type="button" class="lightbox-btn" onclick="zoomOut()">줌 아웃 (-)</button>
+        <button type="button" class="lightbox-btn" onclick="resetZoom()">100% 리셋</button>
+        <button type="button" class="lightbox-close-btn" onclick="closeLightbox()" aria-label="닫기">✕</button>
+      </div>
+    </div>
+    <div class="lightbox-body">
+      <button type="button" class="lightbox-nav-prev" onclick="prevBrochure()" aria-label="이전 브로셔">❮</button>
+      <img id="lightbox-img" class="lightbox-img" src="" alt="확대 브로셔" />
+      <button type="button" class="lightbox-nav-next" onclick="nextBrochure()" aria-label="다음 브로셔">❯</button>
+    </div>
+  </div>
+
+  <!-- TERMS POPUP MODAL -->
+  <div id="terms-modal" class="terms-modal" onclick="closeTermsOnBackdrop(event)" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="terms-modal-card">
+      <div class="terms-modal-header">
+        <h4 class="terms-modal-title" id="terms-modal-title">약관 안내</h4>
+        <button type="button" class="lightbox-close-btn" onclick="closeTerms()" style="width:30px; height:30px; font-size:13px;">✕</button>
+      </div>
+      <div class="terms-modal-body" id="terms-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const BROCHURE_DATA = [{"num":1,"chapter":"CHAPTER 01","tag":"국가 특허 등록","title":"유효 성분 손실을 최소화하는 특허 공진단","subtitle":"[특허] 제 10-1744704호 · 유효 성분 손실을 최소화하는 공진단 및 그의 제조방법","desc":"천년을 이어온 황실의 명약 공진단에 대한민국 특허청 정식 발명특허 기술을 더했습니다. 최고급 원목 자개함과 99.9% 순금박 수제 제환으로 장인의 손끝에서 탄생합니다.","highlights":["특허 제10-1744704호 공식 등록","천연 원목 자개함 & 이중 비단보자기","99.9% 순금박 1:1 수제 제환"]},{"num":2,"chapter":"CHAPTER 02","tag":"황실 비방의 역사","title":"황제의 공진단, 왜 지금 우리에게 필요할까?","subtitle":"700년 전 원나라 황실 비방이 현대인의 극심한 피로를 다스리는 비결","desc":"극심한 권력 스트레스, 잦은 전쟁으로 인한 육체 소모, 기름진 식습관에 지친 황제에게 바쳐졌던 즉효성 명약. 현대인의 만성 번아웃과 기력 고갈을 가장 빠르게 치유합니다.","highlights":["원나라 황실 하사 명약의 현대적 계승","만성 피로·스트레스 즉각 해소","복용 직후 온몸에 퍼지는 즉효성"]},{"num":3,"chapter":"CHAPTER 03","tag":"특허 기술의 본질","title":"공진단에 왜 '특허'가 필요할까?","subtitle":"금보다 비싼 천연 사향의 향기와 약효를 100% 가두는 혁신 공법","desc":"동의보감에 명시된 진짜 공진단의 핵심은 바로 '사향'입니다. 휘발성이 강해 공기 중에 쉽게 날아가는 사향의 약효를 온전히 보존하기 위해 국가로부터 특허를 인정받았습니다.","highlights":["초고가 CITES 정품 천연 사향 보존","특허받은 중심핵 조제 공법","사향 유효 성분 손실 0%에 도전"]},{"num":4,"chapter":"CHAPTER 04","tag":"국내 유일 기술","title":"국내 유일 공진단 효능 관련 특허 기술","subtitle":"대한민국 특허청 정식 인장 및 금장 훈장이 증명하는 독보적 가치","desc":"시중의 수많은 유사 공진단과 비교를 거부합니다. 공진단의 실제 임상 효능 증진과 제조 기술로 대한민국 특허를 획득한 유일무이한 황실 명약입니다.","highlights":["국내 유일 공진단 효능 특허 획득","10년 전 활력으로 되돌리는 회복력","원내 직접 조제 & 품질 보증서"]},{"num":5,"chapter":"CHAPTER 05","tag":"사향 씨알의 기적","title":"눈으로 확인하는 '사향 씨알' 특허 기술","subtitle":"일반 공진단 vs 특허 공진단 단면 비교 & 최대 100mg 압도적 함유량","desc":"일반 공진단처럼 사향을 가루로 흩뿌리지 않고, 중심에 온전한 '사향 씨알'을 봉인하여 복용 시 체내에서 폭발적인 흡수율을 발휘합니다. 홈쇼핑 0mg, 약국 20~70mg 대비 최대 100mg의 정품 사향을 담았습니다.","highlights":["중심에 온전히 보존된 사향 씨알","사향 함유량 최대 100mg + 특허기술","식약처 CITES 시험성적서 원본 동봉"]},{"num":6,"chapter":"CHAPTER 06","tag":"재생의 연료","title":"러시아산 최상급 분골 녹용 200% 배합","subtitle":"세포재생·피부재생·신경재생의 핵심, 일반 대비 4배 많은 1,600mg","desc":"노화를 되돌릴 핵심은 '재생'입니다. 모든 재생의 연료가 되는 녹용을 아낌없이 두 배 더 넣었습니다. 원산지도 모르는 저가 녹용이 아닌, 가장 고급 부위인 러시아산 원용 '분골'과 '상대'만을 엄선합니다.","highlights":["녹용 함유량 1,600mg (일반의 4배)","러시아산 최고급 원용 분골·상대 사용","세포·피부·신경 재생의 극대화"]},{"num":7,"chapter":"CHAPTER 07","tag":"100인 한의사 검증","title":"한의사 100인이 직접 검증한 압도적 효능","subtitle":"\"사향의 향손실을 막고 균일한 약효를 발휘하는 획기적 발명\"","desc":"동료 한의사 100인을 대상으로 한 블라인드 비교 평가에서 극찬을 받았습니다. 복용 후 2시간 만에 온몸에 뜨거운 활력이 충전되는 드라마틱한 임상 피드백이 이를 증명합니다.","highlights":["한의사 100인 블라인드 비교 평가","기존 공진단 대비 압도적 효능 인정","전문가들이 인정한 획기적 발명"]},{"num":8,"chapter":"CHAPTER 08","tag":"국가 공인 시험 성적","title":"동의한약분석센터 잔류농약·중금속 0ppm 불검출","subtitle":"납, 비소, 수은, 잔류농약, 곰팡이독소 '불검출' 공인 시험성적서 원문 공개","desc":"입으로 들어가는 보약이기에 단 하나의 타협도 허용하지 않습니다. 국가 공인 동의한약분석센터의 엄격한 유해물질 검사를 거쳐 0ppm 불검출을 확인한 청정 약재만을 사용합니다.","highlights":["동의한약분석센터 공인 시험성적서","중금속(납/비소/수은/카드뮴) 0ppm","잔류농약 & 곰팡이독소 전 항목 불검출"]},{"num":9,"chapter":"CHAPTER 09","tag":"황실 예우 패키징","title":"마음을 움직이는 최고의 품격, 황실 예우 패키징","subtitle":"이중 밀봉 씰링 · 천연 원목 자개함 · 최고급 이중 비단보자기","desc":"특허받은 공진단에 어울리는 극진한 정성. 습기와 공기를 완벽 차단하는 이중 밀봉 씰링과 영롱한 빛의 수제 자개함, 전통 매듭의 이중 비단보자기로 감동 그 이상의 가치를 전합니다.","highlights":["특허 유효 성분 보호 이중 밀봉","장인의 수제 원목 천연 자개함","VIP 의전용 최고급 이중 비단보자기"]},{"num":10,"chapter":"CHAPTER 10","tag":"4대 명품 약재","title":"황제의 보약을 완성하는 4대 명품 한약재","subtitle":"사향(麝香) · 분골 녹용(鹿茸) · 당귀(當歸) · 산수유(山茱萸)","desc":"상위 1%만을 위한 CITES 공인 정품 사향, 보약의 기운을 두 배 더하는 러시아산 녹용, 혈을 보하는 당귀의 몸통, 따스한 기운을 모으는 국내산 산수유가 황금 비율로 조화를 이룹니다.","highlights":["CITES 공인 정품 천연 사향 100%","러시아산 원용 분골 최고 부위","국내산 일등품 당귀 및 구례 산수유"]}];
+    let currentBrochureIndex = 1;
+    let currentZoom = 1;
+
+    function getBrochureUrl(num) {
+      return 'http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%B8%8C%EB%A1%9C%EC%85%94' + num + '.jpg';
+    }
+
+    /* Lightbox Functions */
+    function openLightbox(num) {
+      currentBrochureIndex = num;
+      currentZoom = 1;
+      const modal = document.getElementById('lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      const title = document.getElementById('lightbox-title');
+
+      const data = BROCHURE_DATA.find(b => b.num === num) || {};
+      title.textContent = (data.chapter || '') + ' : ' + (data.title || '특허 인증 원문 아카이브');
+      img.src = getBrochureUrl(num);
+      img.style.transform = 'scale(1)';
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightboxOnBackdrop(e) {
+      if (e.target.id === 'lightbox-modal' || e.target.classList.contains('lightbox-body')) {
+        closeLightbox();
+      }
+    }
+
+    function prevBrochure() {
+      let idx = currentBrochureIndex - 1;
+      if (idx < 1) idx = 10;
+      openLightbox(idx);
+    }
+
+    function nextBrochure() {
+      let idx = currentBrochureIndex + 1;
+      if (idx > 10) idx = 1;
+      openLightbox(idx);
+    }
+
+    function zoomIn() {
+      currentZoom = Math.min(currentZoom + 0.25, 2.5);
+      applyZoom();
+    }
+
+    function zoomOut() {
+      currentZoom = Math.max(currentZoom - 0.25, 0.75);
+      applyZoom();
+    }
+
+    function resetZoom() {
+      currentZoom = 1;
+      applyZoom();
+    }
+
+    function applyZoom() {
+      const img = document.getElementById('lightbox-img');
+      if (img) img.style.transform = 'scale(' + currentZoom + ')';
+    }
+
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('lightbox-modal');
+      if (modal && modal.classList.contains('is-open')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') prevBrochure();
+        if (e.key === 'ArrowRight') nextBrochure();
+      }
+    });
+
+    /* Package Selector */
+    let selectedPackage = {
+      id: 'plan-30',
+      name: '황제공진단 30환 프리미엄 자개함 세트',
+      amount: 0
+    };
+
+    function selectPlan(planId, price, name) {
+      selectedPackage.id = planId;
+      selectedPackage.name = name;
+      selectedPackage.amount = price;
+
+      document.querySelectorAll('.package-plan-box').forEach(box => {
+        box.classList.remove('is-selected');
+        const ind = box.querySelector('.radio-indicator');
+        if (ind) ind.textContent = '선택하기';
+      });
+
+      const activeBox = event.currentTarget;
+      if (activeBox) {
+        activeBox.classList.add('is-selected');
+        const activeInd = activeBox.querySelector('.radio-indicator');
+        if (activeInd) activeInd.textContent = '선택됨';
+      }
+
+      const btn = document.getElementById('btn-submit-pay');
+      if (btn) {
+        btn.innerHTML = '<span>💳 ' + name + ' 결제 & 예약 접수 (' + price.toLocaleString() + '원)</span><span>➔</span>';
+      }
+    }
+
+    /* Payment Handling via PortOne */
+    function handleGongjinPayment(e) {
+      e.preventDefault();
+      const buyerName = document.getElementById('buyer-name').value.trim();
+      const buyerTel = document.getElementById('buyer-tel').value.trim();
+      const buyerAddr = document.getElementById('buyer-addr').value.trim();
+      const buyerMemo = document.getElementById('buyer-memo').value.trim();
+
+      if (!buyerName || !buyerTel || !buyerAddr) {
+        alert('예약자명, 연락처, 안심 배송지 주소를 모두 입력해 주세요.');
+        return;
+      }
+
+      if (!document.getElementById('consent-terms').checked ||
+          !document.getElementById('consent-privacy').checked ||
+          !document.getElementById('consent-refund').checked) {
+        alert('필수 이용약관 및 조제 규격에 동의해 주셔야 예약이 진행됩니다.');
+        return;
+      }
+
+      const merchantUid = 'gongjin_' + Date.now();
+      let userCode = (window.BAREUN_PAY_CONFIG && window.BAREUN_PAY_CONFIG.userCode) || (window.PAYMENT_CONFIG && window.PAYMENT_CONFIG.userCode) || 'imp38067425';
+      if (!userCode || userCode === 'imp00000000') {
+        userCode = 'imp38067425';
+      }
+      const pgChannel = (window.BAREUN_PAY_CONFIG && window.BAREUN_PAY_CONFIG.pgMapping && window.BAREUN_PAY_CONFIG.pgMapping.card) || (window.PAYMENT_CONFIG && window.PAYMENT_CONFIG.pg) || 'html5_inicis.INIpayTest';
+
+      if (typeof window.IMP !== 'undefined') {
+        window.IMP.init(userCode);
+        window.IMP.request_pay({
+          pg: pgChannel,
+          pay_method: 'card',
+          merchant_uid: merchantUid,
+          name: '[바른한의원 1:1 수제조제] ' + selectedPackage.name,
+          amount: selectedPackage.amount,
+          buyer_email: 'patient@bareunhaniwon.com',
+          buyer_name: buyerName,
+          buyer_tel: buyerTel,
+          buyer_addr: buyerAddr,
+          m_redirect_url: window.location.href
+        }, function(rsp) {
+          if (rsp.success) {
+            alert('👑 황제공진단 예약 및 결제가 성공적으로 접수되었습니다!\n원내에서 수제 조제 후 우체국 안심 택배로 안전하게 직배송됩니다.\n결제번호: ' + rsp.imp_uid);
+          } else {
+            alert('결제 실패 안내: ' + rsp.error_msg);
+          }
+        });
+      } else {
+        alert('온라인 결제 모듈을 불러오는 중입니다. 잠시 후 다시 시도해 주시거나 카카오톡 상담을 이용해 주세요.');
+      }
+    }
+
+    /* Terms Modal Logic */
+    function openTerms(type) {
+      const modal = document.getElementById('terms-modal');
+      const title = document.getElementById('terms-modal-title');
+      const body = document.getElementById('terms-modal-body');
+
+      if (window.BAREUN_TERMS_DATA && window.BAREUN_TERMS_DATA[type]) {
+        title.textContent = window.BAREUN_TERMS_DATA[type].title;
+        body.innerHTML = window.BAREUN_TERMS_DATA[type].content;
+      } else if (window.TERMS_CONFIG && window.TERMS_CONFIG[type]) {
+        title.textContent = window.TERMS_CONFIG[type].title;
+        body.innerHTML = window.TERMS_CONFIG[type].content;
+      } else {
+        const fallbacks = {
+          service: { title: '전자상거래 이용약관', content: '바른한의원 전자상거래 기본 이용약관 전문입니다. 공정거래위원회 표준약관을 준수합니다.' },
+          privacy: { title: '개인정보 처리방침', content: '수집 항목: 성함, 연락처, 배송지 주소, 건강 메모<br>목적: 비대면 진료 및 한약 수제 조제, 안심 택배 배송' },
+          refund: { title: '환불 및 조제 규정', content: '본 제품은 1:1 맞춤 조제되는 의약품으로, 조제 착수 후 단순 변심에 의한 환불이 불가합니다.' },
+          ecommerce: { title: '전자상거래 표준약관', content: '공정거래위원회 표준 전자상거래 약관 제10023호 기준을 준수합니다.' },
+          telemedicine: { title: '비대면 진료 및 조제 규정', content: '보건복지부 비대면 진료 시범사업 및 원내 조제 규정을 100% 준수합니다.' }
+        };
+        const fb = fallbacks[type] || { title: '안내', content: '규정을 준수합니다.' };
+        title.textContent = fb.title;
+        body.innerHTML = fb.content;
+      }
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeTerms() {
+      const modal = document.getElementById('terms-modal');
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    function closeTermsOnBackdrop(e) {
+      if (e.target.id === 'terms-modal') closeTerms();
+    }
+  </script>
+</body>
+</html>

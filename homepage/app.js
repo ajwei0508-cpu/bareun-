@@ -9,6 +9,12 @@ const GET_DIET_ZERO_URL = () => {
     : '/diet-zero/';
 };
 
+const GET_GONGJINDAN_URL = () => {
+  return (window.location.protocol === 'file:' || window.location.pathname.endsWith('.html'))
+    ? 'gongjindan.html'
+    : '/gongjindan/';
+};
+
 const CLINIC_PROGRAMS = [
   {
     id: "00",
@@ -37,6 +43,7 @@ const CLINIC_PROGRAMS = [
     id: "01",
     slug: "gongjindan",
     title: "황제 공진단",
+    badge: "특허 제10-1744704호",
     subtitle: "식약처 정품 사향 100% 인증 · 원내 직접 제환",
     client: "원기 회복 & 면역력 강화 명약",
     role: "황실 전통 비방 · 최고급 원방 사향 공진단",
@@ -425,17 +432,34 @@ class BareunClinicApp {
         </div>
       ` : '';
 
+      const sealHtml = isGongjindan ? `
+        <div class="gongjin-seal-stamp" title="식약처 CITES 공인 정품 사향 眞品 인증">
+          <div class="seal-box">
+            <span class="seal-char">眞</span>
+            <span class="seal-char">品</span>
+          </div>
+          <span class="seal-ribbon">特許 10-1744704</span>
+        </div>
+      ` : '';
+
       const hoverCueHtml = item.slug === 'appetite-zero' ? `
         <div class="card-hover-cue" aria-label="식욕 폭주 클릭">
           <span class="cue-sparkle">✦</span>
           <span class="cue-text">식욕 폭주 클릭</span>
           <span class="cue-arrow">➔</span>
         </div>
-      ` : '';
+      ` : (item.slug === 'gongjindan' ? `
+        <div class="card-hover-cue gongjin-cue" aria-label="황제공진단 상세">
+          <span class="cue-sparkle">✦</span>
+          <span class="cue-text">황제공진단 상세</span>
+          <span class="cue-arrow">➔</span>
+        </div>
+      ` : '');
 
       card.innerHTML = `
         <div class="${wrapClass}">
           <img class="${imgClass}" src="${item.image}" alt="${item.title}" loading="lazy" />
+          ${sealHtml}
           <div class="card-overlay">
             ${badgeHtml}
             <div class="card-meta-bottom">
@@ -454,6 +478,14 @@ class BareunClinicApp {
           if (e.target.closest('.card-hover-cue') || this.currentIndex === index) {
             this.playClick();
             window.location.href = GET_DIET_ZERO_URL();
+            return;
+          }
+        } else if (item.slug === 'gongjindan') {
+          if (e.target.closest('.card-hover-cue') || this.currentIndex === index) {
+            this.playClick();
+            this.triggerGongjindanCraftAnimation(() => {
+              window.location.href = GET_GONGJINDAN_URL();
+            });
             return;
           }
         }
@@ -739,12 +771,18 @@ class BareunClinicApp {
     }
 
     const isZero = item.slug === 'appetite-zero';
-    const zeroLandingBtnHtml = isZero ? `
+    const isGongjin = item.slug === 'gongjindan';
+    const landingBtnHtml = isZero ? `
       <a href="${GET_DIET_ZERO_URL()}" class="modal-cta-btn modal-cta-accent" style="background: linear-gradient(135deg, #1C1917 0%, #382A24 100%); color: #F5EFEB; font-weight: 700; border: 1px solid rgba(197, 160, 89, 0.4); box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; text-decoration: none; width: 100%;">
         <span>✨ 식욕 ZERO 시네마틱 상세페이지 & 결제창 바로가기</span>
         <span style="color: var(--accent-gold);">➔</span>
       </a>
-    ` : '';
+    ` : (isGongjin ? `
+      <a href="${GET_GONGJINDAN_URL()}" class="modal-cta-btn modal-cta-accent" style="background: linear-gradient(135deg, #1C130E 0%, #382A24 100%); color: #F5EFEB; font-weight: 700; border: 1px solid rgba(197, 160, 89, 0.4); box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; text-decoration: none; width: 100%;">
+        <span>👑 황제공진단 10대 특허 브로셔 & 1:1 수제 제환 상세페이지</span>
+        <span style="color: var(--accent-gold);">➔</span>
+      </a>
+    ` : '');
 
     this.modalContent.innerHTML = `
       <div style="background: ${heroBg}; display: flex; justify-content: center; align-items: center; overflow: hidden; height: 380px;">
@@ -769,8 +807,8 @@ class BareunClinicApp {
           </ul>
         </div>
 
-        <div class="modal-cta-group" style="${isZero ? 'flex-direction: column; gap: 10px;' : ''}">
-          ${zeroLandingBtnHtml}
+        <div class="modal-cta-group" style="${(isZero || isGongjin) ? 'flex-direction: column; gap: 10px;' : ''}">
+          ${landingBtnHtml}
           <div style="display: flex; gap: 12px; width: 100%;">
             <a href="${item.primaryLink}" target="_blank" rel="noopener noreferrer" class="modal-cta-btn modal-cta-primary" style="flex: 1;">
               ${item.primaryText} ↗
@@ -784,6 +822,56 @@ class BareunClinicApp {
     `;
     this.projectModal.classList.add('open');
     this.projectModal.setAttribute('aria-hidden', 'false');
+  }
+
+  /* --------------------------------------------------------------------------
+     GONGJINDAN "예약 즉시 조제" 시네마틱 트랜지션 애니메이션
+     -------------------------------------------------------------------------- */
+  triggerGongjindanCraftAnimation(onComplete) {
+    let overlay = document.getElementById('gongjin-craft-overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'gongjin-craft-overlay';
+      overlay.className = 'craft-transition-overlay';
+      overlay.innerHTML = `
+        <div class="craft-center-stage">
+          <div class="craft-seal-wrapper">
+            <div class="craft-giant-seal">
+              <span class="seal-char">眞</span>
+              <span class="seal-char">品</span>
+            </div>
+            <div class="craft-seal-shockwave"></div>
+          </div>
+          <div class="craft-meta-badge">✦ 大韓民國 特許 第10-1744704號 · 1:1 수제 조제</div>
+          <h2 class="craft-main-title">예약 즉시 조제 (豫約 即時 調製)</h2>
+          <p class="craft-desc">천연 사향의 향손실을 막기 위해, 사전 예약된 수량에 한하여 원장이 직접 한 알 한 알 정성으로 빚어냅니다.</p>
+          <div class="craft-progress-track">
+            <div class="craft-progress-bar"></div>
+          </div>
+          <span class="craft-skip-cue">황제공진단 시네마틱 아카이브로 이동합니다 (화면 터치 시 즉시 이동)</span>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    let navigated = false;
+    const doNav = () => {
+      if (navigated) return;
+      navigated = true;
+      if (typeof onComplete === 'function') onComplete();
+    };
+
+    overlay.onclick = doNav;
+    overlay.classList.add('is-active');
+
+    const pBar = overlay.querySelector('.craft-progress-bar');
+    if (pBar) {
+      pBar.style.width = '0%';
+      setTimeout(() => { pBar.style.width = '100%'; }, 50);
+    }
+
+    this.playClick();
+    setTimeout(doNav, 1100);
   }
 
   closeProjectModal() {
