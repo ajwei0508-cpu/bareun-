@@ -476,19 +476,19 @@ class BareunClinicApp {
       card.addEventListener('click', (e) => {
         if (this.wasDragging) return;
         if (item.slug === 'appetite-zero') {
-          if (e.target.closest('.card-hover-cue') || this.currentIndex === index) {
-            this.playClick();
-            window.location.href = GET_DIET_ZERO_URL();
-            return;
-          }
+          e.preventDefault();
+          e.stopPropagation();
+          this.playClick();
+          window.location.href = GET_DIET_ZERO_URL();
+          return;
         } else if (item.slug === 'gongjindan') {
-          if (e.target.closest('.card-hover-cue') || this.currentIndex === index) {
-            this.playClick();
-            this.triggerGongjindanCraftAnimation(() => {
-              window.location.href = GET_GONGJINDAN_URL();
-            });
-            return;
-          }
+          e.preventDefault();
+          e.stopPropagation();
+          this.playClick();
+          this.triggerGongjindanCraftAnimation(() => {
+            window.location.href = GET_GONGJINDAN_URL();
+          });
+          return;
         }
         this.updateProjectView(index);
         this.openProjectModal(item);
