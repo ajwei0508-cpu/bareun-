@@ -1400,6 +1400,114 @@
       line-height: 1.65;
     }
 
+    /* 4-Step Process & Delivery Cinema Showcase (Under Steps 1-4) */
+    .tele-video-showcase {
+      margin-top: -10px;
+      margin-bottom: 50px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFF8F9 100%);
+      border: 1px solid rgba(223, 126, 142, 0.35);
+      border-radius: 24px;
+      padding: 36px 32px 32px;
+      box-shadow: 0 16px 45px rgba(223, 126, 142, 0.10);
+      position: relative;
+      overflow: hidden;
+    }
+    .tele-video-showcase::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #DF7E8E, #EAA6B1, #DF7E8E);
+    }
+    .tele-video-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 24px;
+    }
+    .tele-video-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--baby-pink-prime);
+      background: var(--baby-pink-light);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .tele-video-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+    }
+    .tele-video-desc {
+      font-size: 14.5px;
+      color: var(--text-body);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .tele-video-frame {
+      max-width: 960px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000000;
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.16);
+      border: 1px solid rgba(223, 126, 142, 0.25);
+      position: relative;
+    }
+    .tele-video-frame video {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #000000;
+    }
+    .tele-video-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .tele-video-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: #FFFFFF;
+      border: 1px solid var(--border-hairline);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .step-card-footer {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-hairline);
+    }
+    .step-footer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: #F9F6F7;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+
     /* Trust Data Proof Strip */
     .trust-strip {
       background: #FFFFFF;
@@ -2549,6 +2657,28 @@
         grid-template-columns: 1fr;
         gap: 12px;
       }
+      .tele-video-showcase {
+        padding: 24px 16px 20px;
+        margin-top: -5px;
+        margin-bottom: 36px;
+        border-radius: 18px;
+      }
+      .tele-video-title {
+        font-size: 19px;
+      }
+      .tele-video-desc {
+        font-size: 13px;
+      }
+      .tele-video-frame {
+        border-radius: 12px;
+      }
+      .tele-video-footer {
+        gap: 8px;
+      }
+      .tele-video-pill {
+        font-size: 11.5px;
+        padding: 4px 10px;
+      }
 
       /* Pricing & Checkout */
       .pricing-sec {
@@ -3402,39 +3532,80 @@
       <!-- 4-Step Interactive Flow -->
       <div class="tele-flow-grid">
         <div class="flow-step-card">
-          <div class="step-header">
-            <span class="step-number">STEP 01</span>
-            <span class="step-icon">📝</span>
+          <div>
+            <div class="step-header">
+              <span class="step-number">STEP 01</span>
+              <span class="step-icon">📝</span>
+            </div>
+            <h3 class="step-title">온라인 체질 설문</h3>
+            <p class="step-desc">1분 간단 설문으로 현재 체중, 식습관, 건강 고민 및 복용 이력을 접수합니다.</p>
           </div>
-          <h3 class="step-title">온라인 체질 설문</h3>
-          <p class="step-desc">1분 간단 설문으로 현재 체중, 식습관, 건강 고민 및 복용 이력을 접수합니다.</p>
+          <div class="step-card-footer">
+            <span class="step-footer-pill">⏱️ 1분 간편 설문</span>
+          </div>
         </div>
 
         <div class="flow-step-card">
-          <div class="step-header">
-            <span class="step-number">STEP 02</span>
-            <span class="step-icon">📞</span>
+          <div>
+            <div class="step-header">
+              <span class="step-number">STEP 02</span>
+              <span class="step-icon">📞</span>
+            </div>
+            <h3 class="step-title">원장 1:1 전화 진료</h3>
+            <p class="step-desc">대표원장이 직접 전화로 체질과 기저질환을 정밀 감별하여 맞춤 단계를 처방합니다.</p>
           </div>
-          <h3 class="step-title">원장 1:1 전화 진료</h3>
-          <p class="step-desc">대표원장이 직접 전화로 체질과 기저질환을 정밀 감별하여 맞춤 단계를 처방합니다.</p>
+          <div class="step-card-footer">
+            <span class="step-footer-pill">🩺 대표원장 1:1 진료</span>
+          </div>
         </div>
 
         <div class="flow-step-card">
-          <div class="step-header">
-            <span class="step-number">STEP 03</span>
-            <span class="step-icon">🌿</span>
+          <div>
+            <div class="step-header">
+              <span class="step-number">STEP 03</span>
+              <span class="step-icon">🌿</span>
+            </div>
+            <h3 class="step-title">원내 직접 맞춤 조제</h3>
+            <p class="step-desc">식약처 규격품 한약재만을 고집하여 두근거림과 메스꺼움을 최소화해 원내 조제합니다.</p>
           </div>
-          <h3 class="step-title">원내 직접 맞춤 조제</h3>
-          <p class="step-desc">식약처 규격품 한약재만을 고집하여 두근거림과 메스꺼움을 최소화해 원내 조제합니다.</p>
+          <div class="step-card-footer">
+            <span class="step-footer-pill">🌱 100% 원내 탕전</span>
+          </div>
         </div>
 
         <div class="flow-step-card">
-          <div class="step-header">
-            <span class="step-number">STEP 04</span>
-            <span class="step-icon">📦</span>
+          <div>
+            <div class="step-header">
+              <span class="step-number">STEP 04</span>
+              <span class="step-icon">📦</span>
+            </div>
+            <h3 class="step-title">안심 특급 택배 배송</h3>
+            <p class="step-desc">우체국/CJ 안심 택배로 안전하고 신속하게 환자분 집 앞까지 당일/익일 수령됩니다.</p>
           </div>
-          <h3 class="step-title">안심 특급 직배송</h3>
-          <p class="step-desc">우체국/CJ 안심 택배로 안전하고 신속하게 환자분 집 앞까지 당일/익일 수령됩니다.</p>
+          <div class="step-card-footer">
+            <span class="step-footer-pill">🚀 우체국/CJ 안심 직배송</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4-Step Process & Delivery Cinema Showcase (스탭 1234 하단 와이드 비디오) -->
+      <div class="tele-video-showcase">
+        <div class="tele-video-header">
+          <span class="tele-video-badge">🎬 PROGRAM & DELIVERY GUIDE FILM</span>
+          <h3 class="tele-video-title">식욕 ZERO 비대면 1:1 처방 & 안심 택배 배송 안내 영상</h3>
+        </div>
+        <div class="tele-video-frame">
+          <video controls playsinline preload="metadata">
+            <source src="https://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8_%EC%95%88%EB%82%B4_%EC%98%81%EC%83%81_%EC%A0%9C%EC%9E%91_20260921140439.mp4" type="video/mp4">
+            <source src="http://bareunhaniwon.com/wp-content/uploads/2026/09/%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8_%EC%95%88%EB%82%B4_%EC%98%81%EC%83%81_%EC%A0%9C%EC%9E%91_20260921140439.mp4" type="video/mp4">
+            <source src="http://bareunhaniwon.com/wp-content/uploads/2026/09/다이어트_프로그램_안내_영상_제작_20260921140439.mp4" type="video/mp4">
+            브라우저가 비디오 재생을 지원하지 않습니다.
+          </video>
+        </div>
+        <div class="tele-video-footer">
+          <span class="tele-video-pill">✓ 전국 어디서나 비대면 처방</span>
+          <span class="tele-video-pill">✓ 대표원장 1:1 직접 전화 상담</span>
+          <span class="tele-video-pill">✓ 우체국/CJ 안심 특급 배송</span>
         </div>
       </div>
 
