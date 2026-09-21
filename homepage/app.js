@@ -12,8 +12,9 @@ const GET_DIET_ZERO_URL = () => {
 const GET_GONGJINDAN_URL = () => {
   return (window.location.protocol === 'file:' || window.location.pathname.endsWith('.html'))
     ? 'gongjindan.html'
-    : '/gongjindan/';
+    : '/gongjindan-2/';
 };
+
 
 const CLINIC_PROGRAMS = [
   {

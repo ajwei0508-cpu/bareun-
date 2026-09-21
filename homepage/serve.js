@@ -21,9 +21,10 @@ const server = http.createServer((req, res) => {
     reqPath = '/index.html';
   } else if (reqPath === '/diet-zero' || reqPath === '/diet-zero/') {
     reqPath = '/diet-zero.html';
-  } else if (reqPath === '/gongjindan' || reqPath === '/gongjindan/') {
+  } else if (reqPath === '/gongjindan' || reqPath === '/gongjindan/' || reqPath === '/gongjindan-2' || reqPath === '/gongjindan-2/') {
     reqPath = '/gongjindan.html';
   }
+
   let filePath = path.join(__dirname, reqPath);
   const ext = path.extname(filePath).toLowerCase();
   const contentType = MIME_TYPES[ext] || 'application/octet-stream';
